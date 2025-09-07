@@ -17,6 +17,11 @@ export const auth = betterAuth({
         required: false,
         input: true,
       },
+      rekeningNo: {
+        type: "string",
+        required: false,
+        input: true,
+      },
       role: {
         type: "string",
         input: false,
