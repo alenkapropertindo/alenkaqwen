@@ -1,102 +1,243 @@
-import Image from "next/image";
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
+import { HomeIcon } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  // Sample property data (will be replaced with real data from database later)
+  const properties = [
+    {
+      id: 1,
+      title: "Villa Modern Taman Kebun",
+      location: "Andounohu, Kendari",
+      price: "Rp 500.000.000",
+      description:
+        "Villa modern dengan taman kebun luas, 3 kamar tidur, 2 kamar mandi",
+      image: "/placeholder-property-1.jpg",
+    },
+    {
+      id: 2,
+      title: "Rumah Minimalis Kota",
+      location: "Kendari Kota, Sulawesi Tenggara",
+      price: "Rp 350.000.000",
+      description: "Rumah minimalis 2 lantai, 2 kamar tidur, 1 kamar mandi",
+      image: "/placeholder-property-2.jpg",
+    },
+    {
+      id: 3,
+      title: "Apartemen Mewah Pusat",
+      location: "Mandonga, Kendari",
+      price: "Rp 750.000.000",
+      description:
+        "Apartemen mewah di pusat kota, 3 kamar tidur, fully furnished",
+      image: "/placeholder-property-3.jpg",
+    },
+    {
+      id: 4,
+      title: "Apartemen Mewah Pusat",
+      location: "Mandonga, Kendari",
+      price: "Rp 750.000.000",
+      description:
+        "Apartemen mewah di pusat kota, 3 kamar tidur, fully furnished",
+      image: "/placeholder-property-3.jpg",
+    },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-black/80 backdrop-blur-sm border-b border-purple-500/20">
+        <div className="container mx-auto px-12 py-4 flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+            Alenka Properti
+          </div>
+          <nav className="hidden md:flex space-x-24 ">
+            <Link
+              href="/"
+              className="hover:text-white font-semibold text-purple-400 transition-colors"
+            >
+              Home
+            </Link>
+            <Link
+              href="#"
+              className="hover:text-white font-semibold text-purple-400 transition-colors"
+            >
+              Lokasi Terbaru
+            </Link>
+            <Link
+              href="#"
+              className="hover:text-white font-semibold text-purple-400 transition-colors"
+            >
+              Hubungi Admin
+            </Link>
+          </nav>
+          <div className="flex space-x-4">
+            <Link href="/auth/signin">
+              <Button
+                variant="outline"
+                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+              >
+                Login
+              </Button>
+            </Link>
+            <Link href="/auth/signup">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300">
+                Signup
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="container mx-auto px-12 py-20 md:py-32">
+        <div className="flex flex-col md:flex-row items-center justify-between">
+          <div className="md:w-1/2 mb-10 md:mb-0">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="block">Alenka Properti</span>
+              <span className="block bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                Kendari
+              </span>
+            </h1>
+            <p className="text-gray-300 text-lg mb-8 max-w-lg">
+              Temukan rumah impian Anda dengan harga terjangkau di seputar kota
+              Kendari. Kami menyediakan berbagai pilihan properti terbaik untuk
+              keluarga Anda.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 text-lg shadow-[0_0_15px_#8b5cf6] hover:shadow-[0_0_20px_#8b5cf6] transition-all duration-300">
+                Cari rumah murah seputar kota Kendari
+              </Button>
+              <Button
+                variant="outline"
+                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300 px-8 py-6 text-lg"
+              >
+                <HomeIcon className="mr-2 h-5 w-5 animate-pulse" />
+                Lihat Properti
+              </Button>
+            </div>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            <div className="relative">
+              <div className="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-purple-500 to-pink-600 rounded-full blur-3xl opacity-30 absolute -top-10 -left-10"></div>
+              <div className="relative bg-gray-800 border-2 border-purple-500/30 rounded-2xl overflow-hidden shadow-[0_0_30px_#8b5cf6]">
+                <div className="bg-gray-700 border-b border-purple-500/30 p-4">
+                  <div className="flex space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <div className="h-48 bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-lg flex items-center justify-center">
+                    <HomeIcon className="h-16 w-16 text-purple-400 animate-pulse" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 text-right">
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://wa.me/6285242049550"
             target="_blank"
             rel="noopener noreferrer"
+            className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            Hubungi Kami: 0852-4204-9550
+            <span className="ml-2 animate-bounce">→</span>
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </section>
+
+      {/* Product Cards Section */}
+      <section className="container mx-auto px-4 py-4">
+        <h2 className="text-3xl font-bold text-center mb-12">
+          <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+            Properti Terbaru
+          </span>
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {properties.map((property) => (
+            <Card
+              key={property.id}
+              className="bg-gray-900/50 border-purple-500/30 hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+            >
+              <CardContent className="p-6">
+                <div className="bg-gray-800 border border-purple-500/20 rounded-lg h-48 mb-4 flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-lg w-full h-full flex items-center justify-center">
+                    <HomeIcon className="h-12 w-12 text-purple-400" />
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold mb-2">{property.title}</h3>
+                <p className="text-purple-400 mb-2">{property.location}</p>
+                <p className="text-2xl font-bold text-purple-400 mb-3">
+                  {property.price}
+                </p>
+                <p className="text-gray-400 mb-4">{property.description}</p>
+                <div className="flex flex-col space-x-4">
+                  <Button
+                    variant="outline"
+                    className=" hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6]  transition-all duration-300  w-full mb-4  bg-purple-500/10 text-purple-300"
+                    onClick={() =>
+                      window.open("https://wa.me/6285242049550", "_blank")
+                    }
+                  >
+                    Hubungi Admin
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className=" hover:border-pink-700/70 hover:shadow-[0_0_15px_#8b5cf6]  transition-all duration-300  bg-pink-500/10 text-pink-300"
+                    onClick={() =>
+                      window.open(
+                        "https://www.tiktok.com/@alenkaproperti",
+                        "_blank"
+                      )
+                    }
+                  >
+                    Lihat Video
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-purple-500/20 py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-4 md:mb-0">
+              Alenka Properti
+            </div>
+            <div className="flex space-x-6 mb-4 md:mb-0">
+              <Link
+                href="/"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
+                Lokasi Terbaru
+              </Link>
+              <Link
+                href="#"
+                className="text-gray-400 hover:text-purple-400 transition-colors"
+              >
+                Hubungi Admin
+              </Link>
+            </div>
+            <div className="text-gray-500">
+              © 2025 Alenka Properti – Semua Hak Dilindungi
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );

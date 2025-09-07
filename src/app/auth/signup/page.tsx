@@ -57,23 +57,23 @@ export default function SignupPage() {
       <Card className="w-full max-w-md bg-gray-900 border-purple-500 border-2 shadow-[0_0_15px_#8b5cf6] shadow-purple-500/50">
         <CardHeader className="text-center">
           <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-            Create Account
+            Buat Akun
           </CardTitle>
           <CardDescription className="text-gray-400">
-            Sign up for a new account
+            Buat akun baru
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name" className="text-gray-300">
-                Full Name
+                Nama
               </Label>
               <Input
                 id="name"
                 name="name"
                 type="text"
-                placeholder="Enter your full name"
+                placeholder="Masukan nama"
                 required
                 className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
@@ -86,20 +86,20 @@ export default function SignupPage() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Masukan Email"
                 required
                 className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
             </div>
             <div className="space-y-2">
               <Label htmlFor="whatsapp" className="text-gray-300">
-                WhatsApp Number
+                Whatsupp
               </Label>
               <Input
                 id="whatsapp"
                 name="whatsapp"
                 type="tel"
-                placeholder="Enter your WhatsApp number"
+                placeholder="Masukan Nomor Whatsup"
                 required
                 className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
@@ -112,7 +112,7 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Create a password"
+                placeholder="Min 6 Karakter"
                 required
                 minLength={6}
                 className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
@@ -134,12 +134,12 @@ export default function SignupPage() {
         </CardContent>
         <CardFooter className="flex flex-col">
           <div className="mt-4 text-center text-sm text-gray-400">
-            Already have an account?{" "}
+            Sudah punya akun?{" "}
             <a
-              href="/auth/login"
+              href="/auth/signin"
               className="text-purple-400 hover:text-purple-300 hover:underline"
             >
-              Sign in
+              Login Disini
             </a>
           </div>
         </CardFooter>
