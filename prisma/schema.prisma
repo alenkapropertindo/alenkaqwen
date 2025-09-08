@@ -19,6 +19,12 @@ enum UserRole {
   ADMIN
 }
 
+enum Status {
+  FOLLOWUP
+  PEMBERKASAN
+  AKAD_KREDIT
+}
+
 model User {
   id            String    @id
   name          String
@@ -93,20 +99,17 @@ model Product {
   imageUrl     String?
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
-  customers    Customer[]
 }
 
 model Customer {
   id         String   @id @default(uuid())
   name       String
   whatsapp   String   @unique
-  status     String   @default("followup") // followup | pemberkasan | akad
+  status     Status  @default(FOLLOWUP)
   paidStatus      String   @default("pending") // pending | paid
   komisi     Int      @default(1000000)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  productId  String?
-  product    Product? @relation(fields: [productId], references: [id])
 }
