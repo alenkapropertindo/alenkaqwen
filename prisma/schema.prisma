@@ -106,10 +106,15 @@ model Customer {
   name       String
   whatsapp   String   @unique
   status     Status  @default(FOLLOWUP)
-  paidStatus      String   @default("pending") // pending | paid
+  paidStatus     PaidStatus  @default(PENDING)
   komisi     Int      @default(1000000)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   userId     String
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum PaidStatus {
+  PAID
+  PENDING
 }
