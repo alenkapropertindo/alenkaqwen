@@ -30,8 +30,6 @@ export async function POST(request: Request) {
       data: {
         name,
         whatsapp,
-        komisi: parseInt(komisi),
-        status,
         userId: user.id,
       },
     });

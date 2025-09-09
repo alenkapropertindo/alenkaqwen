@@ -99,7 +99,14 @@ export default async function CustomersPage() {
                       {customer.name}
                     </TableCell>
                     <TableCell className="text-gray-300">
-                      {customer.whatsapp}
+                      <a 
+                        href={`https://wa.me/${customer.whatsapp.replace(/\D/g, '')}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-green-400 hover:text-green-300 underline"
+                      >
+                        {customer.whatsapp}
+                      </a>
                     </TableCell>
 
                     <TableCell>

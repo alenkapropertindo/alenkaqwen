@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth-client";
+import { UserRole } from "@/generated/prisma";
 import { 
   LayoutDashboard, 
   Users, 
@@ -25,7 +26,7 @@ interface NavItem {
   icon: React.ReactNode;
 }
 
-const navItems: NavItem[] = [
+const adminNavItems: NavItem[] = [
   {
     title: "Dashboard",
     href: "/dashboard",
@@ -53,12 +54,35 @@ const navItems: NavItem[] = [
   }
 ];
 
+const userNavItems: NavItem[] = [
+  {
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: <LayoutDashboard className="h-5 w-5" />
+  },
+  {
+    title: "Customers",
+    href: "/customers",
+    icon: <Contact className="h-5 w-5" />
+  },
+  {
+    title: "Products",
+    href: "/products",
+    icon: <Package className="h-5 w-5" />
+  },
+  {
+    title: "Account",
+    href: "/account",
+    icon: <UserIcon className="h-5 w-5" />
+  }
+];
+
 interface User {
   id: string;
   name?: string | null;
   email?: string | null;
   image?: string | null;
-  role?: string;
+  role?: UserRole;
 }
 
 export function CollapsibleSidebar({ user }: { user: User }) {
@@ -152,7 +176,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4">
           <ul className="space-y-1 px-2">
-            {navItems.map((item) => {
+            {(user.role === "ADMIN" ? adminNavItems : userNavItems).map((item) => {
               const isActive = pathname === item.href;
               return (
                 <li key={item.href}>
