@@ -26,6 +26,8 @@ interface User {
   email: string | null;
   whatsapp: string | null;
   role: UserRole;
+  akadKreditCount?: number;
+  pemberkasanCount?: number;
 }
 
 export default function UsersClientPage() {
@@ -127,6 +129,12 @@ export default function UsersClientPage() {
               <TableHead className="text-purple-200 text-lg font-semibold">
                 Role
               </TableHead>
+              <TableHead className="text-purple-200 text-lg font-semibold text-center">
+                Total Akad
+              </TableHead>
+              <TableHead className="text-purple-200 text-lg font-semibold text-center">
+                Pemberkasan
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -170,6 +178,12 @@ export default function UsersClientPage() {
                       </SelectItem>
                     </SelectContent>
                   </Select>
+                </TableCell>
+                <TableCell className="text-gray-300 text-center py-4">
+                  {user.akadKreditCount || 0}
+                </TableCell>
+                <TableCell className="text-gray-300 text-center py-4">
+                  {user.pemberkasanCount || 0}
                 </TableCell>
                 <TableCell className="py-4">
                   {updatingUserId === user.id ? (
