@@ -11,6 +11,7 @@ import {
   FolderOpen,
   UserCog
 } from "lucide-react";
+import { CustomerCharts } from "@/components/customer-charts";
 
 // Define types
 type Customer = {
@@ -36,15 +37,26 @@ export default async function DashboardPage() {
 
   if (!user) return null;
 
-  // Fetch all customers for the user
-  const customers = await prisma.customer.findMany({
-    where: {
-      userId: user.id,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  // Fetch customers based on user role
+  let customers = [];
+  if (user.role === UserRole.ADMIN) {
+    // For admin, fetch all customers
+    customers = await prisma.customer.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } else {
+    // For regular users, fetch only their own customers
+    customers = await prisma.customer.findMany({
+      where: {
+        userId: user.id,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
 
   // Fetch all users (for admin only)
   let allUsers: User[] = [];
@@ -233,6 +245,11 @@ export default async function DashboardPage() {
           </Card>
         </div>
       )}
+
+      {/* Customer Chart Section */}
+      <div className="mt-8">
+        <CustomerCharts customers={customers} />
+      </div>
     </div>
   );
 }
