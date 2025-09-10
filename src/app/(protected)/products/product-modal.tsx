@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { put } from "@vercel/blob";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -40,6 +41,7 @@ const formSchema = z.object({
     message: "Fee is required.",
   }),
   imageUrl: z.string().optional(),
+  lokasi: z.string().optional(),
 });
 
 interface Product {
@@ -50,6 +52,7 @@ interface Product {
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
+  lokasi: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -67,6 +70,7 @@ export function ProductModal({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -77,6 +81,7 @@ export function ProductModal({
       videoLink: "",
       fee: "",
       imageUrl: "",
+      lokasi: "",
     },
   });
 
@@ -91,6 +96,7 @@ export function ProductModal({
           videoLink: product.videoLink || "",
           fee: product.fee.toString(),
           imageUrl: product.imageUrl || "",
+          lokasi: product.lokasi || "",
         });
         setImagePreview(product.imageUrl || null);
       } else {
@@ -101,6 +107,7 @@ export function ProductModal({
           videoLink: "",
           fee: "",
           imageUrl: "",
+          lokasi: "",
         });
         setImagePreview(null);
       }
@@ -126,6 +133,7 @@ export function ProductModal({
           videoLink: values.videoLink || null,
           fee: parseInt(values.fee),
           imageUrl: values.imageUrl || null,
+          lokasi: values.lokasi || null,
         }),
       });
 
@@ -163,18 +171,39 @@ export function ProductModal({
     }
   }
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // In a real app, you would upload this to a storage service
-      // For now, we'll just create a preview
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        setImagePreview(result);
-        form.setValue("imageUrl", result);
-      };
-      reader.readAsDataURL(file);
+      // Check if BLOB_READ_WRITE_TOKEN is configured
+      if (!process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN) {
+        // Fallback to storing file as base64 for local development
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          setImagePreview(result);
+          form.setValue("imageUrl", result);
+          toast.warning("Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production.");
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
+      setUploading(true);
+      try {
+        // Upload to Vercel Blob
+        const { url } = await put(file.name, file, {
+          access: "public",
+        });
+        
+        setImagePreview(url);
+        form.setValue("imageUrl", url);
+        toast.success("Image uploaded successfully");
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        toast.error("Failed to upload image");
+      } finally {
+        setUploading(false);
+      }
     }
   };
 
@@ -202,6 +231,24 @@ export function ProductModal({
                   <FormControl>
                     <Input
                       placeholder="Product title"
+                      {...field}
+                      className="bg-gray-800 border-purple-500/30 text-white"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="lokasi"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-purple-300">Lokasi</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Product location"
                       {...field}
                       className="bg-gray-800 border-purple-500/30 text-white"
                     />
@@ -300,12 +347,16 @@ export function ProductModal({
                         type="file"
                         accept="image/*"
                         onChange={handleImageChange}
+                        disabled={uploading}
                         className="bg-gray-800 border-purple-500/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
                       />
                       <Input
                         type="hidden"
                         {...field}
                       />
+                      {uploading && (
+                        <p className="text-purple-300 text-sm">Uploading image...</p>
+                      )}
                       {imagePreview && (
                         <div className="mt-2">
                           <img 
@@ -334,10 +385,10 @@ export function ProductModal({
               <Button
                 type="submit"
                 className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
-                disabled={isSubmitting}
+                disabled={isSubmitting || uploading}
               >
-                {isSubmitting 
-                  ? (product ? "Updating..." : "Creating...") 
+                {isSubmitting || uploading
+                  ? (uploading ? "Uploading..." : (product ? "Updating..." : "Creating..."))
                   : (product ? "Update Produk" : "Tambah Produk")}
               </Button>
             </DialogFooter>

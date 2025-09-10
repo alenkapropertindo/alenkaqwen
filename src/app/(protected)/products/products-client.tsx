@@ -22,6 +22,7 @@ interface Product {
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
+  lokasi: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -172,6 +173,7 @@ export default function ProductsClientPage() {
           <TableHeader>
             <TableRow className="border-purple-900/50 hover:bg-gray-800">
               <TableHead className="text-purple-200 text-lg font-semibold">Item</TableHead>
+              <TableHead className="text-purple-200 text-lg font-semibold">Lokasi</TableHead>
               <TableHead className="text-purple-200 text-lg font-semibold">DP+Akad (Rp)</TableHead>
               <TableHead className="text-purple-200 text-lg font-semibold">Deskripsi</TableHead>
               <TableHead className="text-purple-200 text-lg font-semibold">Link Video</TableHead>
@@ -186,6 +188,7 @@ export default function ProductsClientPage() {
             {products.map((product) => (
               <TableRow key={product.id} className="border-purple-900/30 hover:bg-gray-800/50">
                 <TableCell className="font-medium text-white py-4">{product.title}</TableCell>
+                <TableCell className="text-gray-300 py-4">{product.lokasi || "-"}</TableCell>
                 <TableCell className="text-gray-300 py-4">{formatRupiah(product.dpAkad)}</TableCell>
                 <TableCell className="text-gray-300 py-4 max-w-xs truncate">{product.description}</TableCell>
                 <TableCell className="text-gray-300 py-4">

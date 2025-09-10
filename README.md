@@ -20,6 +20,28 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+# Vercel Blob Storage (optional but recommended for production)
+BLOB_READ_WRITE_TOKEN=your_vercel_blob_token_here
+
+# Database
+DATABASE_URL=your_database_connection_string
+```
+
+### Setting up Vercel Blob Storage
+
+1. Go to your Vercel project dashboard
+2. Navigate to the "Storage" tab
+3. Create a new Blob storage
+4. Copy the "Read/Write Token"
+5. Add it as `BLOB_READ_WRITE_TOKEN` in your environment variables
+
+When `BLOB_READ_WRITE_TOKEN` is not configured, images will be stored as base64 data URLs (suitable for development).
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

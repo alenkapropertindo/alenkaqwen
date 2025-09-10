@@ -1,49 +1,30 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { HomeIcon } from "lucide-react";
+import prisma from "@/lib/prisma";
+import { ProductCard } from "@/components/product-card";
 
-export default function Home() {
-  // Sample property data (will be replaced with real data from database later)
-  const properties = [
-    {
-      id: 1,
-      title: "Villa Modern Taman Kebun",
-      location: "Andounohu, Kendari",
-      price: "Rp 500.000.000",
-      description:
-        "Villa modern dengan taman kebun luas, 3 kamar tidur, 2 kamar mandi",
-      image: "/placeholder-property-1.jpg",
+// Define the product type based on Prisma schema
+type Product = {
+  id: string;
+  title: string;
+  lokasi: string | null;
+  description: string;
+  dpAkad: number;
+  videoLink: string | null;
+  fee: number;
+  imageUrl: string | null;
+  createdAt: Date;
+};
+
+export default async function Home() {
+  // Fetch products from database
+  const products = await prisma.product.findMany({
+    orderBy: {
+      createdAt: "desc",
     },
-    {
-      id: 2,
-      title: "Rumah Minimalis Kota",
-      location: "Kendari Kota, Sulawesi Tenggara",
-      price: "Rp 350.000.000",
-      description: "Rumah minimalis 2 lantai, 2 kamar tidur, 1 kamar mandi",
-      image: "/placeholder-property-2.jpg",
-    },
-    {
-      id: 3,
-      title: "Apartemen Mewah Pusat",
-      location: "Mandonga, Kendari",
-      price: "Rp 750.000.000",
-      description:
-        "Apartemen mewah di pusat kota, 3 kamar tidur, fully furnished",
-      image: "/placeholder-property-3.jpg",
-    },
-    {
-      id: 4,
-      title: "Apartemen Mewah Pusat",
-      location: "Mandonga, Kendari",
-      price: "Rp 750.000.000",
-      description:
-        "Apartemen mewah di pusat kota, 3 kamar tidur, fully furnished",
-      image: "/placeholder-property-3.jpg",
-    },
-  ];
+    take: 4, // Limit to 4 products for the homepage
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
@@ -159,51 +140,19 @@ export default function Home() {
             Properti Terbaru
           </span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {properties.map((property) => (
-            <Card
-              key={property.id}
-              className="bg-gray-900/50 border-purple-500/30 hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
-            >
-              <CardContent className="p-6">
-                <div className="bg-gray-800 border border-purple-500/20 rounded-lg h-48 mb-4 flex items-center justify-center">
-                  <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-lg w-full h-full flex items-center justify-center">
-                    <HomeIcon className="h-12 w-12 text-purple-400" />
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold mb-2">{property.title}</h3>
-                <p className="text-purple-400 mb-2">{property.location}</p>
-                <p className="text-2xl font-bold text-purple-400 mb-3">
-                  {property.price}
-                </p>
-                <p className="text-gray-400 mb-4">{property.description}</p>
-                <div className="flex flex-col space-x-4">
-                  <Button
-                    variant="outline"
-                    className=" hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6]  transition-all duration-300  w-full mb-4  bg-purple-500/10 text-purple-300"
-                    onClick={() =>
-                      window.open("https://wa.me/6285242049550", "_blank")
-                    }
-                  >
-                    Hubungi Admin
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className=" hover:border-pink-700/70 hover:shadow-[0_0_15px_#8b5cf6]  transition-all duration-300  bg-pink-500/10 text-pink-300"
-                    onClick={() =>
-                      window.open(
-                        "https://www.tiktok.com/@alenkaproperti",
-                        "_blank"
-                      )
-                    }
-                  >
-                    Lihat Video
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {products.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-12">
+            <p className="text-gray-400 text-lg">
+              Belum ada properti yang tersedia saat ini.
+            </p>
+          </div>
+        )}
       </section>
 
       {/* Footer */}

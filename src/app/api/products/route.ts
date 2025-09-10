@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { title, description, dpAkad, videoLink, fee, imageUrl } =
+    const { title, description, dpAkad, videoLink, fee, imageUrl, lokasi } =
       await request.json();
 
     // Validate required fields
@@ -68,6 +68,7 @@ export async function POST(request: Request) {
         videoLink: videoLink || null,
         fee: parseInt(fee),
         imageUrl: imageUrl || null,
+        lokasi: lokasi || null,
       },
     });
 

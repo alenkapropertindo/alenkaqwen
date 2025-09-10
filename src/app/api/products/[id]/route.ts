@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { getServerSession } from "@/lib/get-session";
 import { NextResponse } from "next/server";
 
-// GET /api/customers/[id] - Get a specific customer
+// GET /api/products/[id] - Get a specific product
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -23,7 +23,7 @@ export async function GET(
     });
 
     if (!product) {
-      return new NextResponse("product not found", { status: 404 });
+      return new NextResponse("Product not found", { status: 404 });
     }
 
     return NextResponse.json(product);
@@ -33,7 +33,7 @@ export async function GET(
   }
 }
 
-// PUT /api/customers/[id] - Update a specific customer
+// PATCH /api/products/[id] - Update a specific product
 export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -47,8 +47,13 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
+    // Check if user is admin
+    if (user.role !== "ADMIN") {
+      return new NextResponse("Forbidden: Admin only", { status: 403 });
+    }
+
     const json = await request.json();
-    const { title, description, dpAkad, videoLink, fee, imageUrl } = json;
+    const { title, description, dpAkad, videoLink, fee, imageUrl, lokasi } = json;
 
     const product = await prisma.product.update({
       where: {
@@ -61,17 +66,18 @@ export async function PATCH(
         videoLink: videoLink || null,
         fee: parseInt(fee),
         imageUrl: imageUrl || null,
+        lokasi: lokasi || null,
       },
     });
 
     return NextResponse.json(product);
   } catch (error) {
-    console.error("[CUSTOMERS_PUT]", error);
+    console.error("[PRODUCTS_PATCH]", error);
     return new NextResponse("Internal error", { status: 500 });
   }
 }
 
-// DELETE /api/product/[id] - Delete a specific product
+// DELETE /api/products/[id] - Delete a specific product
 export async function DELETE(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -83,6 +89,11 @@ export async function DELETE(
 
     if (!user) {
       return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    // Check if user is admin
+    if (user.role !== "ADMIN") {
+      return new NextResponse("Forbidden: Admin only", { status: 403 });
     }
 
     const product = await prisma.product.delete({
