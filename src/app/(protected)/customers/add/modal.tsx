@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -63,15 +64,18 @@ export function AddCustomerModal({ open, onOpenChange }: { open: boolean; onOpen
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create customer");
+        const errorText = await response.text();
+        toast.error(errorText || "Failed to create customer");
+        return;
       }
 
       // Close the modal and refresh the parent page
       onOpenChange(false);
       router.refresh();
-    } catch (error) {
+      toast.success("Customer created successfully");
+    } catch (error: any) {
       console.error("Error creating customer:", error);
-      // TODO: Show error message to user
+      toast.error("Failed to create customer. Please try again.");
     } finally {
       setIsSubmitting(false);
     }

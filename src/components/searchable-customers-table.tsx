@@ -169,7 +169,12 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
 
                 <TableCell className="text-right">
                   <div className="flex justify-end space-x-2">
-                    <DeleteButton customerId={customer.id} />
+                    {(userRole === UserRole.ADMIN || 
+                      (userRole !== UserRole.ADMIN && 
+                       customer.status !== "PEMBERKASAN" && 
+                       customer.status !== "AKAD_KREDIT")) && (
+                      <DeleteButton customerId={customer.id} />
+                    )}
                   </div>
                 </TableCell>
               </TableRow>

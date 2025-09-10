@@ -29,6 +29,8 @@ export default async function CustomersPage() {
 
   // Fetch customers based on user role
   let customers = [];
+  let followupCount = 0;
+  
   if (user.role === UserRole.ADMIN) {
     // For admin, fetch all customers with user info
     customers = await prisma.customer.findMany({
@@ -49,7 +51,18 @@ export default async function CustomersPage() {
         createdAt: "desc",
       },
     });
+    
+    // Count followup customers for regular users
+    followupCount = await prisma.customer.count({
+      where: {
+        userId: user.id,
+        status: "FOLLOWUP",
+      },
+    });
   }
+
+  // Check if user has reached the followup limit (10 for regular users)
+  const hasReachedLimit = user.role !== UserRole.ADMIN && followupCount >= 10;
 
   return (
     <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
@@ -58,7 +71,10 @@ export default async function CustomersPage() {
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             Customers
           </h1>
-          <AddCustomerButton />
+          <AddCustomerButton 
+            hasReachedLimit={hasReachedLimit} 
+            followupCount={followupCount}
+          />
         </div>
 
         <SearchableCustomersTable customers={customers} userRole={user.role} />
