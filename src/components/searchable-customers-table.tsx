@@ -17,42 +17,37 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { UserRole } from "@/generated/prisma";
+import { toast } from "sonner";
+import { Status } from "@/generated/prisma";
 import { DeleteButton } from "@/app/(protected)/customers/delete-button";
 import { AddCustomerButton } from "@/app/(protected)/customers/add-button";
+import { Customer as PrismaCustomer, User } from "@/generated/prisma";
 
 // Define the customer type based on Prisma schema
-type Customer = {
-  id: string;
-  name: string;
-  whatsapp: string;
-  komisi: number;
-  status: string;
-  createdAt: Date;
-  user?: {
-    email: string;
-  };
-  userId: string;
+type Customer = PrismaCustomer & {
+  user?: User | null;
 };
 
 interface SearchableCustomersTableProps {
   customers: Customer[];
-  userRole: UserRole;
+  userRole: string; // UserRole is a string in better-auth
 }
 
 export function SearchableCustomersTable({ customers, userRole }: SearchableCustomersTableProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
+  const [updatingCustomerId, setUpdatingCustomerId] = useState<string | null>(null);
+  const [customerList, setCustomerList] = useState<Customer[]>(customers);
 
   // Get unique statuses from customers
   const statuses = useMemo(() => {
-    const uniqueStatuses = [...new Set(customers.map(c => c.status))];
+    const uniqueStatuses = [...new Set(customerList.map(c => c.status))];
     return uniqueStatuses;
-  }, [customers]);
+  }, [customerList]);
 
   // Filter customers based on search term and status filter
   const filteredCustomers = useMemo(() => {
-    let result = customers;
+    let result = customerList;
     
     // Apply search filter
     if (searchTerm) {
@@ -60,7 +55,7 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
       result = result.filter(customer => 
         customer.name.toLowerCase().includes(term) ||
         customer.whatsapp.toLowerCase().includes(term) ||
-        (userRole === UserRole.ADMIN && customer.user?.email.toLowerCase().includes(term))
+        (userRole === "ADMIN" && customer.user?.email?.toLowerCase().includes(term))
       );
     }
     
@@ -70,7 +65,76 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
     }
     
     return result;
-  }, [customers, searchTerm, statusFilter, userRole]);
+  }, [customerList, searchTerm, statusFilter, userRole]);
+
+  // Format status for display
+  const formatStatus = (status: Status) => {
+    switch (status) {
+      case Status.AKAD_KREDIT:
+        return "Akad Kredit";
+      case Status.PEMBERKASAN:
+        return "Pemberkasan";
+      case Status.FOLLOWUP:
+        return "Follow Up";
+      default:
+        return status;
+    }
+  };
+
+  // Get status color class
+  const getStatusColorClass = (status: Status) => {
+    switch (status) {
+      case Status.AKAD_KREDIT:
+        return "bg-green-500/20 text-green-400";
+      case Status.PEMBERKASAN:
+        return "bg-yellow-500/20 text-yellow-400";
+      case Status.FOLLOWUP:
+        return "bg-blue-500/20 text-blue-400";
+      default:
+        return "bg-gray-500/20 text-gray-400";
+    }
+  };
+
+  // Handle status update for admin users
+  const handleStatusUpdate = async (customerId: string, newStatus: Status) => {
+    if (userRole !== "ADMIN") return;
+    
+    setUpdatingCustomerId(customerId);
+    try {
+      const response = await fetch(`/api/customers/${customerId}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: newStatus }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to update status");
+      }
+
+      // Update the customer status in the local state
+      const updatedCustomer = await response.json();
+      
+      // Update the customer list with the new status
+      setCustomerList(prev => 
+        prev.map(customer => 
+          customer.id === customerId 
+            ? { ...customer, status: updatedCustomer.status } 
+            : customer
+        )
+      );
+      
+      // Show success message
+      toast.success("Status updated successfully");
+    } catch (error) {
+      console.error("Error updating status:", error);
+      toast.error("Failed to update status");
+    } finally {
+      setUpdatingCustomerId(null);
+    }
+  };
 
   return (
     <div className="bg-gray-900/50 border border-purple-900/50 rounded-xl p-6">
@@ -93,7 +157,7 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
               <SelectItem value="ALL">Semua Status</SelectItem>
               {statuses.map(status => (
                 <SelectItem key={status} value={status}>
-                  {status}
+                  {formatStatus(status)}
                 </SelectItem>
               ))}
             </SelectContent>
@@ -119,7 +183,7 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
               </TableHead>
               <TableHead className="text-purple-300">WhatsApp</TableHead>
               <TableHead className="text-purple-300">Status</TableHead>
-              {userRole === UserRole.ADMIN && (
+              {userRole === "ADMIN" && (
                 <TableHead className="text-purple-300">Ranger</TableHead>
               )}
               <TableHead className="text-purple-300 text-right">
@@ -148,20 +212,37 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
                 </TableCell>
 
                 <TableCell>
-                  <span
-                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                      customer.status === "AKAD_KREDIT"
-                        ? "bg-green-500/20 text-green-400"
-                        : customer.status === "PEMBERKASAN"
-                        ? "bg-yellow-500/20 text-yellow-400"
-                        : "bg-blue-500/20 text-blue-400"
-                    }`}
-                  >
-                    {customer.status}
-                  </span>
+                  {userRole === "ADMIN" ? (
+                    <Select
+                      value={customer.status}
+                      onValueChange={(value) => handleStatusUpdate(customer.id, value as Status)}
+                      disabled={updatingCustomerId === customer.id}
+                    >
+                      <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[140px]">
+                        {updatingCustomerId === customer.id ? (
+                          <span className="text-gray-400">Updating...</span>
+                        ) : (
+                          <SelectValue />
+                        )}
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Object.values(Status).map((status) => (
+                          <SelectItem key={status} value={status}>
+                            {formatStatus(status)}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <span
+                      className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColorClass(customer.status)}`}
+                    >
+                      {formatStatus(customer.status)}
+                    </span>
+                  )}
                 </TableCell>
                 
-                {userRole === UserRole.ADMIN && (
+                {userRole === "ADMIN" && (
                   <TableCell className="text-gray-300">
                     {customer.user?.email || 'N/A'}
                   </TableCell>
@@ -169,10 +250,10 @@ export function SearchableCustomersTable({ customers, userRole }: SearchableCust
 
                 <TableCell className="text-right">
                   <div className="flex justify-end space-x-2">
-                    {(userRole === UserRole.ADMIN || 
-                      (userRole !== UserRole.ADMIN && 
-                       customer.status !== "PEMBERKASAN" && 
-                       customer.status !== "AKAD_KREDIT")) && (
+                    {(userRole === "ADMIN" || 
+                      (userRole !== "ADMIN" && 
+                       customer.status !== Status.PEMBERKASAN && 
+                       customer.status !== Status.AKAD_KREDIT)) && (
                       <DeleteButton customerId={customer.id} />
                     )}
                   </div>

@@ -41,7 +41,7 @@ export function AddCustomerButton({
         className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
         onClick={handleClick}
       >
-        <Plus className="mr-2 h-4 w-4" /> Add Customer
+        <Plus className="mr-2 h-4 w-4" /> Tambah Data
         {followupCount > 0 && followupCount <= 10 && (
           <span className="ml-2 bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">
             {followupCount}/10

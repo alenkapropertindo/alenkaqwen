@@ -1,22 +1,12 @@
 import { getServerSession } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
-import { UserRole } from "@/generated/prisma";
-import { Button } from "@/components/ui/button";
 import { AddCustomerButton } from "@/app/(protected)/customers/add-button";
 import { SearchableCustomersTable } from "@/components/searchable-customers-table";
+import { Customer as PrismaCustomer, User, Status, PaidStatus } from "@/generated/prisma";
 
 // Define the customer type based on Prisma schema
-type Customer = {
-  id: string;
-  name: string;
-  whatsapp: string;
-  komisi: number;
-  status: string;
-  createdAt: Date;
-  user?: {
-    email: string;
-  };
-  userId: string;
+type Customer = PrismaCustomer & {
+  user?: User | null;
 };
 
 export default async function CustomersPage() {
@@ -28,10 +18,10 @@ export default async function CustomersPage() {
   }
 
   // Fetch customers based on user role
-  let customers = [];
+  let customers: Customer[] = [];
   let followupCount = 0;
   
-  if (user.role === UserRole.ADMIN) {
+  if (user.role === "ADMIN") {
     // For admin, fetch all customers with user info
     customers = await prisma.customer.findMany({
       include: {
@@ -56,13 +46,13 @@ export default async function CustomersPage() {
     followupCount = await prisma.customer.count({
       where: {
         userId: user.id,
-        status: "FOLLOWUP",
+        status: Status.FOLLOWUP,
       },
     });
   }
 
   // Check if user has reached the followup limit (10 for regular users)
-  const hasReachedLimit = user.role !== UserRole.ADMIN && followupCount >= 10;
+  const hasReachedLimit = user.role !== "ADMIN" && followupCount >= 10;
 
   return (
     <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
