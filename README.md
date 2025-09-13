@@ -25,8 +25,9 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-# Vercel Blob Storage (optional but recommended for production)
-BLOB_READ_WRITE_TOKEN=your_vercel_blob_token_here
+# Vercel Blob Storage (required for image uploads)
+BLOB_READ_WRITE_TOKEN=your_vercel_blob_read_write_token_here
+NEXT_PUBLIC_BLOB_URL=https://your-project-name.vercel-blob.com
 
 # Database
 DATABASE_URL=your_database_connection_string
@@ -39,8 +40,9 @@ DATABASE_URL=your_database_connection_string
 3. Create a new Blob storage
 4. Copy the "Read/Write Token"
 5. Add it as `BLOB_READ_WRITE_TOKEN` in your environment variables
+6. Also add the Blob URL as `NEXT_PUBLIC_BLOB_URL`
 
-When `BLOB_READ_WRITE_TOKEN` is not configured, images will be stored as base64 data URLs (suitable for development).
+**Note:** Vercel Blob Storage is required for all image uploads. The application will show an error if the token is not configured.
 
 ## Learn More
 

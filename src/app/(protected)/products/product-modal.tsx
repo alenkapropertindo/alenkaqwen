@@ -210,38 +210,31 @@ export function ProductModal({
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Check if BLOB_READ_WRITE_TOKEN is configured
-      if (
-        !process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN &&
-        !process.env.BLOB_READ_WRITE_TOKEN
-      ) {
-        // Fallback to storing file as base64 for local development
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const result = reader.result as string;
-          setImagePreview(result);
-          form.setValue("imageUrl", result);
-          toast.warning(
-            "Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production."
-          );
-        };
-        reader.readAsDataURL(file);
-        return;
-      }
-
       setUploading(true);
       try {
-        // Upload to Vercel Blob
-        const { url } = await put(file.name, file, {
-          access: "public",
+        // Create FormData object
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Upload to our API route which handles Vercel Blob upload
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
         });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to upload image");
+        }
+
+        const { url } = await response.json();
 
         setImagePreview(url);
         form.setValue("imageUrl", url);
         toast.success("Image uploaded successfully");
       } catch (error) {
         console.error("Error uploading image:", error);
-        toast.error("Failed to upload image");
+        toast.error("Failed to upload image: " + (error instanceof Error ? error.message : "Unknown error"));
       } finally {
         setUploading(false);
       }
@@ -251,38 +244,31 @@ export function ProductModal({
   const handleImage2Change = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      // Check if BLOB_READ_WRITE_TOKEN is configured
-      if (
-        !process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN &&
-        !process.env.BLOB_READ_WRITE_TOKEN
-      ) {
-        // Fallback to storing file as base64 for local development
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          const result = reader.result as string;
-          setImagePreview2(result);
-          form.setValue("imageUrl2", result);
-          toast.warning(
-            "Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production."
-          );
-        };
-        reader.readAsDataURL(file);
-        return;
-      }
-
       setUploading2(true);
       try {
-        // Upload to Vercel Blob
-        const { url } = await put(file.name, file, {
-          access: "public",
+        // Create FormData object
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Upload to our API route which handles Vercel Blob upload
+        const response = await fetch("/api/upload", {
+          method: "POST",
+          body: formData,
         });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to upload image");
+        }
+
+        const { url } = await response.json();
 
         setImagePreview2(url);
         form.setValue("imageUrl2", url);
         toast.success("Second image uploaded successfully");
       } catch (error) {
         console.error("Error uploading second image:", error);
-        toast.error("Failed to upload second image");
+        toast.error("Failed to upload second image: " + (error instanceof Error ? error.message : "Unknown error"));
       } finally {
         setUploading2(false);
       }
