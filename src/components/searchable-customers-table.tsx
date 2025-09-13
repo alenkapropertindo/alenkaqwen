@@ -34,10 +34,16 @@ interface SearchableCustomersTableProps {
   loading?: boolean;
 }
 
-export function SearchableCustomersTable({ customers, userRole, loading }: SearchableCustomersTableProps) {
+export function SearchableCustomersTable({
+  customers,
+  userRole,
+  loading,
+}: SearchableCustomersTableProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
-  const [updatingCustomerId, setUpdatingCustomerId] = useState<string | null>(null);
+  const [updatingCustomerId, setUpdatingCustomerId] = useState<string | null>(
+    null
+  );
   const [customerList, setCustomerList] = useState<Customer[]>(customers);
 
   // Update customerList when customers prop changes
@@ -47,29 +53,31 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
 
   // Get unique statuses from customers
   const statuses = useMemo(() => {
-    const uniqueStatuses = [...new Set(customerList.map(c => c.status))];
+    const uniqueStatuses = [...new Set(customerList.map((c) => c.status))];
     return uniqueStatuses;
   }, [customerList]);
 
   // Filter customers based on search term and status filter
   const filteredCustomers = useMemo(() => {
     let result = customerList;
-    
+
     // Apply search filter
     if (searchTerm) {
       const term = searchTerm.toLowerCase();
-      result = result.filter(customer => 
-        customer.name.toLowerCase().includes(term) ||
-        customer.whatsapp.toLowerCase().includes(term) ||
-        (userRole === "ADMIN" && customer.user?.email?.toLowerCase().includes(term))
+      result = result.filter(
+        (customer) =>
+          customer.name.toLowerCase().includes(term) ||
+          customer.whatsapp.toLowerCase().includes(term) ||
+          (userRole === "ADMIN" &&
+            customer.user?.email?.toLowerCase().includes(term))
       );
     }
-    
+
     // Apply status filter
     if (statusFilter !== "ALL") {
-      result = result.filter(customer => customer.status === statusFilter);
+      result = result.filter((customer) => customer.status === statusFilter);
     }
-    
+
     return result;
   }, [customerList, searchTerm, statusFilter, userRole]);
 
@@ -101,10 +109,43 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
     }
   };
 
+  // Format komisi as Rupiah
+  const formatRupiah = (amount: number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  // Format paidStatus for display
+  const formatPaidStatus = (paidStatus: string) => {
+    switch (paidStatus) {
+      case "PAID":
+        return "Paid";
+      case "PENDING":
+        return "Pending";
+      default:
+        return paidStatus;
+    }
+  };
+
+  // Get paidStatus color class
+  const getPaidStatusColorClass = (paidStatus: string) => {
+    switch (paidStatus) {
+      case "PAID":
+        return "bg-green-500/20 text-green-400";
+      case "PENDING":
+        return "bg-yellow-500/20 text-yellow-400";
+      default:
+        return "bg-gray-500/20 text-gray-400";
+    }
+  };
+
   // Handle status update for admin users
   const handleStatusUpdate = async (customerId: string, newStatus: Status) => {
     if (userRole !== "ADMIN") return;
-    
+
     setUpdatingCustomerId(customerId);
     try {
       const response = await fetch(`/api/customers/${customerId}/status`, {
@@ -122,21 +163,106 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
 
       // Update the customer status in the local state
       const updatedCustomer = await response.json();
-      
+
       // Update the customer list with the new status
-      setCustomerList(prev => 
-        prev.map(customer => 
-          customer.id === customerId 
-            ? { ...customer, status: updatedCustomer.status } 
+      setCustomerList((prev) =>
+        prev.map((customer) =>
+          customer.id === customerId
+            ? { ...customer, status: updatedCustomer.status }
             : customer
         )
       );
-      
+
       // Show success message
       toast.success("Status updated successfully");
     } catch (error) {
       console.error("Error updating status:", error);
       toast.error("Failed to update status");
+    } finally {
+      setUpdatingCustomerId(null);
+    }
+  };
+
+  // Handle komisi update for admin users
+  const handleKomisiUpdate = async (customerId: string, newKomisi: string) => {
+    if (userRole !== "ADMIN") return;
+
+    setUpdatingCustomerId(customerId);
+    try {
+      const response = await fetch(`/api/customers/${customerId}/komisi`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ komisi: newKomisi }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to update komisi");
+      }
+
+      // Update the customer komisi in the local state
+      const updatedCustomer = await response.json();
+
+      // Update the customer list with the new komisi
+      setCustomerList((prev) =>
+        prev.map((customer) =>
+          customer.id === customerId
+            ? { ...customer, komisi: updatedCustomer.komisi }
+            : customer
+        )
+      );
+
+      // Show success message
+      toast.success("Komisi updated successfully");
+    } catch (error) {
+      console.error("Error updating komisi:", error);
+      toast.error("Failed to update komisi");
+    } finally {
+      setUpdatingCustomerId(null);
+    }
+  };
+
+  // Handle paidStatus update for admin users
+  const handlePaidStatusUpdate = async (
+    customerId: string,
+    newPaidStatus: string
+  ) => {
+    if (userRole !== "ADMIN") return;
+
+    setUpdatingCustomerId(customerId);
+    try {
+      const response = await fetch(`/api/customers/${customerId}/paid-status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ paidStatus: newPaidStatus }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to update paid status");
+      }
+
+      // Update the customer paidStatus in the local state
+      const updatedCustomer = await response.json();
+
+      // Update the customer list with the new paidStatus
+      setCustomerList((prev) =>
+        prev.map((customer) =>
+          customer.id === customerId
+            ? { ...customer, paidStatus: updatedCustomer.paidStatus }
+            : customer
+        )
+      );
+
+      // Show success message
+      toast.success("Payment status updated successfully");
+    } catch (error) {
+      console.error("Error updating paid status:", error);
+      toast.error("Failed to update payment status");
     } finally {
       setUpdatingCustomerId(null);
     }
@@ -161,7 +287,7 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="ALL">Semua Status</SelectItem>
-              {statuses.map(status => (
+              {statuses.map((status) => (
                 <SelectItem key={status} value={status}>
                   {formatStatus(status)}
                 </SelectItem>
@@ -178,8 +304,8 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
       ) : filteredCustomers.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-400 mb-4">
-            {searchTerm || statusFilter !== "ALL" 
-              ? "Tidak ada customer yang cocok dengan filter" 
+            {searchTerm || statusFilter !== "ALL"
+              ? "Tidak ada customer yang cocok dengan filter"
               : "Tidak ada customer ditemukan"}
           </p>
           <AddCustomerButton />
@@ -192,10 +318,26 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
                 <TableHead className="text-purple-300 text-sm sm:text-base">
                   Nama Customer
                 </TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">WhatsApp</TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">Status</TableHead>
+                <TableHead className="text-purple-300 text-sm sm:text-base">
+                  WhatsApp
+                </TableHead>
+                <TableHead className="text-purple-300 text-sm sm:text-base">
+                  Status
+                </TableHead>
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">Ranger</TableHead>
+                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                    Komisi (Rp)
+                  </TableHead>
+                )}
+                {userRole === "ADMIN" && (
+                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                    Payment Status
+                  </TableHead>
+                )}
+                {userRole === "ADMIN" && (
+                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                    Ranger
+                  </TableHead>
                 )}
                 <TableHead className="text-purple-300 text-right text-sm sm:text-base">
                   Actions
@@ -212,9 +354,12 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
                     {customer.name}
                   </TableCell>
                   <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
-                    <a 
-                      href={`https://wa.me/${customer.whatsapp.replace(/\D/g, '')}`} 
-                      target="_blank" 
+                    <a
+                      href={`https://wa.me/${customer.whatsapp.replace(
+                        /\D/g,
+                        ""
+                      )}`}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-green-400 hover:text-green-300 underline"
                     >
@@ -226,7 +371,9 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
                     {userRole === "ADMIN" ? (
                       <Select
                         value={customer.status}
-                        onValueChange={(value) => handleStatusUpdate(customer.id, value as Status)}
+                        onValueChange={(value) =>
+                          handleStatusUpdate(customer.id, value as Status)
+                        }
                         disabled={updatingCustomerId === customer.id}
                       >
                         <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[140px]">
@@ -246,25 +393,86 @@ export function SearchableCustomersTable({ customers, userRole, loading }: Searc
                       </Select>
                     ) : (
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColorClass(customer.status)}`}
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${getStatusColorClass(
+                          customer.status
+                        )}`}
                       >
                         {formatStatus(customer.status)}
                       </span>
                     )}
                   </TableCell>
-                  
+
+                  {userRole === "ADMIN" && (
+                    <TableCell className="py-4">
+                      <Input
+                        type="number"
+                        value={customer.komisi}
+                        onChange={(e) => {
+                          // Update the local state immediately for better UX
+                          setCustomerList((prev) =>
+                            prev.map((c) =>
+                              c.id === customer.id
+                                ? {
+                                    ...c,
+                                    komisi: parseInt(e.target.value) || 0,
+                                  }
+                                : c
+                            )
+                          );
+                        }}
+                        onBlur={(e) =>
+                          handleKomisiUpdate(customer.id, e.target.value)
+                        }
+                        disabled={
+                          updatingCustomerId === customer.id ||
+                          customer.paidStatus === "PAID"
+                        }
+                        className="bg-gray-800 border-purple-500/50 text-white w-[140px]"
+                      />
+                    </TableCell>
+                  )}
+
+                  {userRole === "ADMIN" && (
+                    <TableCell className="py-4">
+                      <Select
+                        value={customer.paidStatus}
+                        onValueChange={(value) =>
+                          handlePaidStatusUpdate(customer.id, value)
+                        }
+                        disabled={
+                          updatingCustomerId === customer.id ||
+                          customer.status !== "AKAD_KREDIT"
+                        }
+                      >
+                        <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[140px]">
+                          {updatingCustomerId === customer.id ? (
+                            <span className="text-gray-400">Updating...</span>
+                          ) : customer.status !== "AKAD_KREDIT" ? (
+                            <span className="text-gray-400">Pending</span>
+                          ) : (
+                            <SelectValue />
+                          )}
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="PENDING">Pending</SelectItem>
+                          <SelectItem value="PAID">Paid</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </TableCell>
+                  )}
+
                   {userRole === "ADMIN" && (
                     <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
-                      {customer.user?.email || 'N/A'}
+                      {customer.user?.email || "N/A"}
                     </TableCell>
                   )}
 
                   <TableCell className="text-right py-4">
                     <div className="flex justify-end space-x-2">
-                      {(userRole === "ADMIN" || 
-                        (userRole !== "ADMIN" && 
-                         customer.status !== Status.PEMBERKASAN && 
-                         customer.status !== Status.AKAD_KREDIT)) && (
+                      {(userRole === "ADMIN" ||
+                        (userRole !== "ADMIN" &&
+                          customer.status !== Status.PEMBERKASAN &&
+                          customer.status !== Status.AKAD_KREDIT)) && (
                         <DeleteButton customerId={customer.id} />
                       )}
                     </div>
