@@ -48,6 +48,11 @@ const adminNavItems: NavItem[] = [
     icon: <Users className="h-5 w-5" />
   },
   {
+    title: "Freelance",
+    href: "/freelance",
+    icon: <UserIcon className="h-5 w-5" />
+  },
+  {
     title: "Account",
     href: "/account",
     icon: <UserIcon className="h-5 w-5" />
@@ -69,6 +74,11 @@ const userNavItems: NavItem[] = [
     title: "Products",
     href: "/products",
     icon: <Package className="h-5 w-5" />
+  },
+  {
+    title: "Freelance",
+    href: "/freelance",
+    icon: <UserIcon className="h-5 w-5" />
   },
   {
     title: "Account",

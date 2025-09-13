@@ -191,11 +191,15 @@ export default function ProductsClientPage() {
           <TableHeader>
             <TableRow className="border-purple-900/50 hover:bg-gray-800">
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Item</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Detail</TableHead>
+              {isAdmin && (
+                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Detail</TableHead>
+              )}
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Kategori</TableHead>
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Lokasi</TableHead>
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">DP+Akad (Rp)</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Deskripsi</TableHead>
+              {isAdmin && (
+                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Deskripsi</TableHead>
+              )}
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Link Video</TableHead>
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Fee Penjualan (Rp)</TableHead>
               <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Gambar</TableHead>
@@ -208,11 +212,15 @@ export default function ProductsClientPage() {
             {products.map((product) => (
               <TableRow key={product.id} className="border-purple-900/30 hover:bg-gray-800/50">
                 <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">{product.title}</TableCell>
-                <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{product.detail || "-"}</TableCell>
+                {isAdmin && (
+                  <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{product.detail || "-"}</TableCell>
+                )}
                 <TableCell className="text-gray-300 py-4">{formatKategori(product.kategori)}</TableCell>
                 <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">{product.lokasi || "-"}</TableCell>
                 <TableCell className="text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.dpAkad)}</TableCell>
-                <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{product.description}</TableCell>
+                {isAdmin && (
+                  <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{product.description}</TableCell>
+                )}
                 <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">
                   {product.videoLink ? (
                     <a 

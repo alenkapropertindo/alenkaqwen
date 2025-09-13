@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { toast } from "sonner";
 import { AddCustomerButton } from "@/app/(protected)/customers/add-button";
 import { SearchableCustomersTable } from "@/components/searchable-customers-table";
@@ -21,11 +21,21 @@ interface CustomersClientPageProps {
 export default function CustomersClientPage({ 
   initialCustomers, 
   userRole, 
-  hasReachedLimit,
-  followupCount
+  hasReachedLimit: initialHasReachedLimit,
+  followupCount: initialFollowupCount
 }: CustomersClientPageProps) {
   const [customers, setCustomers] = useState<Customer[]>(initialCustomers);
   const [loading, setLoading] = useState(false);
+
+  // Calculate followup count and limit status
+  const { followupCount, hasReachedLimit } = useMemo(() => {
+    if (userRole === "ADMIN") {
+      return { followupCount: 0, hasReachedLimit: false };
+    }
+    
+    const count = customers.filter(customer => customer.status === "FOLLOWUP").length;
+    return { followupCount: count, hasReachedLimit: count >= 10 };
+  }, [customers, userRole]);
 
   // Fetch customers from API
   const fetchCustomers = async () => {
