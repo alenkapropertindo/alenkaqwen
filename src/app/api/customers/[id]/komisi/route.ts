@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "@/lib/get-session";
 import { NextResponse } from "next/server";
-import { Status } from "@/generated/prisma";
 
 // PUT /api/customers/[id]/komisi - Update customer komisi
 export async function PUT(

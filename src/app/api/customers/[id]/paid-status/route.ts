@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "@/lib/get-session";
 import { NextResponse } from "next/server";
-import { PaidStatus } from "@/generated/prisma";
 
 // PUT /api/customers/[id]/paid-status - Update customer paidStatus
 export async function PUT(
@@ -21,8 +20,9 @@ export async function PUT(
     const json = await request.json();
     const { paidStatus } = json;
 
-    // Validate paidStatus
-    if (!Object.values(PaidStatus).includes(paidStatus as PaidStatus)) {
+    // Validate paidStatus - using string values instead of enum
+    const validPaidStatuses = ["PAID", "PENDING"];
+    if (!validPaidStatuses.includes(paidStatus)) {
       return new NextResponse("Invalid paidStatus value", { status: 400 });
     }
 
@@ -50,7 +50,7 @@ export async function PUT(
         id: id,
       },
       data: {
-        paidStatus: paidStatus as PaidStatus,
+        paidStatus: paidStatus,
       },
     });
 

@@ -1,7 +1,6 @@
 import prisma from "@/lib/prisma";
 import { getServerSession } from "@/lib/get-session";
 import { NextResponse } from "next/server";
-import { Status } from "@/generated/prisma";
 
 // PUT /api/customers/[id]/status - Update customer status
 export async function PUT(
@@ -22,8 +21,9 @@ export async function PUT(
     const json = await request.json();
     const { status } = json;
 
-    // Validate status
-    if (!Object.values(Status).includes(status as Status)) {
+    // Validate status - using string values instead of enum
+    const validStatuses = ["FOLLOWUP", "PEMBERKASAN", "AKAD_KREDIT"];
+    if (!validStatuses.includes(status)) {
       return new NextResponse("Invalid status", { status: 400 });
     }
 
@@ -51,7 +51,7 @@ export async function PUT(
         id: id,
       },
       data: {
-        status: status as Status,
+        status: status,
       },
     });
 
