@@ -3,5 +3,8 @@
     "env": {
       "NEXT_ESLINT_IGNORE_ERRORS": "true"
     }
+  },
+  "scripts": {
+    "build": "prisma generate && next build"
   }
 }
