@@ -20,6 +20,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -30,9 +37,11 @@ const formSchema = z.object({
   title: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
+  detail: z.string().optional(),
   description: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
+  kategori: z.string().optional(),
   dpAkad: z.string().min(1, {
     message: "DP+Akad is required.",
   }),
@@ -41,46 +50,55 @@ const formSchema = z.object({
     message: "Fee is required.",
   }),
   imageUrl: z.string().optional(),
+  imageUrl2: z.string().optional(),
   lokasi: z.string().optional(),
 });
 
 interface Product {
   id: string;
   title: string;
+  detail: string | null;
   description: string;
+  kategori: string | null;
   dpAkad: number;
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
+  imageUrl2: string | null;
   lokasi: string | null;
   createdAt: string;
   updatedAt: string;
 }
 
-export function ProductModal({ 
-  open, 
-  onOpenChange, 
+export function ProductModal({
+  open,
+  onOpenChange,
   product,
-  onSave
-}: { 
-  open: boolean; 
+  onSave,
+}: {
+  open: boolean;
   onOpenChange: (open: boolean) => void;
   product: Product | null;
   onSave: () => void;
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview2, setImagePreview2] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [uploading2, setUploading2] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      detail: "",
       description: "",
+      kategori: "",
       dpAkad: "",
       videoLink: "",
       fee: "",
       imageUrl: "",
+      imageUrl2: "",
       lokasi: "",
     },
   });
@@ -91,25 +109,33 @@ export function ProductModal({
       if (product) {
         form.reset({
           title: product.title,
+          detail: product.detail || "",
           description: product.description,
+          kategori: product.kategori || "",
           dpAkad: product.dpAkad.toString(),
           videoLink: product.videoLink || "",
           fee: product.fee.toString(),
           imageUrl: product.imageUrl || "",
+          imageUrl2: product.imageUrl2 || "",
           lokasi: product.lokasi || "",
         });
         setImagePreview(product.imageUrl || null);
+        setImagePreview2(product.imageUrl2 || null);
       } else {
         form.reset({
           title: "",
+          detail: "",
           description: "",
+          kategori: "",
           dpAkad: "",
           videoLink: "",
           fee: "",
           imageUrl: "",
+          imageUrl2: "",
           lokasi: "",
         });
         setImagePreview(null);
+        setImagePreview2(null);
       }
     }
   }, [open, product, form]);
@@ -120,7 +146,7 @@ export function ProductModal({
       // For update, we need to extract just the ID, not the full path
       const url = product ? `/api/products/${product.id}` : "/api/products";
       const method = product ? "PATCH" : "POST";
-      
+
       const response = await fetch(url, {
         method,
         headers: {
@@ -128,11 +154,14 @@ export function ProductModal({
         },
         body: JSON.stringify({
           title: values.title,
+          detail: values.detail || null,
           description: values.description,
+          kategori: values.kategori || null,
           dpAkad: parseInt(values.dpAkad),
           videoLink: values.videoLink || null,
           fee: parseInt(values.fee),
           imageUrl: values.imageUrl || null,
+          imageUrl2: values.imageUrl2 || null,
           lokasi: values.lokasi || null,
         }),
       });
@@ -164,8 +193,13 @@ export function ProductModal({
       toast.success(`Product ${product ? "updated" : "created"} successfully`);
       onSave();
     } catch (error: any) {
-      console.error(`Error ${product ? "updating" : "creating"} product:`, error);
-      toast.error(error.message || `Failed to ${product ? "update" : "create"} product`);
+      console.error(
+        `Error ${product ? "updating" : "creating"} product:`,
+        error
+      );
+      toast.error(
+        error.message || `Failed to ${product ? "update" : "create"} product`
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -175,14 +209,19 @@ export function ProductModal({
     const file = e.target.files?.[0];
     if (file) {
       // Check if BLOB_READ_WRITE_TOKEN is configured
-      if (!process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN && !process.env.BLOB_READ_WRITE_TOKEN) {
+      if (
+        !process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN &&
+        !process.env.BLOB_READ_WRITE_TOKEN
+      ) {
         // Fallback to storing file as base64 for local development
         const reader = new FileReader();
         reader.onloadend = () => {
           const result = reader.result as string;
           setImagePreview(result);
           form.setValue("imageUrl", result);
-          toast.warning("Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production.");
+          toast.warning(
+            "Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production."
+          );
         };
         reader.readAsDataURL(file);
         return;
@@ -194,7 +233,7 @@ export function ProductModal({
         const { url } = await put(file.name, file, {
           access: "public",
         });
-        
+
         setImagePreview(url);
         form.setValue("imageUrl", url);
         toast.success("Image uploaded successfully");
@@ -207,6 +246,47 @@ export function ProductModal({
     }
   };
 
+  const handleImage2Change = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Check if BLOB_READ_WRITE_TOKEN is configured
+      if (
+        !process.env.NEXT_PUBLIC_BLOB_READ_WRITE_TOKEN &&
+        !process.env.BLOB_READ_WRITE_TOKEN
+      ) {
+        // Fallback to storing file as base64 for local development
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const result = reader.result as string;
+          setImagePreview2(result);
+          form.setValue("imageUrl2", result);
+          toast.warning(
+            "Image stored locally. Configure BLOB_READ_WRITE_TOKEN for production."
+          );
+        };
+        reader.readAsDataURL(file);
+        return;
+      }
+
+      setUploading2(true);
+      try {
+        // Upload to Vercel Blob
+        const { url } = await put(file.name, file, {
+          access: "public",
+        });
+
+        setImagePreview2(url);
+        form.setValue("imageUrl2", url);
+        toast.success("Second image uploaded successfully");
+      } catch (error) {
+        console.error("Error uploading second image:", error);
+        toast.error("Failed to upload second image");
+      } finally {
+        setUploading2(false);
+      }
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px] border-purple-500/30 bg-gray-900 max-h-[90vh] overflow-y-auto">
@@ -215,8 +295,8 @@ export function ProductModal({
             {product ? "Edit Product" : "Tambah Produk"}
           </DialogTitle>
           <DialogDescription className="text-gray-400">
-            {product 
-              ? "Edit the details of the product." 
+            {product
+              ? "Edit the details of the product."
               : "Enter the details of the new product."}
           </DialogDescription>
         </DialogHeader>
@@ -235,6 +315,50 @@ export function ProductModal({
                       className="bg-gray-800 border-purple-500/30 text-white"
                     />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="detail"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-purple-300">Detail</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Product detail"
+                      {...field}
+                      className="bg-gray-800 border-purple-500/30 text-white"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="kategori"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-purple-300">Kategori</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger className="bg-gray-800 border-purple-500/30 text-white">
+                        <SelectValue placeholder="Select a category" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="Strategis">Strategis</SelectItem>
+                      <SelectItem value="Promo">Promo</SelectItem>
+                      <SelectItem value="Dp_Rendah">Dp_Rendah</SelectItem>
+                    </SelectContent>
+                  </Select>
                   <FormMessage />
                 </FormItem>
               )}
@@ -283,7 +407,9 @@ export function ProductModal({
                 name="dpAkad"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-purple-300">DP+Akad (Rp)</FormLabel>
+                    <FormLabel className="text-purple-300">
+                      DP+Akad (Rp)
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -302,7 +428,9 @@ export function ProductModal({
                 name="fee"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-purple-300">Fee Penjualan (Rp)</FormLabel>
+                    <FormLabel className="text-purple-300">
+                      Fee Penjualan (Rp)
+                    </FormLabel>
                     <FormControl>
                       <Input
                         type="number"
@@ -350,18 +478,54 @@ export function ProductModal({
                         disabled={uploading}
                         className="bg-gray-800 border-purple-500/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
                       />
-                      <Input
-                        type="hidden"
-                        {...field}
-                      />
+                      <Input type="hidden" {...field} />
                       {uploading && (
-                        <p className="text-purple-300 text-sm">Uploading image...</p>
+                        <p className="text-purple-300 text-sm">
+                          Uploading image...
+                        </p>
                       )}
                       {imagePreview && (
                         <div className="mt-2">
-                          <img 
-                            src={imagePreview} 
-                            alt="Preview" 
+                          <img
+                            src={imagePreview}
+                            alt="Preview"
+                            className="w-full h-48 object-cover rounded-lg border border-purple-500/30"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="imageUrl2"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-purple-300">Image 2</FormLabel>
+                  <FormControl>
+                    <div className="space-y-4">
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImage2Change}
+                        disabled={uploading2}
+                        className="bg-gray-800 border-purple-500/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
+                      />
+                      <Input type="hidden" {...field} />
+                      {uploading2 && (
+                        <p className="text-purple-300 text-sm">
+                          Uploading second image...
+                        </p>
+                      )}
+                      {imagePreview2 && (
+                        <div className="mt-2">
+                          <img
+                            src={imagePreview2}
+                            alt="Preview 2"
                             className="w-full h-48 object-cover rounded-lg border border-purple-500/30"
                           />
                         </div>
@@ -385,11 +549,17 @@ export function ProductModal({
               <Button
                 type="submit"
                 className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
-                disabled={isSubmitting || uploading}
+                disabled={isSubmitting || uploading || uploading2}
               >
-                {isSubmitting || uploading
-                  ? (uploading ? "Uploading..." : (product ? "Updating..." : "Creating..."))
-                  : (product ? "Update Produk" : "Tambah Produk")}
+                {isSubmitting || uploading || uploading2
+                  ? uploading || uploading2
+                    ? "Uploading..."
+                    : product
+                    ? "Updating..."
+                    : "Creating..."
+                  : product
+                  ? "Update Produk"
+                  : "Tambah Produk"}
               </Button>
             </DialogFooter>
           </form>

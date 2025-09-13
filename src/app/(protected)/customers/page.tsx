@@ -1,7 +1,6 @@
 import { getServerSession } from "@/lib/get-session";
 import prisma from "@/lib/prisma";
-import { AddCustomerButton } from "@/app/(protected)/customers/add-button";
-import { SearchableCustomersTable } from "@/components/searchable-customers-table";
+import CustomersClientPage from "./customers-client";
 import { Customer as PrismaCustomer, User, Status, PaidStatus } from "@/generated/prisma";
 
 // Define the customer type based on Prisma schema
@@ -55,20 +54,13 @@ export default async function CustomersPage() {
   const hasReachedLimit = user.role !== "ADMIN" && followupCount >= 10;
 
   return (
-    <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
-      <div className="space-y-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-            Customers
-          </h1>
-          <AddCustomerButton 
-            hasReachedLimit={hasReachedLimit} 
-            followupCount={followupCount}
-          />
-        </div>
-
-        <SearchableCustomersTable customers={customers} userRole={user.role} />
-      </div>
+    <div className="px-4 sm:px-6 py-8 container mx-auto w-full space-y-8">
+      <CustomersClientPage
+        initialCustomers={customers}
+        userRole={user.role}
+        hasReachedLimit={hasReachedLimit}
+        followupCount={followupCount}
+      />
     </div>
   );
 }

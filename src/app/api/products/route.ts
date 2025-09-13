@@ -48,7 +48,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const { title, description, dpAkad, videoLink, fee, imageUrl, lokasi } =
+    const { title, detail, description, kategori, dpAkad, videoLink, fee, imageUrl, imageUrl2, lokasi } =
       await request.json();
 
     // Validate required fields
@@ -63,11 +63,14 @@ export async function POST(request: Request) {
     const product = await prisma.product.create({
       data: {
         title,
+        detail: detail || null,
         description,
+        kategori: kategori || null,
         dpAkad: parseInt(dpAkad),
         videoLink: videoLink || null,
         fee: parseInt(fee),
         imageUrl: imageUrl || null,
+        imageUrl2: imageUrl2 || null,
         lokasi: lokasi || null,
       },
     });

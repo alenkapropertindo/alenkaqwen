@@ -112,7 +112,7 @@ export default function SignupPage() {
                 id="password"
                 name="password"
                 type="password"
-                placeholder="Min 6 Karakter"
+                placeholder="Min 8 Karakter"
                 required
                 minLength={6}
                 className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"

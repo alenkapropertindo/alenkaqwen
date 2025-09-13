@@ -9,13 +9,13 @@ export default async function UsersPage() {
   // If no user or not admin, show access denied
   if (!user || user.role !== UserRole.ADMIN) {
     return (
-      <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
+      <div className="px-4 sm:px-6 py-8 container mx-auto w-full space-y-8">
         <div className="space-y-8">
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             Users
           </h1>
         </div>
-        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-8 shadow-lg">
+        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6 sm:p-8 shadow-lg">
           <p className="text-red-400 text-xl font-semibold">Access Denied: Admin Only</p>
           <p className="text-gray-300 mt-2">You don't have permission to view this page.</p>
         </div>

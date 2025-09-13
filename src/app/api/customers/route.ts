@@ -30,6 +30,8 @@ export async function POST(request: Request) {
       data: {
         name,
         whatsapp,
+        komisi: parseInt(komisi as string) || 1000000,
+        status: status || "FOLLOWUP",
         userId: user.id,
       },
     });
@@ -51,14 +53,28 @@ export async function GET(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const customers = await prisma.customer.findMany({
-      where: {
-        userId: user.id,
-      },
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    let customers;
+    if (user.role === "ADMIN") {
+      // For admin, fetch all customers with user info
+      customers = await prisma.customer.findMany({
+        include: {
+          user: true,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+    } else {
+      // For regular users, fetch only their own customers
+      customers = await prisma.customer.findMany({
+        where: {
+          userId: user.id,
+        },
+        orderBy: {
+          createdAt: "desc",
+        },
+      });
+    }
 
     return NextResponse.json(customers);
   } catch (error) {

@@ -14,10 +14,12 @@ const AddCustomerModal = dynamic(() => import("./add/modal").then(mod => mod.Add
 
 export function AddCustomerButton({ 
   hasReachedLimit = false, 
-  followupCount = 0 
+  followupCount = 0,
+  onCustomerCreated
 }: { 
   hasReachedLimit?: boolean; 
   followupCount?: number;
+  onCustomerCreated?: () => void;
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -48,7 +50,7 @@ export function AddCustomerButton({
           </span>
         )}
       </Button>
-      <AddCustomerModal open={isModalOpen} onOpenChange={setIsModalOpen} />
+      <AddCustomerModal open={isModalOpen} onOpenChange={setIsModalOpen} onCustomerCreated={onCustomerCreated} />
     </>
   );
 }

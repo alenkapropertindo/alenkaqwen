@@ -17,11 +17,14 @@ import { Trash2, Plus, Edit3 } from "lucide-react";
 interface Product {
   id: string;
   title: string;
+  detail: string | null;
   description: string;
+  kategori: string | null;
   dpAkad: number;
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
+  imageUrl2: string | null;
   lokasi: string | null;
   createdAt: string;
   updatedAt: string;
@@ -131,15 +134,30 @@ export default function ProductsClientPage() {
     }).format(amount);
   };
 
+  const formatKategori = (kategori: string | null) => {
+    if (!kategori) return "-";
+    
+    switch (kategori) {
+      case "Strategis":
+        return "Strategis";
+      case "Promo":
+        return "Promo";
+      case "Dp_Rendah":
+        return "DP Rendah";
+      default:
+        return kategori;
+    }
+  };
+
   if (loading) {
     return (
-      <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
+      <div className="px-4 sm:px-6 py-8 container mx-auto w-full space-y-8">
         <div className="space-y-8">
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             Products
           </h1>
         </div>
-        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-8 shadow-lg">
+        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6 sm:p-8 shadow-lg">
           <p className="text-purple-200 text-xl">Loading products...</p>
         </div>
       </div>
@@ -149,16 +167,16 @@ export default function ProductsClientPage() {
   const isAdmin = user?.role === "ADMIN";
 
   return (
-    <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
+    <div className="px-4 sm:px-6 py-8 container mx-auto w-full space-y-8">
       <div className="space-y-4">
-        <div className="flex justify-between items-center">
-          <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             Products
           </h1>
           {isAdmin && (
             <Button 
               onClick={handleCreateProduct}
-              className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+              className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 w-full sm:w-auto"
             >
               <Plus className="w-4 h-4 mr-2" />
               Tambah Produk
@@ -168,36 +186,40 @@ export default function ProductsClientPage() {
         <p className="text-purple-200 text-lg">Manage all products</p>
       </div>
       
-      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl overflow-hidden shadow-lg">
-        <Table>
+      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl overflow-x-auto shadow-lg">
+        <Table className="w-full">
           <TableHeader>
             <TableRow className="border-purple-900/50 hover:bg-gray-800">
-              <TableHead className="text-purple-200 text-lg font-semibold">Item</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">Lokasi</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">DP+Akad (Rp)</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">Deskripsi</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">Link Video</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">Fee Penjualan (Rp)</TableHead>
-              <TableHead className="text-purple-200 text-lg font-semibold">Gambar</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Item</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Detail</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Kategori</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Lokasi</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">DP+Akad (Rp)</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Deskripsi</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Link Video</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Fee Penjualan (Rp)</TableHead>
+              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Gambar</TableHead>
               {isAdmin && (
-                <TableHead className="text-purple-200 text-lg font-semibold">Actions</TableHead>
+                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-right">Actions</TableHead>
               )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.id} className="border-purple-900/30 hover:bg-gray-800/50">
-                <TableCell className="font-medium text-white py-4">{product.title}</TableCell>
-                <TableCell className="text-gray-300 py-4">{product.lokasi || "-"}</TableCell>
-                <TableCell className="text-gray-300 py-4">{formatRupiah(product.dpAkad)}</TableCell>
-                <TableCell className="text-gray-300 py-4 max-w-xs truncate">{product.description}</TableCell>
-                <TableCell className="text-gray-300 py-4">
+                <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">{product.title}</TableCell>
+                <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{product.detail || "-"}</TableCell>
+                <TableCell className="text-gray-300 py-4">{formatKategori(product.kategori)}</TableCell>
+                <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">{product.lokasi || "-"}</TableCell>
+                <TableCell className="text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.dpAkad)}</TableCell>
+                <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{product.description}</TableCell>
+                <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">
                   {product.videoLink ? (
                     <a 
                       href={product.videoLink} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-purple-400 hover:text-purple-300 underline"
+                      className="text-purple-400 hover:text-purple-300 underline truncate block"
                     >
                       View Video
                     </a>
@@ -205,21 +227,29 @@ export default function ProductsClientPage() {
                     "-"
                   )}
                 </TableCell>
-                <TableCell className="text-gray-300 py-4">{formatRupiah(product.fee)}</TableCell>
+                <TableCell className="text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.fee)}</TableCell>
                 <TableCell className="text-gray-300 py-4">
-                  {product.imageUrl ? (
-                    <img 
-                      src={product.imageUrl} 
-                      alt={product.title} 
-                      className="w-16 h-16 object-cover rounded"
-                    />
-                  ) : (
-                    "No Image"
-                  )}
+                  <div className="flex flex-col gap-2">
+                    {product.imageUrl ? (
+                      <img 
+                        src={product.imageUrl} 
+                        alt={`${product.title} - Image 1`} 
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                    ) : null}
+                    {product.imageUrl2 ? (
+                      <img 
+                        src={product.imageUrl2} 
+                        alt={`${product.title} - Image 2`} 
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                    ) : null}
+                    {!product.imageUrl && !product.imageUrl2 && "No Images"}
+                  </div>
                 </TableCell>
                 {isAdmin && (
-                  <TableCell className="py-4">
-                    <div className="flex space-x-2">
+                  <TableCell className="py-4 text-right">
+                    <div className="flex justify-end space-x-2">
                       <Button
                         variant="outline"
                         size="sm"

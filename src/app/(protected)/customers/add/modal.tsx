@@ -35,7 +35,7 @@ const formSchema = z.object({
   }),
 });
 
-export function AddCustomerModal({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
+export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { open: boolean; onOpenChange: (open: boolean) => void; onCustomerCreated?: () => void }) {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -59,7 +59,7 @@ export function AddCustomerModal({ open, onOpenChange }: { open: boolean; onOpen
         body: JSON.stringify({
           ...values,
           komisi: 1000000, // Default value
-          status: "followup" // Default value
+          status: "FOLLOWUP" // Default value
         }),
       });
 
@@ -71,7 +71,12 @@ export function AddCustomerModal({ open, onOpenChange }: { open: boolean; onOpen
 
       // Close the modal and refresh the parent page
       onOpenChange(false);
-      router.refresh();
+      
+      // Call the callback function to update the customer list
+      if (onCustomerCreated) {
+        onCustomerCreated();
+      }
+      
       toast.success("Customer created successfully");
     } catch (error: any) {
       console.error("Error creating customer:", error);

@@ -152,16 +152,16 @@ export default function UsersClientPage() {
   }
 
   return (
-    <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
+    <div className="px-4 sm:px-6 py-8 container mx-auto w-full space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+        <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           Users
         </h1>
         <p className="text-purple-200 text-lg">Admin Only - Manage all users</p>
       </div>
 
       {/* Search Input */}
-      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6">
+      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-4 sm:p-6">
         <div className="mb-6">
           <Input
             placeholder="Cari user berdasarkan nama, email, atau WhatsApp..."
@@ -178,87 +178,57 @@ export default function UsersClientPage() {
             </p>
           </div>
         ) : (
-          <div className="border border-purple-900/50 rounded-lg overflow-hidden shadow-lg">
-            <Table>
+          <div className="rounded-lg overflow-x-auto">
+            <Table className="w-full">
               <TableHeader>
                 <TableRow className="border-purple-900/50 hover:bg-gray-800">
-                  <TableHead className="text-purple-200 text-lg font-semibold">
-                    Nama
-                  </TableHead>
-                  <TableHead className="text-purple-200 text-lg font-semibold">
-                    Email
-                  </TableHead>
-                  <TableHead className="text-purple-200 text-lg font-semibold">
-                    WhatsApp
-                  </TableHead>
-                  <TableHead className="text-purple-200 text-lg font-semibold">
-                    Role
-                  </TableHead>
-                  <TableHead className="text-purple-200 text-lg font-semibold text-center">
-                    <Button
-                      variant="ghost"
-                      onClick={() => requestSort('akadKreditCount')}
-                      className="text-purple-200 hover:text-white hover:bg-purple-900/50 p-0 h-auto font-semibold"
-                    >
-                      Total Akad
+                  <TableHead 
+                    className="text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-100"
+                    onClick={() => requestSort('name')}
+                  >
+                    <div className="flex items-center">
+                      Name
                       <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
+                    </div>
                   </TableHead>
-                  <TableHead className="text-purple-200 text-lg font-semibold text-center">
-                    <Button
-                      variant="ghost"
-                      onClick={() => requestSort('pemberkasanCount')}
-                      className="text-purple-200 hover:text-white hover:bg-purple-900/50 p-0 h-auto font-semibold"
-                    >
-                      Pemberkasan
+                  <TableHead 
+                    className="text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-100"
+                    onClick={() => requestSort('email')}
+                  >
+                    <div className="flex items-center">
+                      Email
                       <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
+                    </div>
                   </TableHead>
+                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">WhatsApp</TableHead>
+                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Role</TableHead>
+                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-center">Akad Kredit</TableHead>
+                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-center">Pemberkasan</TableHead>
+                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredAndSortedUsers.map((user) => (
-                  <TableRow
-                    key={user.id}
-                    className="border-purple-900/30 hover:bg-gray-800/50"
-                  >
-                    <TableCell className="font-medium text-white py-4">
-                      {user.name || "-"}
-                    </TableCell>
+                  <TableRow key={user.id} className="border-purple-900/30 hover:bg-gray-800/50">
+                    <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">{user.name || "-"}</TableCell>
+                    <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{user.email || "-"}</TableCell>
+                    <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{user.whatsapp || "-"}</TableCell>
                     <TableCell className="text-gray-300 py-4">
-                      {user.email || "-"}
-                    </TableCell>
-                    <TableCell className="text-gray-300 py-4">
-                      {user.whatsapp || "-"}
-                    </TableCell>
-                    <TableCell className="py-4">
                       <Select
                         value={user.role}
-                        onValueChange={(value) =>
-                          updateUserRole(user.id, value as UserRole)
-                        }
+                        onValueChange={(value) => handleRoleChange(user.id, value as UserRole)}
                         disabled={updatingUserId === user.id}
                       >
-                        <SelectTrigger className={`w-[120px] bg-gray-900 border ${
-                          user.role === UserRole.ADMIN 
-                            ? "bg-green-500/20 border-green-500 text-green-300" 
-                            : "bg-yellow-500/20 border-yellow-500 text-yellow-300"
-                        }`}>
-                          <SelectValue />
+                        <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[120px]">
+                          {updatingUserId === user.id ? (
+                            <span className="text-gray-400">Updating...</span>
+                          ) : (
+                            <SelectValue />
+                          )}
                         </SelectTrigger>
-                        <SelectContent className="bg-gray-900 border-purple-900/50">
-                          <SelectItem
-                            value={UserRole.USER}
-                            className="text-purple-100 focus:bg-purple-900 focus:text-white"
-                          >
-                            USER
-                          </SelectItem>
-                          <SelectItem
-                            value={UserRole.ADMIN}
-                            className="text-purple-100 focus:bg-purple-900 focus:text-white"
-                          >
-                            ADMIN
-                          </SelectItem>
+                        <SelectContent>
+                          <SelectItem value={UserRole.USER}>User</SelectItem>
+                          <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
                         </SelectContent>
                       </Select>
                     </TableCell>
