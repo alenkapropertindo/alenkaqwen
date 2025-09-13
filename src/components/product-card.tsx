@@ -8,6 +8,7 @@ type Product = {
   id: string;
   title: string;
   lokasi: string | null;
+  detail: string | null;
   description: string;
   dpAkad: number;
   videoLink: string | null;
@@ -61,7 +62,7 @@ export function ProductCard({ product }: { product: Product }) {
           </p>
         </div>
         <p className="text-gray-300 mb-6 text-sm leading-relaxed line-clamp-3 flex-1">
-          {product.description}
+          {product.detail || product.description}
         </p>
         <div className="flex flex-col gap-3">
           <Button
@@ -69,7 +70,7 @@ export function ProductCard({ product }: { product: Product }) {
             className="w-full border-purple-500 text-purple-500 hover:bg-purple-500/20 hover:text-white hover:border-purple-400 transition-all duration-300"
             onClick={() => window.open("https://wa.me/6285242049550", "_blank")}
           >
-            Hubungi Admin
+            Tanya Admin
           </Button>
           {product.videoLink && (
             <Button
