@@ -52,8 +52,12 @@ export default function CustomersClientPage({
       }
       
       setCustomers(data);
-    } catch (error: any) {
-      toast.error(error.message || "Failed to fetch customers");
+    } catch (error) {
+      let errorMessage = "Failed to fetch customers";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

@@ -10,8 +10,12 @@ export async function GET() {
     }
 
     return NextResponse.json({ session });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error getting session:", error);
-    return NextResponse.json({ error: error.message || "Failed to get session" }, { status: 500 });
+    let errorMessage = "Failed to get session";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

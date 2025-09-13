@@ -192,14 +192,16 @@ export function ProductModal({
       onOpenChange(false);
       toast.success(`Product ${product ? "updated" : "created"} successfully`);
       onSave();
-    } catch (error: any) {
+    } catch (error) {
       console.error(
         `Error ${product ? "updating" : "creating"} product:`,
         error
       );
-      toast.error(
-        error.message || `Failed to ${product ? "update" : "create"} product`
-      );
+      let errorMessage = `Failed to ${product ? "update" : "create"} product`;
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      toast.error(errorMessage);
     } finally {
       setIsSubmitting(false);
     }

@@ -9,8 +9,21 @@ import { User, Settings, Phone, CreditCard } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+// Define the session type
+interface User {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  whatsapp?: string | null;
+  rekeningNo?: string | null;
+}
+
+interface Session {
+  user?: User;
+}
+
 export default function AccountPage() {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState("");
@@ -83,8 +96,12 @@ export default function AccountPage() {
 
       toast.success("Profile updated successfully");
       setIsEditing(false);
-    } catch (error: any) {
-      toast.error(error.message || "Failed to update profile");
+    } catch (error) {
+      let errorMessage = "Failed to update profile";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+      toast.error(errorMessage);
       console.error(error);
     }
   };

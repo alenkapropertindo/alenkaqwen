@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -36,7 +35,6 @@ const formSchema = z.object({
 });
 
 export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { open: boolean; onOpenChange: (open: boolean) => void; onCustomerCreated?: () => void }) {
-  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -78,7 +76,7 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
       }
       
       toast.success("Customer created successfully");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Error creating customer:", error);
       toast.error("Failed to create customer. Please try again.");
     } finally {

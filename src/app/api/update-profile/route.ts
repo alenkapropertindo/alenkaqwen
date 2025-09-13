@@ -25,8 +25,12 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ success: true, user: updatedUser });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error updating profile:", error);
-    return NextResponse.json({ error: error.message || "Failed to update profile" }, { status: 500 });
+    let errorMessage = "Failed to update profile";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
