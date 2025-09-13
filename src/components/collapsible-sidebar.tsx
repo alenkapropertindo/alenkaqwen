@@ -92,7 +92,7 @@ interface User {
   name?: string | null;
   email?: string | null;
   image?: string | null;
-  role?: UserRole;
+  role?: string;
 }
 
 export function CollapsibleSidebar({ user }: { user: User }) {

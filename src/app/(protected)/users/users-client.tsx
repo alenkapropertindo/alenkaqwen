@@ -93,6 +93,11 @@ export default function UsersClientPage() {
     }
   };
 
+  // Handle role change
+  const handleRoleChange = async (userId: string, role: UserRole) => {
+    await updateUserRole(userId, role);
+  };
+
   // Handle sorting
   const requestSort = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
