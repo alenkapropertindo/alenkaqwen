@@ -31,6 +31,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { put } from "@vercel/blob";
 
 
 const formSchema = z.object({
@@ -206,8 +207,8 @@ export function ProductModal({
         const formData = new FormData();
         formData.append("file", file);
 
-        // Upload to our new local API route
-        const response = await fetch("/api/upload/local", {
+        // Upload to our API route which handles Vercel Blob upload
+        const response = await fetch("/api/upload", {
           method: "POST",
           body: formData,
         });

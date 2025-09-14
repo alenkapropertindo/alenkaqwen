@@ -38,7 +38,7 @@ export default async function Home() {
       imageUrl: true,
       createdAt: true,
       kategori: true,
-    }
+    },
   });
 
   return (
@@ -99,7 +99,7 @@ export default async function Home() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/freelance">
                 <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300">
-                  Pelajari caranya disini
+                  Gabung Freelance
                 </Button>
               </Link>
               <Link href="/#products">
