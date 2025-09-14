@@ -53,7 +53,7 @@ export async function PATCH(
     }
 
     const json = await request.json();
-    const { title, detail, description, kategori, dpAkad, videoLink, fee, imageUrl, imageUrl2, lokasi } = json;
+    const { title, detail, description, kategori, dpAkad, videoLink, fee, imageUrl, lokasi } = json;
 
     const product = await prisma.product.update({
       where: {
@@ -68,7 +68,6 @@ export async function PATCH(
         videoLink: videoLink || null,
         fee: parseInt(fee),
         imageUrl: imageUrl || null,
-        imageUrl2: imageUrl2 || null,
         lokasi: lokasi || null,
       },
     });

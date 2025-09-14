@@ -31,7 +31,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { put } from "@vercel/blob";
+
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -50,7 +50,6 @@ const formSchema = z.object({
     message: "Fee is required.",
   }),
   imageUrl: z.string().optional(),
-  imageUrl2: z.string().optional(),
   lokasi: z.string().optional(),
 });
 
@@ -64,7 +63,6 @@ interface Product {
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
-  imageUrl2: string | null;
   lokasi: string | null;
   createdAt: string;
   updatedAt: string;
@@ -83,9 +81,7 @@ export function ProductModal({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [imagePreview2, setImagePreview2] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [uploading2, setUploading2] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -98,7 +94,6 @@ export function ProductModal({
       videoLink: "",
       fee: "",
       imageUrl: "",
-      imageUrl2: "",
       lokasi: "",
     },
   });
@@ -116,11 +111,9 @@ export function ProductModal({
           videoLink: product.videoLink || "",
           fee: product.fee.toString(),
           imageUrl: product.imageUrl || "",
-          imageUrl2: product.imageUrl2 || "",
           lokasi: product.lokasi || "",
         });
         setImagePreview(product.imageUrl || null);
-        setImagePreview2(product.imageUrl2 || null);
       } else {
         form.reset({
           title: "",
@@ -131,11 +124,9 @@ export function ProductModal({
           videoLink: "",
           fee: "",
           imageUrl: "",
-          imageUrl2: "",
           lokasi: "",
         });
         setImagePreview(null);
-        setImagePreview2(null);
       }
     }
   }, [open, product, form]);
@@ -161,7 +152,6 @@ export function ProductModal({
           videoLink: values.videoLink || null,
           fee: parseInt(values.fee),
           imageUrl: values.imageUrl || null,
-          imageUrl2: values.imageUrl2 || null,
           lokasi: values.lokasi || null,
         }),
       });
@@ -216,8 +206,8 @@ export function ProductModal({
         const formData = new FormData();
         formData.append("file", file);
 
-        // Upload to our API route which handles Vercel Blob upload
-        const response = await fetch("/api/upload", {
+        // Upload to our new local API route
+        const response = await fetch("/api/upload/local", {
           method: "POST",
           body: formData,
         });
@@ -237,40 +227,6 @@ export function ProductModal({
         toast.error("Failed to upload image: " + (error instanceof Error ? error.message : "Unknown error"));
       } finally {
         setUploading(false);
-      }
-    }
-  };
-
-  const handleImage2Change = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setUploading2(true);
-      try {
-        // Create FormData object
-        const formData = new FormData();
-        formData.append("file", file);
-
-        // Upload to our API route which handles Vercel Blob upload
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to upload image");
-        }
-
-        const { url } = await response.json();
-
-        setImagePreview2(url);
-        form.setValue("imageUrl2", url);
-        toast.success("Second image uploaded successfully");
-      } catch (error) {
-        console.error("Error uploading second image:", error);
-        toast.error("Failed to upload second image: " + (error instanceof Error ? error.message : "Unknown error"));
-      } finally {
-        setUploading2(false);
       }
     }
   };
@@ -488,43 +444,6 @@ export function ProductModal({
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="imageUrl2"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-purple-300">Image 2</FormLabel>
-                  <FormControl>
-                    <div className="space-y-4">
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImage2Change}
-                        disabled={uploading2}
-                        className="bg-gray-800 border-purple-500/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
-                      />
-                      <Input type="hidden" {...field} />
-                      {uploading2 && (
-                        <p className="text-purple-300 text-sm">
-                          Uploading second image...
-                        </p>
-                      )}
-                      {imagePreview2 && (
-                        <div className="mt-2">
-                          <img
-                            src={imagePreview2}
-                            alt="Preview 2"
-                            className="w-full h-48 object-cover rounded-lg border border-purple-500/30"
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
             <DialogFooter className="gap-2 sm:gap-0">
               <Button
                 type="button"
@@ -537,10 +456,10 @@ export function ProductModal({
               <Button
                 type="submit"
                 className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
-                disabled={isSubmitting || uploading || uploading2}
+                disabled={isSubmitting || uploading}
               >
-                {isSubmitting || uploading || uploading2
-                  ? uploading || uploading2
+                {isSubmitting || uploading
+                  ? uploading
                     ? "Uploading..."
                     : product
                     ? "Updating..."

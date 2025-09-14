@@ -24,7 +24,6 @@ interface Product {
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
-  imageUrl2: string | null;
   lokasi: string | null;
   createdAt: string;
   updatedAt: string;
@@ -244,15 +243,7 @@ export default function ProductsClientPage() {
                         alt={`${product.title} - Image 1`} 
                         className="w-16 h-16 object-cover rounded"
                       />
-                    ) : null}
-                    {product.imageUrl2 ? (
-                      <img 
-                        src={product.imageUrl2} 
-                        alt={`${product.title} - Image 2`} 
-                        className="w-16 h-16 object-cover rounded"
-                      />
-                    ) : null}
-                    {!product.imageUrl && !product.imageUrl2 && "No Images"}
+                    ) : "No Images"}
                   </div>
                 </TableCell>
                 {isAdmin && (

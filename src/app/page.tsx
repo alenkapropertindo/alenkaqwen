@@ -42,30 +42,24 @@ export default async function Home() {
               Home
             </Link>
             <Link
-              href="#"
+              href="/#products"
               className="hover:text-white font-semibold text-purple-400 transition-colors"
             >
               Lokasi Terbaru
             </Link>
-            <Link
-              href="#"
+            <a
+              href="https://wa.me/6285242049550"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:text-white font-semibold text-purple-400 transition-colors"
             >
               Hubungi Admin
-            </Link>
+            </a>
           </nav>
           <div className="flex space-x-4">
-            <Link href="/auth/signin">
-              <Button
-                variant="outline"
-                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
-              >
-                Login
-              </Button>
-            </Link>
             <Link href="/auth/signup">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300">
-                Signup
+              <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300">
+                Freelance
               </Button>
             </Link>
           </div>
@@ -84,20 +78,24 @@ export default async function Home() {
             </h1>
             <p className="text-gray-300 text-lg mb-8 max-w-lg">
               Temukan rumah impian Anda dengan harga terjangkau di seputar kota
-              Kendari. Kami menyediakan berbagai pilihan properti terbaik untuk
-              keluarga Anda.
+              Kendari. Kami juga menyediakan program affiliate untuk kamu bisa
+              hasilkan uang jutaan rupiah tanpa harus jualan
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-6 text-lg shadow-[0_0_15px_#8b5cf6] hover:shadow-[0_0_20px_#8b5cf6] transition-all duration-300">
-                Cari rumah murah seputar kota Kendari
-              </Button>
-              <Button
-                variant="outline"
-                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300 px-8 py-6 text-lg"
-              >
-                <HomeIcon className="mr-2 h-5 w-5 animate-pulse" />
-                Lihat Properti
-              </Button>
+              <Link href="/freelance">
+                <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300">
+                  Pelajari caranya disini
+                </Button>
+              </Link>
+              <Link href="/#products">
+                <Button
+                  variant="outline"
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+                >
+                  <HomeIcon className="mr-2 h-5 w-5 animate-pulse" />
+                  Lihat Properti
+                </Button>
+              </Link>
             </div>
           </div>
           <div className="md:w-1/2 flex justify-center">
@@ -134,7 +132,7 @@ export default async function Home() {
       </section>
 
       {/* Product Cards Section */}
-      <section className="container mx-auto px-4 py-4">
+      <section id="products" className="container mx-auto px-4 py-4">
         <h2 className="text-3xl font-bold text-center mb-12">
           <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
             Properti Terbaru
@@ -169,18 +167,20 @@ export default async function Home() {
               >
                 Home
               </Link>
-              <Link
-                href="#"
+              <a
+                href="/#products"
                 className="text-gray-400 hover:text-purple-400 transition-colors"
               >
                 Lokasi Terbaru
-              </Link>
-              <Link
-                href="#"
+              </a>
+              <a
+                href="https://wa.me/6285242049550"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-gray-400 hover:text-purple-400 transition-colors"
               >
                 Hubungi Admin
-              </Link>
+              </a>
             </div>
             <div className="text-gray-500">
               © 2025 Alenka Properti – Semua Hak Dilindungi
