@@ -68,6 +68,18 @@ export function ProductFilter({ initialProducts }: { initialProducts: Product[] 
       result = result.filter((product) => product.kategori === selectedKategori);
     }
     
+    // Sort products: Promo category first, then by creation date
+    result.sort((a, b) => {
+      // If both are Promo or both are not Promo, sort by createdAt (newest first)
+      if ((a.kategori === "Promo") === (b.kategori === "Promo")) {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      }
+      // If only a is Promo, a comes first
+      if (a.kategori === "Promo") return -1;
+      // If only b is Promo, b comes first
+      return 1;
+    });
+    
     setFilteredProducts(result);
   }, [searchTerm, selectedLokasi, selectedKategori, products]);
 

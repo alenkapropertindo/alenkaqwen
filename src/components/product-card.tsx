@@ -94,7 +94,7 @@ export function ProductCard({ product }: { product: Product }) {
               {product.title}
             </h3>
             {product.kategori && (
-              <Badge variant={getBadgeVariant(product.kategori)} className="text-xs py-0.5 px-2 ml-2 whitespace-nowrap">
+              <Badge variant={getBadgeVariant(product.kategori)} className="text-base py-1.5 px-3 ml-2 whitespace-nowrap font-bold shadow-lg transform hover:scale-105 transition-transform duration-200">
                 {formatKategori(product.kategori)}
               </Badge>
             )}

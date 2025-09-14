@@ -23,7 +23,7 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   // Fetch products from database
-  const products = await prisma.product.findMany({
+  let products = await prisma.product.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -40,6 +40,18 @@ export default async function Home() {
       createdAt: true,
       kategori: true,
     },
+  });
+  
+  // Sort products: Promo category first, then by creation date
+  products.sort((a, b) => {
+    // If both are Promo or both are not Promo, sort by createdAt (newest first)
+    if ((a.kategori === "Promo") === (b.kategori === "Promo")) {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
+    // If only a is Promo, a comes first
+    if (a.kategori === "Promo") return -1;
+    // If only b is Promo, b comes first
+    return 1;
   });
 
   return (
