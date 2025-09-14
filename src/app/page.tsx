@@ -9,12 +9,14 @@ type Product = {
   id: string;
   title: string;
   lokasi: string | null;
+  detail: string | null;
   description: string;
   dpAkad: number;
   videoLink: string | null;
   fee: number;
   imageUrl: string | null;
   createdAt: Date;
+  kategori: string | null;
 };
 
 export default async function Home() {
@@ -24,6 +26,19 @@ export default async function Home() {
       createdAt: "desc",
     },
     take: 4, // Limit to 4 products for the homepage
+    select: {
+      id: true,
+      title: true,
+      lokasi: true,
+      detail: true,
+      description: true,
+      dpAkad: true,
+      videoLink: true,
+      fee: true,
+      imageUrl: true,
+      createdAt: true,
+      kategori: true,
+    }
   });
 
   return (
