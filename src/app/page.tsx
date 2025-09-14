@@ -19,7 +19,7 @@ type Product = {
   kategori: string | null;
 };
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   // Fetch products from database
@@ -93,9 +93,9 @@ export default async function Home() {
               </span>
             </h1>
             <p className="text-gray-300 text-lg mb-8 max-w-lg">
-              Temukan rumah impian Anda dengan harga terjangkau di seputar kota
-              Kendari. Kami juga menyediakan program affiliate untuk kamu bisa
-              hasilkan uang jutaan rupiah tanpa harus jualan
+              Temukan rumah impianmu dengan harga terjangkau di kota Kendari.
+              kamu juga bisa ikut program affiliate kami untuk bisa hasilkan
+              uang jutaan rupiah tanpa harus jualan, mau tau caranya?
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/freelance">

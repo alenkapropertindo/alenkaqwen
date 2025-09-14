@@ -50,7 +50,7 @@ export default function FreelancePage() {
                 </h3>
                 <p className="text-purple-300">
                   Kamu tidak perlu jadi agen properti atau door to door ke calon
-                  pembeli. Cukup rekomendasikan saja!
+                  pembeli!
                 </p>
               </div>
 
@@ -59,11 +59,11 @@ export default function FreelancePage() {
                   <Users className="h-8 w-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">
-                  Agen Kami yang Follow-Up
+                  Agen AI Kami yang Follow-Up
                 </h3>
                 <p className="text-purple-300">
-                  Setelah kamu rekomendasikan, tim profesional kami yang akan
-                  menghubungi, presentasi, antar ceklokasi hingga closing.
+                  Setelah kamu rekomendasikan target konsumen, tim kami yang
+                  akan menghubungi, presentasi, antar ceklokasi hingga closing.
                 </p>
               </div>
 
@@ -308,7 +308,7 @@ export default function FreelancePage() {
                   <Star className="h-6 w-6 fill-current" />
                 </div>
                 <p className="text-purple-200 mb-4">
-                  "Saya dapat fee 2,5 juta hanya dengan merekomendasikan teman.
+                  "Saya dapat fee 2 juta hanya dengan merekomendasikan teman.
                   Sangat mudah dan tanpa repot!"
                 </p>
                 <p className="text-purple-400 font-bold">
