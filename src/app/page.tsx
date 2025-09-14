@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { HomeIcon } from "lucide-react";
 import prisma from "@/lib/prisma";
-import { ProductCard } from "@/components/product-card";
+import { ProductFilter } from "@/components/product-filter";
 
 // Define the product type based on Prisma schema
 type Product = {
@@ -154,19 +154,7 @@ export default async function Home() {
             Properti Terbaru
           </span>
         </h2>
-        {products.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">
-              Belum ada properti yang tersedia saat ini.
-            </p>
-          </div>
-        )}
+        <ProductFilter initialProducts={products} />
       </section>
 
       {/* Footer */}

@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { UserRole } from "@/generated/prisma";
 
 // GET /api/products - Get all products
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const session = await getServerSession();
 
@@ -13,11 +13,55 @@ export async function GET() {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // Fetch all products
+    // Parse query parameters
+    const { searchParams } = new URL(request.url);
+    const search = searchParams.get('search') || '';
+    const lokasi = searchParams.get('lokasi') || '';
+    const kategori = searchParams.get('kategori') || '';
+    const sortBy = searchParams.get('sortBy') || 'createdAt';
+    const sortOrder = searchParams.get('sortOrder') || 'desc';
+
+    // Build where conditions
+    const where: any = {};
+    
+    // Search filter
+    if (search) {
+      where.OR = [
+        { title: { contains: search, mode: 'insensitive' } },
+        { description: { contains: search, mode: 'insensitive' } },
+        { detail: { contains: search, mode: 'insensitive' } },
+      ];
+    }
+    
+    // Lokasi filter
+    if (lokasi && lokasi !== "__all__") {
+      where.lokasi = { contains: lokasi, mode: 'insensitive' };
+    }
+    
+    // Kategori filter
+    if (kategori && kategori !== "__all__") {
+      where.kategori = kategori;
+    }
+
+    // Build orderBy conditions
+    let orderBy: any = {};
+    switch (sortBy) {
+      case 'fee':
+        orderBy = { fee: sortOrder };
+        break;
+      case 'title':
+        orderBy = { title: sortOrder };
+        break;
+      case 'createdAt':
+      default:
+        orderBy = { createdAt: sortOrder };
+        break;
+    }
+
+    // Fetch products with filters and sorting
     const products = await prisma.product.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
+      where,
+      orderBy,
     });
 
     return NextResponse.json({ products });

@@ -11,8 +11,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { ProductModal } from "./product-modal";
-import { Trash2, Plus, Edit3 } from "lucide-react";
+import { Trash2, Plus, Edit3, Search } from "lucide-react";
 
 interface Product {
   id: string;
@@ -43,12 +51,31 @@ export default function ProductsClientPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [deletingProductId, setDeletingProductId] = useState<string | null>(null);
+  
+  // Search and filter states
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedLokasi, setSelectedLokasi] = useState("");
+  const [selectedKategori, setSelectedKategori] = useState("");
+  const [sortBy, setSortBy] = useState("createdAt"); // Default sort by creation date
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
 
   useEffect(() => {
     fetchProducts();
     fetchUser();
+    fetchUniqueLokasi();
   }, []);
 
+  // Fetch products when filters change
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      fetchProducts();
+    }, 500); // Debounce search input
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchTerm, selectedLokasi, selectedKategori, sortBy, sortOrder]);
+
+  const [uniqueLokasi, setUniqueLokasi] = useState<string[]>([]);
+  
   const fetchUser = async () => {
     try {
       const response = await fetch("/api/users/me");
@@ -64,9 +91,34 @@ export default function ProductsClientPage() {
     }
   };
 
+  const fetchUniqueLokasi = async () => {
+    try {
+      const response = await fetch("/api/products/lokasi");
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to fetch locations");
+      }
+      
+      setUniqueLokasi(data.lokasi);
+    } catch (error: any) {
+      console.error("Error fetching locations:", error);
+    }
+  };
+
   const fetchProducts = async () => {
     try {
-      const response = await fetch("/api/products");
+      setLoading(true);
+      
+      // Build query parameters
+      const params = new URLSearchParams();
+      if (searchTerm) params.append('search', searchTerm);
+      if (selectedLokasi && selectedLokasi !== "__all__") params.append('lokasi', selectedLokasi);
+      if (selectedKategori && selectedKategori !== "__all__") params.append('kategori', selectedKategori);
+      if (sortBy) params.append('sortBy', sortBy);
+      if (sortOrder) params.append('sortOrder', sortOrder);
+      
+      const response = await fetch(`/api/products?${params.toString()}`);
       const data = await response.json();
       
       if (!response.ok) {
@@ -183,6 +235,67 @@ export default function ProductsClientPage() {
           )}
         </div>
         <p className="text-purple-200 text-lg">Manage all products</p>
+      </div>
+      
+      {/* Search and Filter Controls */}
+      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6 shadow-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {/* Search Input */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input
+              placeholder="Cari produk..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 bg-gray-900 border-purple-500/30 text-white placeholder-gray-400"
+            />
+          </div>
+          
+          {/* Lokasi Filter */}
+          <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
+            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+              <SelectValue placeholder="Semua Lokasi" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">Semua Lokasi</SelectItem>
+              {uniqueLokasi.map((lokasi) => (
+                <SelectItem key={lokasi} value={lokasi}>
+                  {lokasi}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          
+          {/* Kategori Filter */}
+          <Select value={selectedKategori} onValueChange={setSelectedKategori}>
+            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+              <SelectValue placeholder="Semua Kategori" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="__all__">Semua Kategori</SelectItem>
+              <SelectItem value="Strategis">Strategis</SelectItem>
+              <SelectItem value="Promo">Promo</SelectItem>
+              <SelectItem value="Dp_Rendah">DP Rendah</SelectItem>
+            </SelectContent>
+          </Select>
+          
+          {/* Sort By */}
+          <Select value={sortBy} onValueChange={(value) => {
+            setSortBy(value);
+            if (value === "fee") {
+              setSortOrder("desc"); // Default to descending for fee
+            }
+          }}>
+            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+              <SelectValue placeholder="Urutkan Berdasarkan" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="createdAt">Tanggal Terbaru</SelectItem>
+              <SelectItem value="fee">Fee Penjualan Tertinggi</SelectItem>
+              <SelectItem value="title">Nama Produk (A-Z)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       
       <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl overflow-x-auto shadow-lg">
