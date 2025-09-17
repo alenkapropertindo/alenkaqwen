@@ -110,14 +110,14 @@ export default function AccountPage() {
     return (
       <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-700 rounded w-1/4 mb-8"></div>
+          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-8"></div>
           <div className="space-y-6">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex items-center space-x-4">
-                <div className="h-12 w-12 bg-gray-700 rounded-full"></div>
+                <div className="h-12 w-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-gray-700 rounded"></div>
-                  <div className="h-4 bg-gray-700 rounded w-3/4"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
                 </div>
               </div>
             ))}
@@ -131,10 +131,10 @@ export default function AccountPage() {
     return (
       <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
         <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-purple-400">
+          <h1 className="text-2xl font-bold text-purple-800 dark:text-purple-400">
             Not authenticated
           </h1>
-          <p className="text-purple-200 mt-2">
+          <p className="text-purple-700 dark:text-purple-200 mt-2">
             Please log in to view your account
           </p>
         </div>
@@ -158,7 +158,7 @@ export default function AccountPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6"
+        className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-6"
       >
         <div className="flex flex-col md:flex-row gap-8">
           {/* Avatar Section */}
@@ -173,8 +173,8 @@ export default function AccountPage() {
                   className="rounded-full border-2 border-purple-500"
                 />
               ) : (
-                <div className="w-32 h-32 rounded-full bg-purple-900/50 border-2 border-purple-500 flex items-center justify-center">
-                  <User className="h-16 w-16 text-purple-400" />
+                <div className="w-32 h-32 rounded-full bg-purple-100 dark:bg-purple-900/50 border-2 border-purple-300 dark:border-purple-500 flex items-center justify-center">
+                  <User className="h-16 w-16 text-purple-600 dark:text-purple-400" />
                 </div>
               )}
               <button
@@ -184,10 +184,10 @@ export default function AccountPage() {
                 <Settings className="h-4 w-4 text-white" />
               </button>
             </div>
-            <h2 className="text-xl font-semibold mt-4 text-purple-100">
+            <h2 className="text-xl font-semibold mt-4 text-gray-900 dark:text-purple-100">
               {name}
             </h2>
-            <p className="text-purple-300">{email}</p>
+            <p className="text-purple-700 dark:text-purple-300">{email}</p>
           </div>
 
           {/* Information Section */}
@@ -195,64 +195,64 @@ export default function AccountPage() {
             {isEditing ? (
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="name" className="text-purple-200">
+                  <Label htmlFor="name" className="text-gray-700 dark:text-purple-200">
                     Name
                   </Label>
                   <Input
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="mt-1 bg-gray-700/50 border-purple-900/50 text-purple-100 focus:border-purple-500"
+                    className="mt-1 bg-gray-50 dark:bg-gray-700/50 border-purple-300 dark:border-purple-900/50 text-gray-900 dark:text-purple-100 focus:border-purple-500"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-purple-200">
+                  <Label htmlFor="email" className="text-gray-700 dark:text-purple-200">
                     Email
                   </Label>
                   <Input
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 bg-gray-700/50 border-purple-900/50 text-purple-100 focus:border-purple-500"
+                    className="mt-1 bg-gray-50 dark:bg-gray-700/50 border-purple-300 dark:border-purple-900/50 text-gray-900 dark:text-purple-100 focus:border-purple-500"
                     disabled
                   />
-                  <p className="text-xs text-purple-400 mt-1">
+                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">
                     Email cannot be changed
                   </p>
                 </div>
 
                 <div>
-                  <Label htmlFor="whatsapp" className="text-purple-200">
+                  <Label htmlFor="whatsapp" className="text-gray-700 dark:text-purple-200">
                     WhatsApp
                   </Label>
                   <div className="relative mt-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Phone className="h-4 w-4 text-purple-400" />
+                      <Phone className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                     </div>
                     <Input
                       id="whatsapp"
                       value={whatsapp}
                       onChange={(e) => setWhatsapp(e.target.value)}
-                      className="pl-10 bg-gray-700/50 border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      className="pl-10 bg-gray-50 dark:bg-gray-700/50 border-purple-300 dark:border-purple-900/50 text-gray-900 dark:text-purple-100 focus:border-purple-500"
                       placeholder="+62..."
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="rekening" className="text-purple-200">
+                  <Label htmlFor="rekening" className="text-gray-700 dark:text-purple-200">
                     Nomor Rekening
                   </Label>
                   <div className="relative mt-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <CreditCard className="h-4 w-4 text-purple-400" />
+                      <CreditCard className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                     </div>
                     <Input
                       id="rekening"
                       value={rekening}
                       onChange={(e) => setRekening(e.target.value)}
-                      className="pl-10 bg-gray-700/50 border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      className="pl-10 bg-gray-50 dark:bg-gray-700/50 border-purple-300 dark:border-purple-900/50 text-gray-900 dark:text-purple-100 focus:border-purple-500"
                       placeholder="cth: 9702345069/BCA"
                     />
                   </div>
@@ -268,7 +268,7 @@ export default function AccountPage() {
                   <Button
                     variant="outline"
                     onClick={() => setIsEditing(false)}
-                    className="border-purple-700 text-purple-300 hover:bg-purple-800/50"
+                    className="border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-800/50"
                   >
                     Cancel
                   </Button>
@@ -276,12 +276,12 @@ export default function AccountPage() {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-purple-900/50">
+                <div className="flex items-center justify-between pb-4 border-b border-purple-200 dark:border-purple-900/50">
                   <div>
-                    <h3 className="font-medium text-purple-200">
+                    <h3 className="font-medium text-gray-700 dark:text-purple-200">
                       Personal Information
                     </h3>
-                    <p className="text-sm text-purple-400">
+                    <p className="text-sm text-purple-600 dark:text-purple-400">
                       Basic information about you
                     </p>
                   </div>
@@ -295,36 +295,36 @@ export default function AccountPage() {
 
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <User className="h-5 w-5 text-purple-400 mr-3" />
+                    <User className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">Name</p>
-                      <p className="text-purple-100">{name || "Not set"}</p>
+                      <p className="text-sm text-purple-600 dark:text-purple-400">Name</p>
+                      <p className="text-gray-900 dark:text-purple-100">{name || "Not set"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <div className="h-5 w-5 text-purple-400 mr-3 flex items-center">
+                    <div className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-3 flex items-center">
                       <span className="text-xs">@</span>
                     </div>
                     <div>
-                      <p className="text-sm text-purple-400">Email</p>
-                      <p className="text-purple-100">{email}</p>
+                      <p className="text-sm text-purple-600 dark:text-purple-400">Email</p>
+                      <p className="text-gray-900 dark:text-purple-100">{email}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <Phone className="h-5 w-5 text-purple-400 mr-3" />
+                    <Phone className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">WhatsApp</p>
-                      <p className="text-purple-100">{whatsapp || "Not set"}</p>
+                      <p className="text-sm text-purple-600 dark:text-purple-400">WhatsApp</p>
+                      <p className="text-gray-900 dark:text-purple-100">{whatsapp || "Not set"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <CreditCard className="h-5 w-5 text-purple-400 mr-3" />
+                    <CreditCard className="h-5 w-5 text-purple-600 dark:text-purple-400 mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">Rekening Number</p>
-                      <p className="text-purple-100">{rekening || "Not set"}</p>
+                      <p className="text-sm text-purple-600 dark:text-purple-400">Rekening Number</p>
+                      <p className="text-gray-900 dark:text-purple-100">{rekening || "Not set"}</p>
                     </div>
                   </div>
                 </div>

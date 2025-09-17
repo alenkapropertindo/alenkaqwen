@@ -19,6 +19,7 @@ import {
   Menu,
   LogOut
 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface NavItem {
   title: string;
@@ -121,7 +122,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
 
   return (
     <>
-      {/* Mobile overlay */}
+      {/* Mobile overlay */};
       {isMobile && !isCollapsed && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
@@ -133,12 +134,12 @@ export function CollapsibleSidebar({ user }: { user: User }) {
       <motion.aside
         initial={false}
         animate={{ width: isCollapsed ? 80 : 260 }}
-        className={`h-screen sticky top-0 flex flex-col bg-gray-900 border-r border-purple-900 z-50 ${
+        className={`h-screen sticky top-0 flex flex-col bg-white dark:bg-gray-900 border-r border-purple-200 dark:border-purple-900 z-50 ${
           isMobile && !isCollapsed ? "fixed inset-y-0" : ""
         }`}
       >
         {/* Sidebar header */}
-        <div className="flex items-center justify-between p-4 border-b border-purple-900">
+        <div className="flex items-center justify-between p-4 border-b border-purple-200 dark:border-purple-900">
           <AnimatePresence>
             {!isCollapsed && (
               <motion.div
@@ -157,20 +158,36 @@ export function CollapsibleSidebar({ user }: { user: User }) {
             )}
           </AnimatePresence>
           
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleSidebar}
-            className="text-purple-300 hover:bg-purple-800 hover:text-purple-100 rounded-lg"
-          >
-            {isCollapsed ? (
-              <Menu className="h-6 w-6" />
-            ) : isMobile ? (
-              <ChevronLeft className="h-6 w-6" />
-            ) : (
-              <ChevronLeft className="h-6 w-6" />
-            )}
-          </Button>
+          <div className="flex items-center space-x-2">
+            {/* Theme Toggle - only visible when sidebar is not collapsed */}
+            <AnimatePresence>
+              {!isCollapsed && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  className="flex items-center"
+                >
+                  <ThemeToggle className="bg-gray-100 dark:bg-gray-800/50 border border-purple-300 dark:border-purple-500/20 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all duration-300" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleSidebar}
+              className="text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800 hover:text-purple-900 dark:hover:text-purple-100 rounded-lg"
+            >
+              {isCollapsed ? (
+                <Menu className="h-6 w-6" />
+              ) : isMobile ? (
+                <ChevronLeft className="h-6 w-6" />
+              ) : (
+                <ChevronLeft className="h-6 w-6" />
+              )}
+            </Button>
+          </div>
         </div>
 
         {/* Navigation */}
@@ -184,11 +201,11 @@ export function CollapsibleSidebar({ user }: { user: User }) {
                     <div
                       className={`flex items-center rounded-lg px-3 py-2 transition-all duration-200 ${
                         isActive
-                          ? "bg-purple-900 text-purple-100 shadow-lg shadow-purple-900/50"
-                          : "text-purple-200 hover:bg-purple-800/50 hover:text-purple-50"
+                          ? "bg-purple-600 dark:bg-purple-900 text-white dark:text-purple-100 shadow-lg shadow-purple-500/20 dark:shadow-purple-900/50"
+                          : "text-gray-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-800/50 hover:text-purple-900 dark:hover:text-purple-50"
                       }`}
                     >
-                      <span className={`${isActive ? "text-purple-200" : "text-purple-400"}`}>
+                      <span className={`${isActive ? "text-white dark:text-purple-200" : "text-purple-600 dark:text-purple-400"}`}>
                         {item.icon}
                       </span>
                       
@@ -213,10 +230,10 @@ export function CollapsibleSidebar({ user }: { user: User }) {
         </nav>
 
         {/* Sidebar footer - Logout button */}
-        <div className="p-4 border-t border-purple-900">
+        <div className="p-4 border-t border-purple-200 dark:border-purple-900">
           <button
             onClick={handleSignOut}
-            className={`flex items-center w-full rounded-lg px-3 py-2 transition-all duration-200 text-purple-200 hover:bg-purple-800/50 hover:text-purple-50 ${
+            className={`flex items-center w-full rounded-lg px-3 py-2 transition-all duration-200 text-gray-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-800/50 hover:text-purple-900 dark:hover:text-purple-50 ${
               isCollapsed ? "justify-center" : ""
             }`}
           >

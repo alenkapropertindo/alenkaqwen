@@ -149,8 +149,8 @@ export default function UsersClientPage() {
             Users
           </h1>
         </div>
-        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-8 shadow-lg">
-          <p className="text-purple-200 text-xl">Loading users...</p>
+        <div className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-8 shadow-lg">
+          <p className="text-purple-800 dark:text-purple-200 text-xl">Loading users...</p>
         </div>
       </div>
     );
@@ -162,23 +162,23 @@ export default function UsersClientPage() {
         <h1 className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
           Users
         </h1>
-        <p className="text-purple-200 text-lg">Admin Only - Manage all users</p>
+        <p className="text-purple-800 dark:text-purple-200 text-lg">Admin Only - Manage all users</p>
       </div>
 
       {/* Search Input */}
-      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-4 sm:p-6">
+      <div className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-4 sm:p-6">
         <div className="mb-6">
           <Input
             placeholder="Cari user berdasarkan nama, email, atau WhatsApp..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-gray-900 border-purple-900/50 text-white placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500"
+            className="bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-900/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
 
         {filteredAndSortedUsers.length === 0 ? (
           <div className="text-center py-8">
-            <p className="text-gray-400">
+            <p className="text-gray-700 dark:text-gray-400">
               {searchTerm ? "Tidak ada user yang cocok dengan pencarian" : "Tidak ada user ditemukan"}
             </p>
           </div>
@@ -186,9 +186,9 @@ export default function UsersClientPage() {
           <div className="rounded-lg overflow-x-auto">
             <Table className="w-full">
               <TableHeader>
-                <TableRow className="border-purple-900/50 hover:bg-gray-800">
+                <TableRow className="border-purple-200 dark:border-purple-900/50 hover:bg-purple-50 dark:hover:bg-gray-800">
                   <TableHead 
-                    className="text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-100"
+                    className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-900 dark:hover:text-purple-100"
                     onClick={() => requestSort('name')}
                   >
                     <div className="flex items-center">
@@ -197,7 +197,7 @@ export default function UsersClientPage() {
                     </div>
                   </TableHead>
                   <TableHead 
-                    className="text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-100"
+                    className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold cursor-pointer hover:text-purple-900 dark:hover:text-purple-100"
                     onClick={() => requestSort('email')}
                   >
                     <div className="flex items-center">
@@ -205,28 +205,28 @@ export default function UsersClientPage() {
                       <ArrowUpDown className="ml-2 h-4 w-4" />
                     </div>
                   </TableHead>
-                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">WhatsApp</TableHead>
-                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Role</TableHead>
-                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-center">Akad Kredit</TableHead>
-                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-center">Pemberkasan</TableHead>
-                  <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Actions</TableHead>
+                  <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">WhatsApp</TableHead>
+                  <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Role</TableHead>
+                  <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold text-center">Akad Kredit</TableHead>
+                  <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold text-center">Pemberkasan</TableHead>
+                  <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredAndSortedUsers.map((user) => (
-                  <TableRow key={user.id} className="border-purple-900/30 hover:bg-gray-800/50">
-                    <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">{user.name || "-"}</TableCell>
-                    <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{user.email || "-"}</TableCell>
-                    <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{user.whatsapp || "-"}</TableCell>
-                    <TableCell className="text-gray-300 py-4">
+                  <TableRow key={user.id} className="border-purple-100 dark:border-purple-900/30 hover:bg-purple-50 dark:hover:bg-gray-800/50">
+                    <TableCell className="font-medium text-gray-900 dark:text-white py-4 max-w-[150px] truncate">{user.name || "-"}</TableCell>
+                    <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[200px] truncate">{user.email || "-"}</TableCell>
+                    <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[150px] truncate">{user.whatsapp || "-"}</TableCell>
+                    <TableCell className="text-gray-700 dark:text-gray-300 py-4">
                       <Select
                         value={user.role}
                         onValueChange={(value) => handleRoleChange(user.id, value as UserRole)}
                         disabled={updatingUserId === user.id}
                       >
-                        <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[120px]">
+                        <SelectTrigger className="bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white w-[120px]">
                           {updatingUserId === user.id ? (
-                            <span className="text-gray-400">Updating...</span>
+                            <span className="text-gray-500 dark:text-gray-400">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
@@ -237,10 +237,10 @@ export default function UsersClientPage() {
                         </SelectContent>
                       </Select>
                     </TableCell>
-                    <TableCell className="text-gray-300 text-center py-4">
+                    <TableCell className="text-gray-700 dark:text-gray-300 text-center py-4">
                       {user.akadKreditCount || 0}
                     </TableCell>
-                    <TableCell className="text-gray-300 text-center py-4">
+                    <TableCell className="text-gray-700 dark:text-gray-300 text-center py-4">
                       {user.pemberkasanCount || 0}
                     </TableCell>
                     <TableCell className="py-4">
@@ -249,7 +249,7 @@ export default function UsersClientPage() {
                           variant="ghost"
                           size="sm"
                           disabled
-                          className="text-purple-300"
+                          className="text-purple-700 dark:text-purple-300"
                         >
                           Updating...
                         </Button>

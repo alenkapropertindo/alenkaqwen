@@ -208,8 +208,8 @@ export default function ProductsClientPage() {
             Products
           </h1>
         </div>
-        <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6 sm:p-8 shadow-lg">
-          <p className="text-purple-200 text-xl">Loading products...</p>
+        <div className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-6 sm:p-8 shadow-lg">
+          <p className="text-purple-800 dark:text-purple-200 text-xl">Loading products...</p>
         </div>
       </div>
     );
@@ -234,26 +234,26 @@ export default function ProductsClientPage() {
             </Button>
           )}
         </div>
-        <p className="text-purple-200 text-lg">Manage all products</p>
+        <p className="text-purple-800 dark:text-purple-200 text-lg">Manage all products</p>
       </div>
       
       {/* Search and Filter Controls */}
-      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl p-6 shadow-lg">
+      <div className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-6 shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Search Input */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400 h-4 w-4" />
             <Input
               placeholder="Cari produk..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-gray-900 border-purple-500/30 text-white placeholder-gray-400"
+              className="pl-10 bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-500/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             />
           </div>
           
           {/* Lokasi Filter */}
           <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
-            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-500/30 text-gray-900 dark:text-white">
               <SelectValue placeholder="Semua Lokasi" />
             </SelectTrigger>
             <SelectContent>
@@ -268,7 +268,7 @@ export default function ProductsClientPage() {
           
           {/* Kategori Filter */}
           <Select value={selectedKategori} onValueChange={setSelectedKategori}>
-            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-500/30 text-gray-900 dark:text-white">
               <SelectValue placeholder="Semua Kategori" />
             </SelectTrigger>
             <SelectContent>
@@ -286,7 +286,7 @@ export default function ProductsClientPage() {
               setSortOrder("desc"); // Default to descending for fee
             }
           }}>
-            <SelectTrigger className="bg-gray-900 border-purple-500/30 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-900 border-purple-300 dark:border-purple-500/30 text-gray-900 dark:text-white">
               <SelectValue placeholder="Urutkan Berdasarkan" />
             </SelectTrigger>
             <SelectContent>
@@ -298,48 +298,48 @@ export default function ProductsClientPage() {
         </div>
       </div>
       
-      <div className="bg-gray-800/50 border border-purple-900/50 rounded-xl overflow-x-auto shadow-lg">
+      <div className="bg-white dark:bg-gray-800/50 border border-purple-200 dark:border-purple-900/50 rounded-xl overflow-x-auto shadow-lg">
         <Table className="w-full">
           <TableHeader>
-            <TableRow className="border-purple-900/50 hover:bg-gray-800">
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Item</TableHead>
+            <TableRow className="border-purple-200 dark:border-purple-900/50 hover:bg-purple-50 dark:hover:bg-gray-800">
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Item</TableHead>
               {isAdmin && (
-                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Detail</TableHead>
+                <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Detail</TableHead>
               )}
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Kategori</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Lokasi</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">DP+Akad (Rp)</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Kategori</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Lokasi</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">DP+Akad (Rp)</TableHead>
               {isAdmin && (
-                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Deskripsi</TableHead>
+                <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Deskripsi</TableHead>
               )}
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Link Video</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Fee Penjualan (Rp)</TableHead>
-              <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold">Gambar</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Link Video</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold whitespace-nowrap">Fee Penjualan (Rp)</TableHead>
+              <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold">Gambar</TableHead>
               {isAdmin && (
-                <TableHead className="text-purple-200 text-sm sm:text-lg font-semibold text-right">Actions</TableHead>
+                <TableHead className="text-purple-800 dark:text-purple-200 text-sm sm:text-lg font-semibold text-right">Actions</TableHead>
               )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {products.map((product) => (
-              <TableRow key={product.id} className="border-purple-900/30 hover:bg-gray-800/50">
-                <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">{product.title}</TableCell>
+              <TableRow key={product.id} className="border-purple-100 dark:border-purple-900/30 hover:bg-purple-50 dark:hover:bg-gray-800/50">
+                <TableCell className="font-medium text-gray-900 dark:text-white py-4 max-w-[150px] truncate">{product.title}</TableCell>
                 {isAdmin && (
-                  <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">{product.detail || "-"}</TableCell>
+                  <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[150px] truncate">{product.detail || "-"}</TableCell>
                 )}
-                <TableCell className="text-gray-300 py-4">{formatKategori(product.kategori)}</TableCell>
-                <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">{product.lokasi || "-"}</TableCell>
-                <TableCell className="text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.dpAkad)}</TableCell>
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4">{formatKategori(product.kategori)}</TableCell>
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[120px] truncate">{product.lokasi || "-"}</TableCell>
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.dpAkad)}</TableCell>
                 {isAdmin && (
-                  <TableCell className="text-gray-300 py-4 max-w-[200px] truncate">{product.description}</TableCell>
+                  <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[200px] truncate">{product.description}</TableCell>
                 )}
-                <TableCell className="text-gray-300 py-4 max-w-[120px] truncate">
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[120px] truncate">
                   {product.videoLink ? (
                     <a 
                       href={product.videoLink} 
                       target="_blank" 
                       rel="noopener noreferrer"
-                      className="text-purple-400 hover:text-purple-300 underline truncate block"
+                      className="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 underline truncate block"
                     >
                       View Video
                     </a>
@@ -347,8 +347,8 @@ export default function ProductsClientPage() {
                     "-"
                   )}
                 </TableCell>
-                <TableCell className="text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.fee)}</TableCell>
-                <TableCell className="text-gray-300 py-4">
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4 whitespace-nowrap">{formatRupiah(product.fee)}</TableCell>
+                <TableCell className="text-gray-700 dark:text-gray-300 py-4">
                   <div className="flex flex-col gap-2">
                     {product.imageUrl ? (
                       <img 
@@ -366,7 +366,7 @@ export default function ProductsClientPage() {
                         variant="outline"
                         size="sm"
                         onClick={() => handleEditProduct(product)}
-                        className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+                        className="border-purple-300 dark:border-purple-500 text-purple-700 dark:text-purple-400 hover:bg-purple-500/10 dark:hover:bg-purple-500/10 hover:text-purple-800 dark:hover:text-purple-300"
                       >
                         <Edit3 className="w-4 h-4" />
                       </Button>
@@ -375,7 +375,7 @@ export default function ProductsClientPage() {
                         size="sm"
                         onClick={() => handleDeleteProduct(product.id)}
                         disabled={deletingProductId === product.id}
-                        className="border-red-500 text-red-400 hover:bg-red-500/10 hover:text-red-300"
+                        className="border-red-300 dark:border-red-500 text-red-700 dark:text-red-400 hover:bg-red-500/10 dark:hover:bg-red-500/10 hover:text-red-800 dark:hover:text-red-300"
                       >
                         {deletingProductId === product.id ? (
                           "Deleting..."
@@ -393,7 +393,7 @@ export default function ProductsClientPage() {
         
         {products.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-400">No products found</p>
+            <p className="text-gray-700 dark:text-gray-400">No products found</p>
           </div>
         )}
       </div>

@@ -99,13 +99,13 @@ export function SearchableCustomersTable({
   const getStatusColorClass = (status: Status) => {
     switch (status) {
       case Status.AKAD_KREDIT:
-        return "bg-green-500/20 text-green-400";
+        return "bg-green-500/20 text-green-700 dark:text-green-400";
       case Status.PEMBERKASAN:
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400";
       case Status.FOLLOWUP:
-        return "bg-blue-500/20 text-blue-400";
+        return "bg-blue-500/20 text-blue-700 dark:text-blue-400";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-gray-700 dark:text-gray-400";
     }
   };
 
@@ -134,11 +134,11 @@ export function SearchableCustomersTable({
   const getPaidStatusColorClass = (paidStatus: string) => {
     switch (paidStatus) {
       case "PAID":
-        return "bg-green-500/20 text-green-400";
+        return "bg-green-500/20 text-green-700 dark:text-green-400";
       case "PENDING":
-        return "bg-yellow-500/20 text-yellow-400";
+        return "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400";
       default:
-        return "bg-gray-500/20 text-gray-400";
+        return "bg-gray-500/20 text-gray-700 dark:text-gray-400";
     }
   };
 
@@ -269,7 +269,7 @@ export function SearchableCustomersTable({
   };
 
   return (
-    <div className="bg-gray-900/50 border border-purple-900/50 rounded-xl p-4 sm:p-6">
+    <div className="bg-white dark:bg-gray-900/50 border border-purple-200 dark:border-purple-900/50 rounded-xl p-4 sm:p-6">
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="flex-grow">
@@ -277,12 +277,12 @@ export function SearchableCustomersTable({
             placeholder="Cari customer berdasarkan nama, WhatsApp, atau email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-gray-800 border-purple-500/50 text-white placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500"
+            className="bg-gray-50 dark:bg-gray-800 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500"
           />
         </div>
         <div className="w-full md:w-48">
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white">
               <SelectValue placeholder="Filter status" />
             </SelectTrigger>
             <SelectContent>
@@ -299,11 +299,11 @@ export function SearchableCustomersTable({
 
       {loading ? (
         <div className="text-center py-12">
-          <p className="text-gray-400">Loading customers...</p>
+          <p className="text-gray-700 dark:text-gray-400">Loading customers...</p>
         </div>
       ) : filteredCustomers.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-400 mb-4">
+          <p className="text-gray-700 dark:text-gray-400 mb-4">
             {searchTerm || statusFilter !== "ALL"
               ? "Tidak ada customer yang cocok dengan filter"
               : "Tidak ada customer ditemukan"}
@@ -314,32 +314,32 @@ export function SearchableCustomersTable({
         <div className="rounded-lg overflow-x-auto">
           <Table className="w-full">
             <TableHeader>
-              <TableRow className="border-purple-500/30 hover:bg-purple-900/20">
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+              <TableRow className="border-purple-200 dark:border-purple-500/30 hover:bg-purple-50 dark:hover:bg-purple-900/20">
+                <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                   Nama Customer
                 </TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+                <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                   WhatsApp
                 </TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+                <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                   Status
                 </TableHead>
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                     Komisi (Rp)
                   </TableHead>
                 )}
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                     Payment Status
                   </TableHead>
                 )}
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="text-purple-800 dark:text-purple-300 text-sm sm:text-base">
                     Ranger
                   </TableHead>
                 )}
-                <TableHead className="text-purple-300 text-right text-sm sm:text-base">
+                <TableHead className="text-purple-800 dark:text-purple-300 text-right text-sm sm:text-base">
                   Actions
                 </TableHead>
               </TableRow>
@@ -348,12 +348,12 @@ export function SearchableCustomersTable({
               {filteredCustomers.map((customer) => (
                 <TableRow
                   key={customer.id}
-                  className="border-purple-500/20 hover:bg-purple-900/10"
+                  className="border-purple-100 dark:border-purple-500/20 hover:bg-purple-50 dark:hover:bg-purple-900/10"
                 >
-                  <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">
+                  <TableCell className="font-medium text-gray-900 dark:text-white py-4 max-w-[150px] truncate">
                     {customer.name}
                   </TableCell>
-                  <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
+                  <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[150px] truncate">
                     <a
                       href={`https://wa.me/${customer.whatsapp.replace(
                         /\D/g,
@@ -361,7 +361,7 @@ export function SearchableCustomersTable({
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-400 hover:text-green-300 underline"
+                      className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 underline"
                     >
                       {customer.whatsapp}
                     </a>
@@ -376,9 +376,9 @@ export function SearchableCustomersTable({
                         }
                         disabled={updatingCustomerId === customer.id}
                       >
-                        <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[140px]">
+                        <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white w-[140px]">
                           {updatingCustomerId === customer.id ? (
-                            <span className="text-gray-400">Updating...</span>
+                            <span className="text-gray-500 dark:text-gray-400">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
@@ -427,7 +427,7 @@ export function SearchableCustomersTable({
                           updatingCustomerId === customer.id ||
                           customer.paidStatus === "PAID"
                         }
-                        className="bg-gray-800 border-purple-500/50 text-white w-[140px]"
+                        className="bg-gray-50 dark:bg-gray-800 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white w-[140px]"
                       />
                     </TableCell>
                   )}
@@ -444,11 +444,11 @@ export function SearchableCustomersTable({
                           customer.status !== "AKAD_KREDIT"
                         }
                       >
-                        <SelectTrigger className="bg-gray-800 border-purple-500/50 text-white w-[140px]">
+                        <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-300 dark:border-purple-500/50 text-gray-900 dark:text-white w-[140px]">
                           {updatingCustomerId === customer.id ? (
-                            <span className="text-gray-400">Updating...</span>
+                            <span className="text-gray-500 dark:text-gray-400">Updating...</span>
                           ) : customer.status !== "AKAD_KREDIT" ? (
-                            <span className="text-gray-400">Pending</span>
+                            <span className="text-gray-500 dark:text-gray-400">Pending</span>
                           ) : (
                             <SelectValue />
                           )}
@@ -462,7 +462,7 @@ export function SearchableCustomersTable({
                   )}
 
                   {userRole === "ADMIN" && (
-                    <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
+                    <TableCell className="text-gray-700 dark:text-gray-300 py-4 max-w-[150px] truncate">
                       {customer.user?.email || "N/A"}
                     </TableCell>
                   )}

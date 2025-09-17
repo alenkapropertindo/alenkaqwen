@@ -15,7 +15,7 @@ export default async function ProtectedLayout({
     <div className="flex min-h-screen">
       <CollapsibleSidebar user={user} />
       <div className="flex-1 flex flex-col">
-        <header className="border-b border-purple-900 bg-gray-900/50 sticky top-0 z-10">
+        <header className="border-b border-purple-200 dark:border-purple-900 bg-white dark:bg-gray-900/50 sticky top-0 z-10">
           <div className="flex items-center justify-between px-6 py-4">
             <div></div> {/* Spacer for alignment */}
             <div className="flex items-center space-x-4">
@@ -23,7 +23,7 @@ export default async function ProtectedLayout({
             </div>
           </div>
         </header>
-        <main className="flex-1 bg-gray-950">
+        <main className="flex-1 bg-gray-50 dark:bg-gray-950">
           {children}
         </main>
       </div>

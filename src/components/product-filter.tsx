@@ -103,7 +103,7 @@ export function ProductFilter({
   return (
     <div className="space-y-6">
       {/* Search and Filter Controls */}
-      <div className="bg-gray-900/50 border border-purple-500/30 rounded-xl p-6 shadow-lg">
+      <div className="bg-white dark:bg-gray-900/50 border border-purple-500/30 dark:border-purple-500/30 rounded-xl p-6 shadow-lg">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Search Input */}
           <div className="relative">
@@ -112,13 +112,13 @@ export function ProductFilter({
               placeholder="Cari properti..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-gray-800 border-purple-500/30 text-white placeholder-gray-400"
+              className="pl-10 bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
             />
           </div>
 
           {/* Lokasi Filter */}
           <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
-            <SelectTrigger className="bg-gray-800 border-purple-500/30 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
               <SelectValue placeholder="Semua Lokasi" />
             </SelectTrigger>
             <SelectContent>
@@ -133,7 +133,7 @@ export function ProductFilter({
 
           {/* Kategori Filter */}
           <Select value={selectedKategori} onValueChange={setSelectedKategori}>
-            <SelectTrigger className="bg-gray-800 border-purple-500/30 text-white">
+            <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
               <SelectValue placeholder="Semua Kategori" />
             </SelectTrigger>
             <SelectContent>
@@ -157,7 +157,7 @@ export function ProductFilter({
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
             Tidak ada properti yang sesuai dengan kriteria pencarian.
           </p>
         </div>

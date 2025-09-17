@@ -72,18 +72,18 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <>
       <Card
-        className="bg-gray-900/50 border-purple-500/30 hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer"
+        className="bg-white dark:bg-gray-900/50 border-purple-500/30 dark:border-purple-500/30 hover:border-purple-500/60 dark:hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative bg-gray-800 border-b border-purple-500/20 h-full">
+        <div className="relative bg-gray-100 dark:bg-gray-800 border-b mb-1 lg:mb-4 border-purple-500/20 dark:border-purple-500/20 h-full">
           {isImageUrlValid(product.imageUrl) ? (
             <img
               src={product.imageUrl!}
               alt={product.title}
-              className="w-full h-40 md:h-48 object-cover"
+              className="w-full h-40 lg:h-full md:h-48 object-cover"
             />
           ) : (
-            <div className="bg-gradient-to-br from-purple-900/50 to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
+            <div className="bg-gradient-to-br from-purple-900/20 dark:from-purple-900/50 to-pink-900/20 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
               <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-purple-400" />
             </div>
           )}
@@ -99,25 +99,27 @@ export function ProductCard({ product }: { product: Product }) {
           )}
         </div>
         <CardContent className="flex flex-col flex-1">
-          <h3 className="text-sm md:text-xl font-bold text-white leading-tight ">
+          <h3 className="text-sm md:text-xl font-bold text-gray-900 dark:text-white leading-tight">
             {product.title}
           </h3>
-          <p className="text-purple-400 text-xs md:text-sm font-medium ">
+          <p className="text-purple-500 dark:text-purple-400 text-xs md:text-sm font-medium">
             {product.lokasi || "Lokasi tidak tersedia"}
           </p>
           <div className="mb-1">
-            <span className="text-xs md:text-sm text-gray-400">DP/Akad</span>
-            <p className="text-sm md:text-2xl font-bold text-purple-400">
+            <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">
+              DP/Akad
+            </span>
+            <p className="text-sm md:text-2xl font-bold text-purple-500 dark:text-purple-400">
               {formatCurrency(product.dpAkad)}
             </p>
           </div>
-          <p className="text-gray-300 mb-2 text-xs md:text-sm leading-relaxed line-clamp-3 flex-1">
+          <p className="text-gray-700 dark:text-gray-300 mb-2 lg:mb-4 text-xs md:text-sm leading-relaxed line-clamp-3 flex-1">
             {product.detail || product.description}
           </p>
           <div className="flex flex-col gap-3">
             <Button
               variant="outline"
-              className="w-full border-purple-500 text-purple-500 hover:bg-purple-500/20 hover:text-white hover:border-purple-400 transition-all duration-300 text-sm md:text-base"
+              className="w-full border-purple-500 text-purple-500 hover:bg-purple-500/20 hover:text-white hover:border-purple-400 dark:text-purple-400 dark:border-purple-500 dark:hover:bg-purple-500/20 dark:hover:text-white dark:hover:border-purple-400 transition-all duration-300 text-sm md:text-base"
               onClick={(e) => {
                 e.stopPropagation();
                 window.open("https://wa.me/6285242049550", "_blank");
@@ -128,7 +130,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.videoLink && (
               <Button
                 variant="outline"
-                className="w-full border-pink-500 text-pink-500 hover:bg-pink-500/20 hover:text-white hover:border-pink-400 transition-all duration-300 text-sm md:text-base"
+                className="w-full border-pink-500 lg:mb-4 text-pink-500 hover:bg-pink-500/20 hover:text-white hover:border-pink-400 dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 dark:hover:text-white dark:hover:border-pink-400 transition-all duration-300 text-sm md:text-base"
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(product.videoLink!, "_blank");

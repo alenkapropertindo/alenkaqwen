@@ -112,11 +112,123 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
+/* Light theme customizations for your design */
+:root:not(.dark) {
+  --header-bg: oklch(1 0 0 / 80%);
+  --card-bg: oklch(1 0 0);
+  --text-primary: oklch(0.141 0.005 285.823);
+  --text-secondary: oklch(0.552 0.016 285.938);
+  --border-color: oklch(0.92 0.004 286.32);
+  --gradient-from: oklch(0.705 0.15 286.067); /* purple-400 equivalent */
+  --gradient-to: oklch(0.645 0.246 16.439); /* pink-600 equivalent */
+  --filter-bg: oklch(1 0 0);
+  --card-bg-light: oklch(1 0 0);
+  --card-bg-dark: oklch(0.21 0.006 285.885);
+}
+
+/* Dark theme customizations */
+.dark {
+  --header-bg: oklch(0 0 0 / 80%);
+  --card-bg: oklch(0.21 0.006 285.885);
+  --text-primary: oklch(0.985 0 0);
+  --text-secondary: oklch(0.705 0.015 286.067);
+  --border-color: oklch(1 0 0 / 10%);
+  --gradient-from: oklch(0.705 0.15 286.067); /* purple-400 equivalent */
+  --gradient-to: oklch(0.645 0.246 16.439); /* pink-600 equivalent */
+  --filter-bg: oklch(0.21 0.006 285.885);
+  --card-bg-light: oklch(1 0 0);
+  --card-bg-dark: oklch(0.21 0.006 285.885);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
+}
+
+/* Custom styles for light/dark theme transitions */
+.bg-white {
+  background-color: oklch(1 0 0);
+  transition: background-color 0.3s ease;
+}
+
+.dark .bg-white {
+  background-color: oklch(0.21 0.006 285.885);
+}
+
+.bg-gray-50 {
+  background-color: oklch(0.98 0 0);
+  transition: background-color 0.3s ease;
+}
+
+.dark .bg-gray-50 {
+  background-color: oklch(0.18 0.005 285.8);
+}
+
+.bg-gray-100 {
+  background-color: oklch(0.96 0 0);
+  transition: background-color 0.3s ease;
+}
+
+.dark .bg-gray-100 {
+  background-color: oklch(0.19 0.005 285.8);
+}
+
+.text-gray-900 {
+  color: oklch(0.14 0.005 285.8);
+  transition: color 0.3s ease;
+}
+
+.dark .text-gray-900 {
+  color: oklch(0.98 0 0);
+}
+
+.text-gray-700 {
+  color: oklch(0.35 0.01 285.9);
+  transition: color 0.3s ease;
+}
+
+.dark .text-gray-700 {
+  color: oklch(0.85 0.005 285.8);
+}
+
+/* Transition for all theme changes */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, fill 0.3s ease;
+}
+
+/* Additional styles for better light theme visibility */
+.bg-gradient-to-br {
+  transition: background 0.3s ease;
+}
+
+.border {
+  transition: border-color 0.3s ease;
+}
+
+.shadow-lg {
+  transition: box-shadow 0.3s ease;
+}
+
+.text-purple-900 {
+  color: oklch(0.25 0.15 286.067);
+  transition: color 0.3s ease;
+}
+
+.text-purple-800 {
+  color: oklch(0.30 0.15 286.067);
+  transition: color 0.3s ease;
+}
+
+.text-purple-700 {
+  color: oklch(0.35 0.15 286.067);
+  transition: color 0.3s ease;
+}
+
+.text-purple-600 {
+  color: oklch(0.45 0.15 286.067);
+  transition: color 0.3s ease;
 }
