@@ -42,7 +42,7 @@ export default async function Home() {
       kategori: true,
     },
   });
-  
+
   // Sort products: Promo category first, then by creation date
   products.sort((a, b) => {
     // If both are Promo or both are not Promo, sort by createdAt (newest first)
@@ -97,10 +97,10 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-12 py-20 md:py-32">
+      <section className="container mx-auto px-12 py-4 md:py-20">
         <div className="flex flex-col md:flex-row items-center justify-between">
           <div className="md:w-1/2 mb-10 md:mb-0">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            <h1 className="text-3xl md:text-6xl font-bold mb-6">
               <span className="block">Alenka Properti</span>
               <span className="block bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
                 Kendari
