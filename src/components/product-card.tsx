@@ -83,7 +83,7 @@ export function ProductCard({ product }: { product: Product }) {
               className="w-full h-40 lg:h-full md:h-48 object-cover"
             />
           ) : (
-            <div className="bg-gradient-to-br from-purple-900/20 dark:from-purple-900/50 to-pink-900/20 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
+            <div className="bg-linear-to-br from-purple-900/20 dark:from-purple-900/50 to-pink-900/20 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
               <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-purple-400" />
             </div>
           )}
