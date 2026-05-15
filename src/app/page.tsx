@@ -61,7 +61,7 @@ export default async function Home() {
         <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_40px_rgba(168,85,247,0.15)] overflow-hidden transform transition-transform hover:-translate-y-2 duration-500">
           <div className="h-72 bg-gray-100 dark:bg-gray-800 relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10"></div>
-            <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern Home" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+            <img src="/GIB.png" alt="Main Card Image" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
             <div className="absolute bottom-5 left-5 z-20">
               <div className="text-white font-extrabold text-2xl drop-shadow-md">Cluster Premium</div>
               <div className="text-white/90 text-sm flex items-center gap-1.5 mt-1 font-medium"><MapPin className="w-4 h-4" /> Kendari City</div>
@@ -69,8 +69,8 @@ export default async function Home() {
           </div>
           <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900">
             <div>
-              <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Harga Mulai</div>
-              <div className="text-2xl font-extrabold text-gray-900 dark:text-white">Rp 450 Juta</div>
+              <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
+              <div className="text-2xl font-extrabold text-gray-900 dark:text-white">Rp 1 Juta-an</div>
             </div>
             <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white hover:bg-gray-800 dark:bg-purple-600 dark:hover:bg-purple-700 shadow-md">
               <ArrowRight className="w-5 h-5" />
