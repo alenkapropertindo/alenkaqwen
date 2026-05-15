@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HomeIcon } from "lucide-react";
+import { HomeIcon, MapPin } from "lucide-react";
 import { ProductDetailModal } from "@/components/product-detail-modal";
 
 type Product = {
@@ -72,10 +72,10 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <>
       <Card
-        className="bg-white dark:bg-gray-900/50 border-purple-500/30 dark:border-purple-500/30 hover:border-purple-500/60 dark:hover:border-purple-500/60 hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer"
+        className="bg-white dark:bg-gray-900/50 border-gray-200 dark:border-purple-500/30 hover:border-gray-300 dark:hover:border-purple-500/60 hover:shadow-md dark:hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer"
         onClick={() => setIsModalOpen(true)}
       >
-        <div className="relative bg-gray-100 dark:bg-gray-800 border-b mb-1 lg:mb-4 border-purple-500/20 dark:border-purple-500/20 h-full">
+        <div className="relative bg-gray-100 dark:bg-gray-800 border-b mb-1 lg:mb-4 border-gray-200 dark:border-purple-500/20 h-full">
           {isImageUrlValid(product.imageUrl) ? (
             <img
               src={product.imageUrl!}
@@ -83,8 +83,8 @@ export function ProductCard({ product }: { product: Product }) {
               className="w-full h-40 lg:h-full md:h-48 object-cover"
             />
           ) : (
-            <div className="bg-linear-to-br from-purple-900/20 dark:from-purple-900/50 to-pink-900/20 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
-              <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-purple-400" />
+            <div className="bg-linear-to-br from-gray-100 dark:from-purple-900/50 to-gray-200 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
+              <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-gray-400 dark:text-purple-400" />
             </div>
           )}
           {product.kategori && (
@@ -98,20 +98,32 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
           )}
         </div>
-        <CardContent className="flex flex-col flex-1">
-          <h3 className="text-sm md:text-xl font-bold text-gray-900 dark:text-white leading-tight">
-            {product.title}
-          </h3>
-          <p className="text-purple-500 dark:text-purple-400 text-xs md:text-sm font-medium">
-            {product.lokasi || "Lokasi tidak tersedia"}
-          </p>
-          <div className="mb-1">
-            <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">
-              DP/Akad
+        <CardContent className="flex flex-col flex-1 p-4 lg:p-5">
+          <div className="flex justify-between items-start gap-3 mb-3">
+            <h3 className="text-sm md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white leading-tight flex-1">
+              {product.title}
+            </h3>
+            <span className="shrink-0 inline-flex items-center gap-1 text-[10px] md:text-xs font-semibold text-gray-600 dark:text-purple-300 bg-gray-100 dark:bg-purple-900/30 px-2 py-1 rounded-md border border-gray-200 dark:border-purple-500/20">
+              <MapPin className="w-3 h-3" />
+              {product.lokasi || "Kendari"}
             </span>
-            <p className="text-sm md:text-2xl font-bold text-purple-500 dark:text-purple-400">
-              {formatCurrency(product.dpAkad)}
-            </p>
+          </div>
+
+          <div className="mb-3 lg:mb-4">
+            <div className="flex flex-col bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-purple-500/30 rounded-lg p-3 shadow-sm w-full relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-green-400/10 to-transparent rounded-bl-full transition-transform group-hover:scale-110"></div>
+              <span className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+                Biaya DP / Akad
+              </span>
+              <div className="flex items-center flex-wrap gap-2">
+                <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 dark:bg-clip-text">
+                  {formatCurrency(product.dpAkad)}
+                </span>
+                <span className="text-[10px] font-bold text-green-700 bg-green-100 dark:bg-green-900/40 dark:text-green-400 px-2 py-0.5 rounded-full border border-green-200 dark:border-green-800/50">
+                  Paling Murah!
+                </span>
+              </div>
+            </div>
           </div>
           <p className="text-gray-700 dark:text-gray-300 mb-2 lg:mb-4 text-xs md:text-sm leading-relaxed line-clamp-3 flex-1">
             {product.detail || product.description}
@@ -119,7 +131,7 @@ export function ProductCard({ product }: { product: Product }) {
           <div className="flex flex-col gap-3">
             <Button
               variant="outline"
-              className="w-full border-purple-500 text-purple-500 hover:bg-purple-500/20 hover:text-white hover:border-purple-400 dark:text-purple-400 dark:border-purple-500 dark:hover:bg-purple-500/20 dark:hover:text-white dark:hover:border-purple-400 transition-all duration-300 text-sm md:text-base"
+              className="w-full border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white dark:text-purple-400 dark:border-purple-500 dark:hover:bg-purple-500/20 dark:hover:text-white dark:hover:border-purple-400 transition-all duration-300 text-sm md:text-base"
               onClick={(e) => {
                 e.stopPropagation();
                 window.open("https://wa.me/6285242049550", "_blank");
@@ -130,7 +142,7 @@ export function ProductCard({ product }: { product: Product }) {
             {product.videoLink && (
               <Button
                 variant="outline"
-                className="w-full border-pink-500 lg:mb-4 text-pink-500 hover:bg-pink-500/20 hover:text-white hover:border-pink-400 dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 dark:hover:text-white dark:hover:border-pink-400 transition-all duration-300 text-sm md:text-base"
+                className="w-full border-gray-300 lg:mb-4 text-gray-700 hover:bg-gray-900 hover:text-white dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 dark:hover:text-white dark:hover:border-pink-400 transition-all duration-300 text-sm md:text-base"
                 onClick={(e) => {
                   e.stopPropagation();
                   window.open(product.videoLink!, "_blank");

@@ -19,7 +19,6 @@ import {
   Menu,
   LogOut
 } from "lucide-react";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 interface NavItem {
   title: string;
@@ -122,7 +121,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
 
   return (
     <>
-      {/* Mobile overlay */};
+      {/* Mobile overlay */}
       {isMobile && !isCollapsed && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
@@ -159,19 +158,6 @@ export function CollapsibleSidebar({ user }: { user: User }) {
           </AnimatePresence>
           
           <div className="flex items-center space-x-2">
-            {/* Theme Toggle - only visible when sidebar is not collapsed */}
-            <AnimatePresence>
-              {!isCollapsed && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
-                  className="flex items-center"
-                >
-                  <ThemeToggle className="bg-gray-100 dark:bg-gray-800/50 border border-purple-300 dark:border-purple-500/20 hover:bg-purple-100 dark:hover:bg-purple-900/50 transition-all duration-300" />
-                </motion.div>
-              )}
-            </AnimatePresence>
             
             <Button
               variant="ghost"

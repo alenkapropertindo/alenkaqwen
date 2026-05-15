@@ -77,14 +77,14 @@ export function ProductDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[600px] border-purple-500/30 bg-gray-900 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[600px] border-purple-500/30 bg-white dark:bg-gray-900 max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex justify-between items-start">
             <div>
-              <DialogTitle className="text-purple-400 text-2xl">
+              <DialogTitle className="text-purple-600 dark:text-purple-400 text-2xl">
                 {product.title}
               </DialogTitle>
-              <DialogDescription className="text-gray-400">
+              <DialogDescription className="text-gray-600 dark:text-gray-400">
                 {product.lokasi || "Lokasi tidak tersedia"}
               </DialogDescription>
             </div>
@@ -100,16 +100,16 @@ export function ProductDetailModal({
         <div className="space-y-6">
           {/* DP/Akad */}
           <div>
-            <h3 className="text-sm text-gray-400">DP/Akad</h3>
-            <p className="text-2xl font-bold text-purple-400">
+            <h3 className="text-sm text-gray-600 dark:text-gray-400">DP/Akad</h3>
+            <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
               {formatCurrency(product.dpAkad)}
             </p>
           </div>
 
           {/* Description */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-2">Deskripsi</h3>
-            <p className="text-gray-300">{product.description}</p>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Deskripsi</h3>
+            <p className="text-gray-700 dark:text-gray-300">{product.description}</p>
           </div>
 
           {/* Actions */}
@@ -125,7 +125,7 @@ export function ProductDetailModal({
             {product.videoLink && (
               <Button
                 variant="outline"
-                className="w-full border-pink-500 text-pink-500 hover:bg-pink-500/20 hover:text-white hover:border-pink-400 transition-all duration-300"
+                className="w-full border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 dark:hover:text-white dark:hover:border-pink-400 transition-all duration-300"
                 onClick={() => window.open(product.videoLink!, "_blank")}
               >
                 Lihat Video

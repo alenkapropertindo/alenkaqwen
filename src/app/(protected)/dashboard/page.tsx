@@ -121,10 +121,10 @@ export default async function DashboardPage() {
       {/* Statistic Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Total Komisi Card */}
-        <Card className="bg-gradient-to-br pb-4 from-purple-50 to-indigo-50 border border-purple-200 shadow-lg shadow-purple-200/50 hover:shadow-purple-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-purple-900/50 dark:to-indigo-900/50 dark:border-purple-500/50 dark:shadow-lg dark:shadow-purple-500/20 dark:hover:shadow-purple-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-purple-900/50 dark:to-indigo-900/50 dark:border-purple-500/50 dark:shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-500 flex items-center gap-2 dark:text-white">
-              <Wallet className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <Wallet className="h-5 w-5 text-gray-900 dark:text-purple-400" />
               Total Komisi
             </CardTitle>
           </CardHeader>
@@ -132,17 +132,17 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {formatCurrency(totalKomisi)}
             </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Komisi dari customer dengan status akad
             </p>
           </CardContent>
         </Card>
 
         {/* Menunggu Pembayaran Card */}
-        <Card className="bg-gradient-to-br pb-4 from-blue-50 to-cyan-50 border border-blue-200 shadow-lg shadow-blue-200/50 hover:shadow-blue-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-blue-900/50 dark:to-cyan-900/50 dark:border-blue-500/50 dark:shadow-lg dark:shadow-blue-500/20 dark:hover:shadow-blue-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-blue-900/50 dark:to-cyan-900/50 dark:border-blue-500/50 dark:shadow-[0_0_15px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-blue-800 flex items-center gap-2 dark:text-white">
-              <Clock className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <Clock className="h-5 w-5 text-gray-900 dark:text-blue-400" />
               Menunggu Pembayaran
             </CardTitle>
           </CardHeader>
@@ -150,17 +150,17 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {formatCurrency(menungguPembayaran)}
             </div>
-            <p className="text-xs text-blue-600 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Komisi dari customer dengan status akad dan belum dibayar
             </p>
           </CardContent>
         </Card>
 
         {/* Customers Card */}
-        <Card className="bg-gradient-to-br pb-4 from-emerald-50 to-green-50 border border-emerald-200 shadow-lg shadow-emerald-200/50 hover:shadow-emerald-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-emerald-900/50 dark:to-green-900/50 dark:border-emerald-500/50 dark:shadow-lg dark:shadow-emerald-500/20 dark:hover:shadow-emerald-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-emerald-900/50 dark:to-green-900/50 dark:border-emerald-500/50 dark:shadow-[0_0_15px_rgba(16,185,129,0.15)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-emerald-800 flex items-center gap-2 dark:text-white">
-              <Users className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <Users className="h-5 w-5 text-gray-900 dark:text-emerald-400" />
               Customers
             </CardTitle>
           </CardHeader>
@@ -168,17 +168,17 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {totalCustomers}
             </div>
-            <p className="text-xs text-emerald-600 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Total semua customer
             </p>
           </CardContent>
         </Card>
 
         {/* Followup Card */}
-        <Card className="bg-gradient-to-br pb-4 from-amber-50 to-orange-50 border border-amber-200 shadow-lg shadow-amber-200/50 hover:shadow-amber-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-amber-900/50 dark:to-orange-900/50 dark:border-amber-500/50 dark:shadow-lg dark:shadow-amber-500/20 dark:hover:shadow-amber-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-amber-900/50 dark:to-orange-900/50 dark:border-amber-500/50 dark:shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-amber-800 flex items-center gap-2 dark:text-white">
-              <PhoneCall className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <PhoneCall className="h-5 w-5 text-gray-900 dark:text-amber-400" />
               Followup
             </CardTitle>
           </CardHeader>
@@ -186,17 +186,17 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {followupCount}
             </div>
-            <p className="text-xs text-amber-600 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Customer dalam tahap followup
             </p>
           </CardContent>
         </Card>
 
         {/* Akad Card */}
-        <Card className="bg-gradient-to-br pb-4 from-teal-50 to-cyan-50 border border-teal-200 shadow-lg shadow-teal-200/50 hover:shadow-teal-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-teal-900/50 dark:to-cyan-900/50 dark:border-teal-500/50 dark:shadow-lg dark:shadow-teal-500/20 dark:hover:shadow-teal-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-teal-900/50 dark:to-cyan-900/50 dark:border-teal-500/50 dark:shadow-[0_0_15px_rgba(20,184,166,0.15)] dark:hover:shadow-[0_0_20px_rgba(20,184,166,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-teal-800 flex items-center gap-2 dark:text-white">
-              <FileCheck className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <FileCheck className="h-5 w-5 text-gray-900 dark:text-teal-400" />
               Akad
             </CardTitle>
           </CardHeader>
@@ -204,17 +204,17 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {akadCount}
             </div>
-            <p className="text-xs text-teal-600 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Customer dengan status akad
             </p>
           </CardContent>
         </Card>
 
         {/* Pemberkasan Card */}
-        <Card className="bg-gradient-to-br  pb-4 from-rose-50 to-pink-50 border border-rose-200 shadow-lg shadow-rose-200/50 hover:shadow-rose-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-rose-900/50 dark:to-pink-900/50 dark:border-rose-500/50 dark:shadow-lg dark:shadow-rose-500/20 dark:hover:shadow-rose-500/40">
+        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-rose-900/50 dark:to-pink-900/50 dark:border-rose-500/50 dark:shadow-[0_0_15px_rgba(244,63,94,0.15)] dark:hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-rose-800 flex items-center gap-2 dark:text-white">
-              <FolderOpen className="h-5 w-5" />
+            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+              <FolderOpen className="h-5 w-5 text-gray-900 dark:text-rose-400" />
               Pemberkasan
             </CardTitle>
           </CardHeader>
@@ -222,7 +222,7 @@ export default async function DashboardPage() {
             <div className="text-3xl font-bold text-gray-900 dark:text-white">
               {pemberkasanCount}
             </div>
-            <p className="text-xs text-rose-600 mt-1 dark:text-white/80">
+            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
               Customer dalam tahap pemberkasan
             </p>
           </CardContent>
@@ -232,10 +232,10 @@ export default async function DashboardPage() {
       {/* Admin Only Extra Card */}
       {user.role === UserRole.ADMIN && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card className="lg:col-span-1 bg-gradient-to-br pb-2 from-violet-50 to-fuchsia-50 border border-violet-200 shadow-lg shadow-violet-200/50 hover:shadow-violet-300/50 transition-all duration-300 transform hover:-translate-y-1 dark:from-violet-900/50 dark:to-fuchsia-900/50 dark:border-violet-500/50 dark:shadow-lg dark:shadow-violet-500/20 dark:hover:shadow-violet-500/40">
+          <Card className="lg:col-span-1 bg-white pb-2 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-violet-900/50 dark:to-fuchsia-900/50 dark:border-violet-500/50 dark:shadow-[0_0_15px_rgba(139,92,246,0.15)] dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
             <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-violet-800 flex items-center gap-2 dark:text-white">
-                <UserCog className="h-5 w-5" />
+              <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
+                <UserCog className="h-5 w-5 text-gray-900 dark:text-violet-400" />
                 Total Marketing
               </CardTitle>
             </CardHeader>
@@ -243,7 +243,7 @@ export default async function DashboardPage() {
               <div className="text-3xl font-bold text-gray-900 dark:text-white">
                 {totalMarketing}
               </div>
-              <p className="text-xs text-violet-600 my-1 dark:text-white/80">
+              <p className="text-xs text-gray-500 my-1 dark:text-gray-400">
                 Jumlah user dengan role marketing
               </p>
             </CardContent>

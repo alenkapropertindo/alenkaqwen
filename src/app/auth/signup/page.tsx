@@ -53,20 +53,20 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black p-4">
-      <Card className="w-full max-w-md bg-gray-900 border-purple-500 border-2 shadow-[0_0_15px_#8b5cf6] shadow-purple-500/50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black p-4">
+      <Card className="w-full max-w-md bg-white dark:bg-gray-900 border-purple-500 border-2 shadow-[0_0_15px_#8b5cf6] shadow-purple-500/20 dark:shadow-purple-500/50">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-600">
             Buat Akun
           </CardTitle>
-          <CardDescription className="text-gray-400">
+          <CardDescription className="text-gray-600 dark:text-gray-400">
             Buat akun baru
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-gray-300">
+              <Label htmlFor="name" className="text-gray-700 dark:text-gray-300">
                 Nama
               </Label>
               <Input
@@ -75,11 +75,11 @@ export default function SignupPage() {
                 type="text"
                 placeholder="Masukan nama"
                 required
-                className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-300">
+              <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">
                 Email
               </Label>
               <Input
@@ -88,11 +88,11 @@ export default function SignupPage() {
                 type="email"
                 placeholder="Masukan Email"
                 required
-                className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-gray-300">
+              <Label htmlFor="whatsapp" className="text-gray-700 dark:text-gray-300">
                 Whatsupp
               </Label>
               <Input
@@ -101,11 +101,11 @@ export default function SignupPage() {
                 type="tel"
                 placeholder="Masukan Nomor Whatsup"
                 required
-                className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-300">
+              <Label htmlFor="password" className="text-gray-700 dark:text-gray-300">
                 Password
               </Label>
               <Input
@@ -115,7 +115,7 @@ export default function SignupPage() {
                 placeholder="Min 8 Karakter"
                 required
                 minLength={6}
-                className="bg-gray-800 border-gray-700 text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
               />
             </div>
             {error && (
@@ -133,11 +133,11 @@ export default function SignupPage() {
           </form>
         </CardContent>
         <CardFooter className="flex flex-col">
-          <div className="mt-4 text-center text-sm text-gray-400">
+          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
             Sudah punya akun?{" "}
             <a
               href="/auth/signin"
-              className="text-purple-400 hover:text-purple-300 hover:underline"
+              className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 hover:underline"
             >
               Login Disini
             </a>
