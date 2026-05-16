@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { HomeIcon, MapPin } from "lucide-react";
-import { ProductDetailModal } from "@/components/product-detail-modal";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -22,7 +21,6 @@ type Product = {
 };
 
 export function ProductCard({ product }: { product: Product }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Format currency
   const formatCurrency = (value: number) => {
@@ -74,10 +72,9 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <>
+    <Link href={`/product/${product.id}`} className="block h-full">
       <Card
         className="bg-white dark:bg-gray-900/50 border-gray-200 dark:border-purple-500/30 hover:border-gray-300 dark:hover:border-purple-500/60 hover:shadow-md dark:hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 overflow-hidden h-full flex flex-col cursor-pointer"
-        onClick={() => setIsModalOpen(true)}
       >
         <div className="relative bg-gray-100 dark:bg-gray-800 border-b mb-1 lg:mb-4 border-gray-200 dark:border-purple-500/20 h-full">
           {isImageUrlValid(product.imageUrl) ? (
@@ -136,6 +133,7 @@ export function ProductCard({ product }: { product: Product }) {
               variant="outline"
               className="w-full border-gray-300 text-gray-700 hover:bg-gray-900 hover:text-white dark:text-purple-400 dark:border-purple-500 dark:hover:bg-purple-500/20 dark:hover:text-white dark:hover:border-purple-400 transition-all duration-300 text-sm md:text-base"
               onClick={(e) => {
+                e.preventDefault();
                 e.stopPropagation();
                 window.open("https://wa.me/6285242049550", "_blank");
               }}
@@ -147,6 +145,7 @@ export function ProductCard({ product }: { product: Product }) {
                 variant="outline"
                 className="w-full border-gray-300 lg:mb-4 text-gray-700 hover:bg-gray-900 hover:text-white dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 dark:hover:text-white dark:hover:border-pink-400 transition-all duration-300 text-sm md:text-base"
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   window.open(product.videoLink!, "_blank");
                 }}
@@ -157,12 +156,6 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
         </CardContent>
       </Card>
-
-      <ProductDetailModal
-        product={product}
-        open={isModalOpen}
-        onOpenChange={setIsModalOpen}
-      />
-    </>
+    </Link>
   );
 }
