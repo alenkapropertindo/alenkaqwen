@@ -102,6 +102,16 @@ export function ProductDetailModal({
               <HomeIcon className="h-16 w-16 text-gray-400 dark:text-purple-400" />
             </div>
           )}
+          {product.kategori && (
+            <div className="absolute top-4 right-4 z-10">
+              <Badge
+                variant={getBadgeVariant(product.kategori)}
+                className="text-sm py-1 px-3 whitespace-nowrap shadow-lg"
+              >
+                {formatKategori(product.kategori)}
+              </Badge>
+            </div>
+          )}
           {/* Gradient overlay to ensure close button is visible */}
           <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
         </div>
@@ -116,12 +126,6 @@ export function ProductDetailModal({
                 {product.lokasi || "Lokasi tidak tersedia"}
               </DialogDescription>
             </div>
-            <Badge
-              variant={getBadgeVariant(product.kategori)}
-              className="text-sm py-1 px-3 whitespace-nowrap"
-            >
-              {formatKategori(product.kategori)}
-            </Badge>
           </div>
         </DialogHeader>
 
