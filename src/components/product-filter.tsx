@@ -83,18 +83,24 @@ export function ProductFilter({
       );
     }
 
-    // Sort products: Promo category first, then by creation date
+    // Sort products: DP_Akad_Gratis first, then Promo, then by creation date (newest first)
     result.sort((a, b) => {
-      // If both are Promo or both are not Promo, sort by createdAt (newest first)
-      if ((a.kategori === "Promo") === (b.kategori === "Promo")) {
-        return (
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        );
+      const getPriority = (kategori: string | null) => {
+        if (kategori === "DP_Akad_Gratis") return 2;
+        if (kategori === "Promo") return 1;
+        return 0;
+      };
+
+      const priorityA = getPriority(a.kategori);
+      const priorityB = getPriority(b.kategori);
+
+      // If they have different priorities, the one with higher priority comes first
+      if (priorityA !== priorityB) {
+        return priorityB - priorityA;
       }
-      // If only a is Promo, a comes first
-      if (a.kategori === "Promo") return -1;
-      // If only b is Promo, b comes first
-      return 1;
+
+      // If priorities are the same, sort by createdAt (newest first)
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
 
     setFilteredProducts(result);

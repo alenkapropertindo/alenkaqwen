@@ -19,11 +19,11 @@ const badgeVariants = cva(
         strategis:
           "border-transparent bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 shadow-[0_0_12px_#8b5cf6] animate-bounce",
         promo:
-          "border-transparent bg-gradient-to-r from-rose-500 to-orange-500 text-white hover:from-rose-600 hover:to-orange-600 shadow-[0_0_15px_#f43f5e] animate-bounce font-extrabold",
+          "border-transparent bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 shadow-[0_0_15px_#f97316] animate-bounce font-extrabold",
         dp_rendah:
           "border-transparent bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:from-emerald-500 hover:to-teal-600 shadow-[0_0_12px_#10b981] animate-bounce",
         dp_akad_gratis:
-          "border-transparent bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 shadow-[0_0_12px_#0ea5e9] animate-bounce",
+          "border-transparent bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white hover:from-pink-600 hover:to-fuchsia-600 shadow-[0_0_12px_#ec4899] animate-bounce",
       },
     },
     defaultVariants: {
@@ -34,7 +34,7 @@ const badgeVariants = cva(
 
 export interface BadgeProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof badgeVariants> {}
+  VariantProps<typeof badgeVariants> { }
 
 function Badge({ className, variant, ...props }: BadgeProps) {
   return (
