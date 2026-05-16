@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { HomeIcon } from "lucide-react";
 
 type Product = {
   id: string;
@@ -43,6 +44,12 @@ export function ProductDetailModal({
     }).format(value);
   };
 
+  // Check if imageUrl is a data URL (base64) or a regular URL
+  const isImageUrlValid = (url: string | null) => {
+    if (!url) return false;
+    return url.startsWith("http") || url.startsWith("data:image");
+  };
+
   // Format category
   const formatKategori = (kategori: string | null) => {
     if (!kategori) return "Tidak ada kategori";
@@ -54,6 +61,8 @@ export function ProductDetailModal({
         return "Promo";
       case "Dp_Rendah":
         return "DP Rendah";
+      case "DP_Akad_Gratis":
+        return "DP Akad Gratis";
       default:
         return kategori;
     }
@@ -68,6 +77,8 @@ export function ProductDetailModal({
         return "promo";
       case "Dp_Rendah":
         return "dp_rendah";
+      case "DP_Akad_Gratis":
+        return "dp_akad_gratis";
       default:
         return "outline";
     }
@@ -78,6 +89,23 @@ export function ProductDetailModal({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[600px] border-purple-500/30 bg-white dark:bg-gray-900 max-h-[90vh] overflow-y-auto">
+        {/* Banner Image / Placeholder */}
+        <div className="-mt-6 -mx-6 mb-6 relative overflow-hidden bg-gray-100 dark:bg-gray-800">
+          {isImageUrlValid(product.imageUrl) ? (
+            <img
+              src={product.imageUrl!}
+              alt={product.title}
+              className="w-full h-auto max-h-[70vh] object-contain"
+            />
+          ) : (
+            <div className="bg-gradient-to-br from-gray-100 dark:from-purple-900/50 to-gray-200 dark:to-pink-900/50 w-full h-56 sm:h-80 flex items-center justify-center">
+              <HomeIcon className="h-16 w-16 text-gray-400 dark:text-purple-400" />
+            </div>
+          )}
+          {/* Gradient overlay to ensure close button is visible */}
+          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
+        </div>
+
         <DialogHeader>
           <div className="flex justify-between items-start">
             <div>

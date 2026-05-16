@@ -58,22 +58,44 @@ export default async function Home() {
 
       <div className="relative w-full max-w-md mx-auto">
         {/* Main Image/Card */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_40px_rgba(168,85,247,0.15)] overflow-hidden transform transition-transform hover:-translate-y-2 duration-500">
-          <div className="h-72 bg-gray-100 dark:bg-gray-800 relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-10"></div>
-            <img src="/GIB.png" alt="Main Card Image" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute bottom-5 left-5 z-20">
-              <div className="text-white font-extrabold text-2xl drop-shadow-md">Cluster Premium</div>
-              <div className="text-white/90 text-sm flex items-center gap-1.5 mt-1 font-medium"><MapPin className="w-4 h-4" /> Kendari City</div>
+        <div className="group bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] dark:shadow-[0_0_40px_rgba(168,85,247,0.15)] overflow-hidden transform transition-all duration-500 hover:-translate-y-3 hover:scale-[1.02] hover:shadow-[0_30px_60px_rgba(168,85,247,0.3)] hover:border-purple-500/50 cursor-pointer relative">
+          
+          {/* Glass Sweep Reflection */}
+          <div className="absolute top-0 -left-[150%] w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent z-30 skew-x-12 transition-all duration-1000 ease-in-out group-hover:left-[150%] pointer-events-none"></div>
+          
+          <div className="h-72 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-90"></div>
+            
+            <img src="/GIB.png" alt="Main Card Image" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:-rotate-1" />
+            
+            <div className="absolute bottom-5 left-5 z-20 transform transition-transform duration-500 group-hover:-translate-y-2">
+              <div className="text-white font-extrabold text-2xl drop-shadow-md flex items-center gap-3">
+                Cluster Premium
+                {/* Live Indicator */}
+                <span className="flex h-3 w-3 relative mt-1">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+              </div>
+              <div className="text-white/90 text-sm flex items-center gap-1.5 mt-1 font-medium transform transition-all duration-500 opacity-80 group-hover:opacity-100 group-hover:translate-x-1">
+                <MapPin className="w-4 h-4 text-purple-400 animate-bounce" /> Kendari City
+              </div>
             </div>
           </div>
-          <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900">
-            <div>
+          
+          <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900 relative overflow-hidden">
+            {/* Subtle background glow on hover */}
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-purple-500/0 rounded-full blur-2xl transition-colors duration-500 group-hover:bg-purple-500/20"></div>
+            
+            <div className="relative z-10 transform transition-transform duration-500 group-hover:translate-x-2">
               <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
-              <div className="text-2xl font-extrabold text-gray-900 dark:text-white">Rp 1 Juta-an</div>
+              <div className="text-2xl font-extrabold text-gray-900 dark:text-white transition-all duration-500 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-pink-500">
+                Rp 1 Juta-an
+              </div>
             </div>
-            <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white hover:bg-gray-800 dark:bg-purple-600 dark:hover:bg-purple-700 shadow-md">
-              <ArrowRight className="w-5 h-5" />
+            
+            <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white dark:bg-purple-600 shadow-md transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-12 group-hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative z-10">
+              <ArrowRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-1" />
             </Button>
           </div>
         </div>

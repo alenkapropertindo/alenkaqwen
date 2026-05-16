@@ -140,7 +140,7 @@ export function ProductFilter({
               <SelectItem value="__all__">Semua Kategori</SelectItem>
               {uniqueKategori.map((kategori) => (
                 <SelectItem key={kategori} value={kategori}>
-                  {kategori === "Dp_Rendah" ? "DP Rendah" : kategori}
+                  {kategori === "Dp_Rendah" ? "DP Rendah" : kategori === "DP_Akad_Gratis" ? "DP Akad Gratis" : kategori}
                 </SelectItem>
               ))}
             </SelectContent>

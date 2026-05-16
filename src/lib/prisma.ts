@@ -7,7 +7,13 @@ const globalForPrisma = global as unknown as {
 };
 
 const createPrismaClient = () => {
-  const connectionString = process.env.DATABASE_URL;
+  // Replace sslmode=require with sslmode=verify-full to suppress the pg library's security warning
+  // Since pg v8 treats 'require' as an alias for 'verify-full' anyway, this is a safe equivalent.
+  const connectionString = process.env.DATABASE_URL?.replace(
+    "sslmode=require",
+    "sslmode=verify-full"
+  );
+  
   const pool = new Pool({ connectionString });
   const adapter = new PrismaPg(pool);
   return new PrismaClient({ adapter });

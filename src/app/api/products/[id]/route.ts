@@ -63,7 +63,7 @@ export async function PATCH(
         title,
         detail: detail || null,
         description,
-        kategori: kategori || null,
+        kategori: kategori || "Strategis",
         dpAkad: parseInt(dpAkad),
         videoLink: videoLink || null,
         fee: parseInt(fee),

@@ -17,11 +17,13 @@ const badgeVariants = cva(
         outline: "text-foreground",
         // Custom variants for product categories
         strategis:
-          "border-transparent bg-purple-500 text-white hover:bg-purple-600 shadow-[0_0_12px_#a855f7] animate-pulse",
+          "border-transparent bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 shadow-[0_0_12px_#8b5cf6] animate-bounce",
         promo:
-          "border-transparent bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600 shadow-[0_0_15px_#f59e0b] animate-pulse transform hover:scale-110 transition-all duration-300 font-extrabold",
+          "border-transparent bg-gradient-to-r from-rose-500 to-orange-500 text-white hover:from-rose-600 hover:to-orange-600 shadow-[0_0_15px_#f43f5e] animate-bounce font-extrabold",
         dp_rendah:
-          "border-transparent bg-green-500 text-white hover:bg-green-600 shadow-[0_0_12px_#10b981] animate-pulse",
+          "border-transparent bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:from-emerald-500 hover:to-teal-600 shadow-[0_0_12px_#10b981] animate-bounce",
+        dp_akad_gratis:
+          "border-transparent bg-gradient-to-r from-blue-500 to-cyan-500 text-white hover:from-blue-600 hover:to-cyan-600 shadow-[0_0_12px_#0ea5e9] animate-bounce",
       },
     },
     defaultVariants: {

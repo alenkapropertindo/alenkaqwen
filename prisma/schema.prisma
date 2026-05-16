@@ -94,6 +94,7 @@ enum Kategori {
   Strategis
   Promo
   Dp_Rendah
+  DP_Akad_Gratis
 }
 
 model Product {

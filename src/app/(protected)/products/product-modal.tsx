@@ -302,6 +302,7 @@ export function ProductModal({
                       <SelectItem value="Strategis">Strategis</SelectItem>
                       <SelectItem value="Promo">Promo</SelectItem>
                       <SelectItem value="Dp_Rendah">Dp_Rendah</SelectItem>
+                      <SelectItem value="DP_Akad_Gratis">DP Akad Gratis</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />

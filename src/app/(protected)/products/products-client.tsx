@@ -195,6 +195,8 @@ export default function ProductsClientPage() {
         return "Promo";
       case "Dp_Rendah":
         return "DP Rendah";
+      case "DP_Akad_Gratis":
+        return "DP Akad Gratis";
       default:
         return kategori;
     }
@@ -276,6 +278,7 @@ export default function ProductsClientPage() {
               <SelectItem value="Strategis">Strategis</SelectItem>
               <SelectItem value="Promo">Promo</SelectItem>
               <SelectItem value="Dp_Rendah">DP Rendah</SelectItem>
+              <SelectItem value="DP_Akad_Gratis">DP Akad Gratis</SelectItem>
             </SelectContent>
           </Select>
           

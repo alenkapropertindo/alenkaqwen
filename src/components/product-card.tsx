@@ -50,6 +50,8 @@ export function ProductCard({ product }: { product: Product }) {
         return "Promo";
       case "Dp_Rendah":
         return "DP Rendah";
+      case "DP_Akad_Gratis":
+        return "DP Akad Gratis";
       default:
         return kategori;
     }
@@ -64,6 +66,8 @@ export function ProductCard({ product }: { product: Product }) {
         return "promo";
       case "Dp_Rendah":
         return "dp_rendah";
+      case "DP_Akad_Gratis":
+        return "dp_akad_gratis";
       default:
         return "outline";
     }
@@ -119,9 +123,14 @@ export function ProductCard({ product }: { product: Product }) {
                 <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 dark:bg-clip-text">
                   {formatCurrency(product.dpAkad)}
                 </span>
-                <span className="text-[10px] font-bold text-green-700 bg-green-100 dark:bg-green-900/40 dark:text-green-400 px-2 py-0.5 rounded-full border border-green-200 dark:border-green-800/50">
-                  Paling Murah!
-                </span>
+                {product.kategori && (
+                  <Badge
+                    variant={getBadgeVariant(product.kategori)}
+                    className="text-[10px] md:text-xs py-0.5 px-2.5"
+                  >
+                    {formatKategori(product.kategori)}
+                  </Badge>
+                )}
               </div>
             </div>
           </div>
