@@ -84,7 +84,7 @@ export function ProductCard({ product }: { product: Product }) {
             <img
               src={product.imageUrl!}
               alt={product.title}
-              className="w-full h-40 lg:h-full md:h-48 object-cover"
+              className="w-full h-40 lg:h-full md:h-48 object-cover object-top"
             />
           ) : (
             <div className="bg-linear-to-br from-gray-100 dark:from-purple-900/50 to-gray-200 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
@@ -115,13 +115,13 @@ export function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
 
-          <div className="mb-3 lg:mb-4">
-            <div className="flex flex-col bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-purple-500/30 rounded-lg p-3 shadow-sm w-full relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-green-400/10 to-transparent rounded-bl-full transition-transform group-hover:scale-110"></div>
+          <div className="mb-2 lg:mb-4">
+            <div className="flex flex-col bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-purple-500/30 rounded-lg p-2 shadow-sm w-full relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-16 h-12 bg-gradient-to-br from-green-400/10 to-transparent rounded-bl-full transition-transform group-hover:scale-110"></div>
               <span className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
                 Biaya DP / Akad
               </span>
-              <div className="flex items-center flex-wrap gap-2">
+              <div className="flex items-center flex-wrap gap-0">
                 <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 dark:bg-clip-text">
                   {formatCurrency(product.dpAkad)}
                 </span>
