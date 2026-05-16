@@ -111,7 +111,7 @@ export function ProductFilter({
       {/* Search and Filter Controls */}
       <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-xl mb-8">
         {/* Animated Conic Gradient Border */}
-        <div className="absolute top-1/2 left-1/2 h-[800%] w-[800%] sm:h-[500%] sm:w-[500%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+        <div className="absolute top-1/2 left-1/2 h-[800%] w-[800%] sm:h-[500%] sm:w-[500%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
         
         <div className="relative z-10 bg-white dark:bg-[#0d041a] rounded-[14px] p-6 w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

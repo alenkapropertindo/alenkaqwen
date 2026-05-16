@@ -60,43 +60,43 @@ export default async function Home() {
         {/* Main Image/Card */}
         <div className="relative overflow-hidden rounded-3xl p-[2px] z-0 shadow-2xl cursor-pointer">
           {/* Animated Conic Gradient Border */}
-          <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
-          
+          <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+
           <div className="relative z-10 w-full bg-white dark:bg-gray-900 rounded-[22px] overflow-hidden">
             <div className="h-72 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
-              
+
               <img src="/GIB.png" alt="Main Card Image" className="w-full h-full object-cover" />
-              
+
               <div className="absolute bottom-5 left-5 z-20">
                 <div className="text-white font-extrabold text-2xl drop-shadow-md flex items-center gap-3">
                   Cluster Premium
                   {/* Live Indicator */}
-                <span className="flex h-3 w-3 relative mt-1">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                </span>
-              </div>
-              <div className="text-white text-sm flex items-center gap-1.5 mt-1 font-medium opacity-100">
-                <MapPin className="w-4 h-4 text-purple-400 animate-bounce" /> Kendari City
-              </div>
-            </div>
-          </div>
-          
-          <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900 relative overflow-hidden">
-            <div className="relative z-10">
-              <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
-              <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
-                Rp 1 Juta-an
+                  <span className="flex h-3 w-3 relative mt-1">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                  </span>
+                </div>
+                <div className="text-white text-sm flex items-center gap-1.5 mt-1 font-medium opacity-100">
+                  <MapPin className="w-4 h-4 text-purple-400 animate-bounce" /> Kendari City
+                </div>
               </div>
             </div>
-            
-            <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white dark:bg-purple-600 shadow-md relative z-10">
-              <ArrowRight className="w-5 h-5" />
-            </Button>
+
+            <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900 relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
+                <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                  Rp 1 Juta-an
+                </div>
+              </div>
+
+              <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white dark:bg-purple-600 shadow-md relative z-10">
+                <ArrowRight className="w-5 h-5" />
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
 
         {/* Floating Stat Card 1 */}
         <div className="absolute -left-2 sm:-left-12 top-16 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white dark:border-gray-700 animate-bounce" style={{ animationDuration: '4s' }}>
@@ -183,7 +183,7 @@ export default async function Home() {
               di Kendari
             </h1>
             <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-10 max-w-lg leading-relaxed">
-              Platform properti terpercaya untuk menemukan hunian ideal atau meraih penghasilan tanpa batas sebagai affiliate marketing kami.
+              Temukan rumah impianmu dikota kendari dengan harga paling terjangkau. atau gabung komunitas digital marketing kami dan mulai hasilkan cuan dari rumah tanpa harus jualan.
             </p>
 
             {/* Mobile Hero Visual */}

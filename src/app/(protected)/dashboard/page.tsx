@@ -193,7 +193,7 @@ export default async function DashboardPage() {
               className="relative overflow-hidden rounded-xl sm:rounded-2xl p-[1.5px] sm:p-[2px] z-0 shadow-2xl"
             >
               {/* Animated Conic Gradient Border */}
-              <div className="absolute top-1/2 left-1/2 h-[250%] w-[250%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+              <div className="absolute top-1/2 left-1/2 h-[250%] w-[250%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
               
               {/* Inner Card Content */}
               <div className="relative z-10 flex flex-col justify-between h-full w-full bg-[#0d041a] rounded-[10px] sm:rounded-[14px] p-3 sm:p-5">

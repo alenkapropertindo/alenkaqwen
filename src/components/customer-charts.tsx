@@ -165,7 +165,7 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
 
   return (
     <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-2xl mt-10">
-      <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+      <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
       
       <div className="relative z-10 flex flex-col h-full w-full bg-[#0d041a] rounded-[14px] p-5">
         <div className="flex flex-row items-center justify-between pb-4 border-b border-white/5">
@@ -196,8 +196,8 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
       </div>
       <div className="relative z-10 w-full">
         {customers.length > 0 ? (
-          <div className="h-80 mt-6">
-            <ResponsiveContainer width="100%" height="100%">
+          <div className="h-80 mt-6 min-w-0">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <BarChart
                 data={customerDataByMonth}
                 margin={{

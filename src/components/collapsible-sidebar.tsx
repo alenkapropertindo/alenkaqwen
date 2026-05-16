@@ -17,7 +17,8 @@ import {
   ChevronLeft, 
   ChevronRight,
   Menu,
-  LogOut
+  LogOut,
+  X
 } from "lucide-react";
 
 interface NavItem {
@@ -87,26 +88,16 @@ interface User {
 
 export function CollapsibleSidebar({ user }: { user: User }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
-  // Check if we're on mobile
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth < 768) {
-        setIsCollapsed(true);
-      }
-    };
-
-    checkIsMobile();
-    window.addEventListener("resize", checkIsMobile);
-    return () => window.removeEventListener("resize", checkIsMobile);
-  }, []);
-
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleSignOut = async () => {
@@ -119,23 +110,83 @@ export function CollapsibleSidebar({ user }: { user: User }) {
     }
   };
 
+  const navItems = user.role === "ADMIN" ? adminNavItems : userNavItems;
+
   return (
     <>
-      {/* Mobile overlay */}
-      {isMobile && !isCollapsed && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
-          onClick={toggleSidebar}
-        />
-      )}
+      {/* Mobile Navbar */}
+      <div className="md:hidden sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-purple-200 dark:border-purple-900 shadow-sm">
+        <div className="flex items-center justify-between p-4">
+          <div className="flex items-center space-x-2">
+            <div className="bg-purple-600 w-8 h-8 rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold">A</span>
+            </div>
+            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+              Alenka
+            </span>
+          </div>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleMobileMenu}
+            className="text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800 hover:text-purple-900 dark:hover:text-purple-100 rounded-lg"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
+        </div>
+        
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="absolute top-full left-0 right-0 overflow-hidden bg-white dark:bg-gray-900 border-b border-purple-200 dark:border-purple-900 shadow-lg"
+            >
+              <nav className="p-4">
+                <ul className="space-y-2">
+                  {navItems.map((item) => {
+                    const isActive = pathname === item.href;
+                    return (
+                      <li key={item.href}>
+                        <Link href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
+                          <div
+                            className={`flex items-center rounded-lg px-3 py-3 transition-all duration-200 ${
+                              isActive
+                                ? "bg-purple-600 dark:bg-purple-900 text-white dark:text-purple-100 shadow-md shadow-purple-500/20"
+                                : "text-gray-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-800/50"
+                            }`}
+                          >
+                            <span className={isActive ? "text-white dark:text-purple-200" : "text-purple-600 dark:text-purple-400"}>
+                              {item.icon}
+                            </span>
+                            <span className="ml-3 font-medium">{item.title}</span>
+                          </div>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                  <li className="pt-2 mt-2 border-t border-purple-100 dark:border-purple-800/50">
+                    <button
+                      onClick={handleSignOut}
+                      className="flex items-center w-full rounded-lg px-3 py-3 transition-all duration-200 text-gray-700 dark:text-purple-200 hover:bg-purple-100 dark:hover:bg-purple-800/50"
+                    >
+                      <LogOut className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                      <span className="ml-3 font-medium">Sign-Out</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
 
-      {/* Sidebar */}
+      {/* Desktop Sidebar */}
       <motion.aside
         initial={false}
         animate={{ width: isCollapsed ? 80 : 260 }}
-        className={`h-screen sticky top-0 flex flex-col bg-white dark:bg-gray-900 border-r border-purple-200 dark:border-purple-900 z-50 ${
-          isMobile && !isCollapsed ? "fixed inset-y-0" : ""
-        }`}
+        className={`hidden md:flex h-screen sticky top-0 flex-col bg-white dark:bg-gray-900 border-r border-purple-200 dark:border-purple-900 z-50`}
       >
         {/* Sidebar header */}
         <div className="flex items-center justify-between p-4 border-b border-purple-200 dark:border-purple-900">
@@ -158,7 +209,6 @@ export function CollapsibleSidebar({ user }: { user: User }) {
           </AnimatePresence>
           
           <div className="flex items-center space-x-2">
-            
             <Button
               variant="ghost"
               size="icon"
@@ -167,8 +217,6 @@ export function CollapsibleSidebar({ user }: { user: User }) {
             >
               {isCollapsed ? (
                 <Menu className="h-6 w-6" />
-              ) : isMobile ? (
-                <ChevronLeft className="h-6 w-6" />
               ) : (
                 <ChevronLeft className="h-6 w-6" />
               )}
@@ -179,7 +227,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto py-4">
           <ul className="space-y-1 px-2">
-            {(user.role === "ADMIN" ? adminNavItems : userNavItems).map((item) => {
+            {navItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <li key={item.href}>
