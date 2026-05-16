@@ -109,48 +109,53 @@ export function ProductFilter({
   return (
     <div className="space-y-6">
       {/* Search and Filter Controls */}
-      <div className="bg-white dark:bg-gray-900/50 border border-purple-500/30 dark:border-purple-500/30 rounded-xl p-6 shadow-lg">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {/* Search Input */}
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input
-              placeholder="Cari properti..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-            />
+      <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-xl mb-8">
+        {/* Animated Conic Gradient Border */}
+        <div className="absolute top-1/2 left-1/2 h-[800%] w-[800%] sm:h-[500%] sm:w-[500%] -translate-x-1/2 -translate-y-1/2 animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+        
+        <div className="relative z-10 bg-white dark:bg-[#0d041a] rounded-[14px] p-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Search Input */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Input
+                placeholder="Cari properti..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-10 bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+              />
+            </div>
+
+            {/* Lokasi Filter */}
+            <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
+              <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
+                <SelectValue placeholder="Semua Lokasi" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="__all__">Semua Lokasi</SelectItem>
+                {uniqueLokasi.map((lokasi) => (
+                  <SelectItem key={lokasi} value={lokasi}>
+                    {lokasi}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            {/* Kategori Filter */}
+            <Select value={selectedKategori} onValueChange={setSelectedKategori}>
+              <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
+                <SelectValue placeholder="Semua Kategori" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="__all__">Semua Kategori</SelectItem>
+                {uniqueKategori.map((kategori) => (
+                  <SelectItem key={kategori} value={kategori}>
+                    {kategori === "Dp_Rendah" ? "DP Rendah" : kategori === "DP_Akad_Gratis" ? "DP Akad Gratis" : kategori}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
-
-          {/* Lokasi Filter */}
-          <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
-            <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
-              <SelectValue placeholder="Semua Lokasi" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="__all__">Semua Lokasi</SelectItem>
-              {uniqueLokasi.map((lokasi) => (
-                <SelectItem key={lokasi} value={lokasi}>
-                  {lokasi}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-
-          {/* Kategori Filter */}
-          <Select value={selectedKategori} onValueChange={setSelectedKategori}>
-            <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
-              <SelectValue placeholder="Semua Kategori" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="__all__">Semua Kategori</SelectItem>
-              {uniqueKategori.map((kategori) => (
-                <SelectItem key={kategori} value={kategori}>
-                  {kategori === "Dp_Rendah" ? "DP Rendah" : kategori === "DP_Akad_Gratis" ? "DP Akad Gratis" : kategori}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
         </div>
       </div>
 

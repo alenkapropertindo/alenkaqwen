@@ -46,6 +46,11 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
   );
   const [availableYears, setAvailableYears] = useState<number[]>([]);
   const { theme } = useTheme();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Get available years from customer data
   useEffect(() => {
@@ -62,7 +67,7 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
     if (years.length > 0 && !years.includes(selectedYear)) {
       setSelectedYear(years[0]);
     }
-  }, [customers]);
+  }, [customers, selectedYear]);
 
   // Process customer data for chart based on selected year
   const getCustomerDataByMonth = (): ChartData[] => {
@@ -139,26 +144,48 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
   const colors = getChartColors();
   const customerDataByMonth = getCustomerDataByMonth();
 
+  if (!isMounted) {
+    return (
+      <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-2xl">
+        <div className="relative z-10 h-full w-full bg-[#0d041a] rounded-[14px] p-5">
+          <div className="flex flex-row items-center justify-between pb-2">
+            <h3 className="text-lg font-bold text-gray-200">
+              Customer Registration Trend
+            </h3>
+          </div>
+          <div className="h-80 flex items-center justify-center">
+            <p className="text-gray-500 font-medium">
+              Loading chart...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <Card className="bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200 rounded-lg shadow-lg shadow-purple-200/50 dark:from-purple-900/30 dark:to-indigo-900/30 dark:border-purple-500/50 dark:rounded-lg dark:shadow-lg dark:shadow-purple-500/10">
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle className="text-xl font-bold text-gray-500 dark:text-white">
-          Customer Registration Trend
-        </CardTitle>
+    <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-2xl mt-10">
+      <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_5s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+      
+      <div className="relative z-10 flex flex-col h-full w-full bg-[#0d041a] rounded-[14px] p-5">
+        <div className="flex flex-row items-center justify-between pb-4 border-b border-white/5">
+          <h3 className="text-lg font-bold text-gray-200">
+            Customer Registration Trend
+          </h3>
         {availableYears.length > 0 && (
           <Select
             value={selectedYear.toString()}
             onValueChange={(value) => setSelectedYear(parseInt(value))}
           >
-            <SelectTrigger className="w-[120px] bg-white border-purple-200 text-gray-500 dark:bg-white  dark:text-white">
+            <SelectTrigger className="w-[120px] bg-purple-900/40 border-purple-500/50 text-purple-100 focus:ring-fuchsia-500 focus:border-fuchsia-500 rounded-xl backdrop-blur-md hover:bg-purple-800/50 transition-colors">
               <SelectValue placeholder="Select year" />
             </SelectTrigger>
-            <SelectContent className="dark:bg-white">
+            <SelectContent className="bg-[#1e0a3c] border-purple-500/50">
               {availableYears.map((year) => (
                 <SelectItem
                   key={year}
                   value={year.toString()}
-                  className="dark:text-white"
+                  className="text-purple-200 focus:bg-fuchsia-600/40 focus:text-white"
                 >
                   {year}
                 </SelectItem>
@@ -166,10 +193,10 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
             </SelectContent>
           </Select>
         )}
-      </CardHeader>
-      <CardContent>
+      </div>
+      <div className="relative z-10 w-full">
         {customers.length > 0 ? (
-          <div className="h-80">
+          <div className="h-80 mt-6">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={customerDataByMonth}
@@ -180,7 +207,7 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
                   bottom: 5,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} />
+                <CartesianGrid strokeDasharray="3 3" stroke={colors.grid} opacity={0.3} />
                 <XAxis
                   dataKey="month"
                   stroke={colors.xAxis}
@@ -218,13 +245,14 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
             </ResponsiveContainer>
           </div>
         ) : (
-          <div className="h-80 flex items-center justify-center">
-            <p className="text-purple-700/70 dark:text-purple-200/70">
+          <div className="h-80 flex items-center justify-center mt-6">
+            <p className="text-purple-300/70 font-medium">
               No customer data available
             </p>
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+      </div>
+    </div>
   );
 }

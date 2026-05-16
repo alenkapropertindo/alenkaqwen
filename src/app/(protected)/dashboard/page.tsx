@@ -110,149 +110,117 @@ export default async function DashboardPage() {
     }).format(value);
   };
 
+  const statCards = [
+    {
+      title: "Total Komisi",
+      value: formatCurrency(totalKomisi),
+      description: "Komisi dari customer dengan status akad",
+      icon: Wallet,
+      color: "purple",
+    },
+    {
+      title: "Menunggu Pembayaran",
+      value: formatCurrency(menungguPembayaran),
+      description: "Komisi dari status akad & belum dibayar",
+      icon: Clock,
+      color: "blue",
+    },
+    {
+      title: "Total Customers",
+      value: totalCustomers.toString(),
+      description: "Jumlah seluruh customer terdaftar",
+      icon: Users,
+      color: "emerald",
+    },
+    {
+      title: "Followup",
+      value: followupCount.toString(),
+      description: "Customer dalam tahap followup",
+      icon: PhoneCall,
+      color: "amber",
+    },
+    {
+      title: "Pemberkasan",
+      value: pemberkasanCount.toString(),
+      description: "Customer dalam tahap pemberkasan",
+      icon: FolderOpen,
+      color: "rose",
+    },
+    {
+      title: "Akad",
+      value: akadCount.toString(),
+      description: "Customer dengan status akad",
+      icon: FileCheck,
+      color: "teal",
+    },
+  ];
+
+  if (user.role === UserRole.ADMIN) {
+    statCards.push({
+      title: "Total Marketing",
+      value: totalMarketing.toString(),
+      description: "Jumlah user dengan role marketing",
+      icon: UserCog,
+      color: "violet",
+    });
+  }
+
   return (
-    <div className="px-4 py-8 sm:px-6 lg:px-8 container mx-auto max-w-screen-xl space-y-8">
-      <div className="space-y-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+    <div className="relative min-h-screen px-4 py-8 sm:px-6 lg:px-8 container mx-auto max-w-screen-xl space-y-10 z-0">
+      {/* Grand Neon Background Glows for the whole page */}
+      <div className="fixed inset-0 pointer-events-none -z-10">
+        <div className="absolute top-[0%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[150px] rounded-full mix-blend-screen"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-600/10 blur-[150px] rounded-full mix-blend-screen"></div>
+      </div>
+
+      <div className="space-y-2 relative z-10">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
           Dashboard
         </h1>
+        <p className="text-gray-400 text-lg">
+          Ringkasan performa dan data marketing Anda hari ini.
+        </p>
       </div>
 
       {/* Statistic Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Total Komisi Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-purple-900/50 dark:to-indigo-900/50 dark:border-purple-500/50 dark:shadow-[0_0_15px_rgba(168,85,247,0.15)] dark:hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <Wallet className="h-5 w-5 text-gray-900 dark:text-purple-400" />
-              Total Komisi
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {formatCurrency(totalKomisi)}
-            </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Komisi dari customer dengan status akad
-            </p>
-          </CardContent>
-        </Card>
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 relative z-10">
+        {statCards.map((stat, idx) => {
+          const Icon = stat.icon;
 
-        {/* Menunggu Pembayaran Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-blue-900/50 dark:to-cyan-900/50 dark:border-blue-500/50 dark:shadow-[0_0_15px_rgba(59,130,246,0.15)] dark:hover:shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <Clock className="h-5 w-5 text-gray-900 dark:text-blue-400" />
-              Menunggu Pembayaran
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {formatCurrency(menungguPembayaran)}
+          return (
+            <div 
+              key={idx} 
+              className="relative overflow-hidden rounded-xl sm:rounded-2xl p-[1.5px] sm:p-[2px] z-0 shadow-2xl"
+            >
+              {/* Animated Conic Gradient Border */}
+              <div className="absolute top-1/2 left-1/2 h-[250%] w-[250%] -translate-x-1/2 -translate-y-1/2 animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+              
+              {/* Inner Card Content */}
+              <div className="relative z-10 flex flex-col justify-between h-full w-full bg-[#0d041a] rounded-[10px] sm:rounded-[14px] p-3 sm:p-5">
+                <div className="flex flex-row items-start sm:items-center justify-between pb-1 sm:pb-2 gap-2">
+                  <h3 className="text-[10px] sm:text-sm font-semibold text-gray-200 tracking-wide line-clamp-2">
+                    {stat.title}
+                  </h3>
+                  <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-purple-900/30 border border-purple-500/20 shadow-inner flex-shrink-0">
+                    <Icon className="h-3 w-3 sm:h-5 sm:w-5 text-pink-400" strokeWidth={2.5} />
+                  </div>
+                </div>
+                <div className="pt-1 sm:pt-2">
+                  <div className="text-lg sm:text-3xl font-bold text-white truncate">
+                    {stat.value}
+                  </div>
+                  <p className="text-[9px] sm:text-xs text-gray-400 mt-1 sm:mt-2 font-medium line-clamp-2">
+                    {stat.description}
+                  </p>
+                </div>
+              </div>
             </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Komisi dari customer dengan status akad dan belum dibayar
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Customers Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-emerald-900/50 dark:to-green-900/50 dark:border-emerald-500/50 dark:shadow-[0_0_15px_rgba(16,185,129,0.15)] dark:hover:shadow-[0_0_20px_rgba(16,185,129,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <Users className="h-5 w-5 text-gray-900 dark:text-emerald-400" />
-              Customers
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {totalCustomers}
-            </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Total semua customer
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Followup Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-amber-900/50 dark:to-orange-900/50 dark:border-amber-500/50 dark:shadow-[0_0_15px_rgba(245,158,11,0.15)] dark:hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <PhoneCall className="h-5 w-5 text-gray-900 dark:text-amber-400" />
-              Followup
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {followupCount}
-            </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Customer dalam tahap followup
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Akad Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-teal-900/50 dark:to-cyan-900/50 dark:border-teal-500/50 dark:shadow-[0_0_15px_rgba(20,184,166,0.15)] dark:hover:shadow-[0_0_20px_rgba(20,184,166,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <FileCheck className="h-5 w-5 text-gray-900 dark:text-teal-400" />
-              Akad
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {akadCount}
-            </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Customer dengan status akad
-            </p>
-          </CardContent>
-        </Card>
-
-        {/* Pemberkasan Card */}
-        <Card className="bg-white pb-4 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-rose-900/50 dark:to-pink-900/50 dark:border-rose-500/50 dark:shadow-[0_0_15px_rgba(244,63,94,0.15)] dark:hover:shadow-[0_0_20px_rgba(244,63,94,0.3)]">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-              <FolderOpen className="h-5 w-5 text-gray-900 dark:text-rose-400" />
-              Pemberkasan
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold text-gray-900 dark:text-white">
-              {pemberkasanCount}
-            </div>
-            <p className="text-xs text-gray-500 mt-1 dark:text-gray-400">
-              Customer dalam tahap pemberkasan
-            </p>
-          </CardContent>
-        </Card>
+          );
+        })}
       </div>
 
-      {/* Admin Only Extra Card */}
-      {user.role === UserRole.ADMIN && (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <Card className="lg:col-span-1 bg-white pb-2 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 dark:bg-gradient-to-br dark:from-violet-900/50 dark:to-fuchsia-900/50 dark:border-violet-500/50 dark:shadow-[0_0_15px_rgba(139,92,246,0.15)] dark:hover:shadow-[0_0_20px_rgba(139,92,246,0.3)]">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-gray-600 flex items-center gap-2 dark:text-gray-300">
-                <UserCog className="h-5 w-5 text-gray-900 dark:text-violet-400" />
-                Total Marketing
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                {totalMarketing}
-              </div>
-              <p className="text-xs text-gray-500 my-1 dark:text-gray-400">
-                Jumlah user dengan role marketing
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      )}
-
       {/* Customer Chart Section */}
-      <div className="mt-8">
+      <div className="mt-10">
         <CustomerCharts customers={customers} />
       </div>
     </div>
