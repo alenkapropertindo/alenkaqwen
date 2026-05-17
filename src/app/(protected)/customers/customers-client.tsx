@@ -72,7 +72,7 @@ export default function CustomersClientPage({
   return (
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+        <h1 className="text-3xl sm:text-4xl font-extrabold clay-text-title">
           Customers
         </h1>
         <AddCustomerButton 

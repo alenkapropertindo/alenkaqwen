@@ -99,13 +99,13 @@ export function SearchableCustomersTable({
   const getStatusColorClass = (status: Status) => {
     switch (status) {
       case Status.AKAD_KREDIT:
-        return "bg-green-500/20 text-green-700 dark:text-green-400";
+        return "bg-white/40 text-[#1f4f59] shadow-sm";
       case Status.PEMBERKASAN:
-        return "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400";
+        return "bg-[#fed277]/40 text-[#7c5806] shadow-sm";
       case Status.FOLLOWUP:
-        return "bg-blue-500/20 text-blue-700 dark:text-blue-400";
+        return "bg-[#aae4ee]/40 text-[#1f4f59] shadow-sm";
       default:
-        return "bg-gray-500/20 text-gray-300";
+        return "bg-white/20 text-gray-500 shadow-sm";
     }
   };
 
@@ -134,11 +134,11 @@ export function SearchableCustomersTable({
   const getPaidStatusColorClass = (paidStatus: string) => {
     switch (paidStatus) {
       case "PAID":
-        return "bg-green-500/20 text-green-700 dark:text-green-400";
+        return "bg-white/40 text-[#1f4f59] shadow-sm";
       case "PENDING":
-        return "bg-yellow-500/20 text-yellow-700 dark:text-yellow-400";
+        return "bg-[#fed277]/40 text-[#7c5806] shadow-sm";
       default:
-        return "bg-gray-500/20 text-gray-300";
+        return "bg-white/20 text-gray-500 shadow-sm";
     }
   };
 
@@ -269,7 +269,7 @@ export function SearchableCustomersTable({
   };
 
   return (
-    <div className="bg-gray-900/60 border border-purple-200 dark:border-purple-900/50 rounded-xl p-4 sm:p-6">
+    <div className="clay-panel p-4 sm:p-6">
       {/* Search and Filter Controls */}
       <div className="flex flex-col md:flex-row gap-4 mb-6">
         <div className="flex-grow">
@@ -277,18 +277,18 @@ export function SearchableCustomersTable({
             placeholder="Cari customer berdasarkan nama, WhatsApp, atau email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-purple-500 focus:border-purple-500"
+            className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
           />
         </div>
         <div className="w-full md:w-48">
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white">
+            <SelectTrigger className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12">
               <SelectValue placeholder="Filter status" />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="ALL">Semua Status</SelectItem>
+            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+              <SelectItem value="ALL" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Semua Status</SelectItem>
               {statuses.map((status) => (
-                <SelectItem key={status} value={status}>
+                <SelectItem key={status} value={status} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">
                   {formatStatus(status)}
                 </SelectItem>
               ))}
@@ -299,11 +299,11 @@ export function SearchableCustomersTable({
 
       {loading ? (
         <div className="text-center py-12">
-          <p className="text-gray-300">Loading customers...</p>
+          <p className="clay-text-muted font-bold">Loading customers...</p>
         </div>
       ) : filteredCustomers.length === 0 ? (
         <div className="text-center py-12">
-          <p className="text-gray-300 mb-4">
+          <p className="clay-text-muted font-bold mb-4">
             {searchTerm || statusFilter !== "ALL"
               ? "Tidak ada customer yang cocok dengan filter"
               : "Tidak ada customer ditemukan"}
@@ -311,35 +311,35 @@ export function SearchableCustomersTable({
           <AddCustomerButton />
         </div>
       ) : (
-        <div className="rounded-lg overflow-x-auto">
+        <div className="rounded-[20px] overflow-x-auto">
           <Table className="w-full">
             <TableHeader>
-              <TableRow className="border-purple-200 dark:border-purple-500/30 hover:bg-purple-50 dark:hover:bg-purple-900/20">
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+              <TableRow className="border-white/40 hover:bg-white/40">
+                <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                   Nama Customer
                 </TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+                <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                   WhatsApp
                 </TableHead>
-                <TableHead className="text-purple-300 text-sm sm:text-base">
+                <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                   Status
                 </TableHead>
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                     Komisi (Rp)
                   </TableHead>
                 )}
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                     Payment Status
                   </TableHead>
                 )}
                 {userRole === "ADMIN" && (
-                  <TableHead className="text-purple-300 text-sm sm:text-base">
+                  <TableHead className="clay-text-title text-sm sm:text-base font-extrabold">
                     Ranger
                   </TableHead>
                 )}
-                <TableHead className="text-purple-300 text-right text-sm sm:text-base">
+                <TableHead className="clay-text-title text-right text-sm sm:text-base font-extrabold">
                   Actions
                 </TableHead>
               </TableRow>
@@ -348,12 +348,12 @@ export function SearchableCustomersTable({
               {filteredCustomers.map((customer) => (
                 <TableRow
                   key={customer.id}
-                  className="border-purple-100 dark:border-purple-500/20 hover:bg-purple-50 dark:hover:bg-purple-900/10"
+                  className="border-white/40 hover:bg-white/20"
                 >
-                  <TableCell className="font-medium text-white py-4 max-w-[150px] truncate">
+                  <TableCell className="clay-text-title font-bold py-4 max-w-[150px] truncate">
                     {customer.name}
                   </TableCell>
-                  <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
+                  <TableCell className="clay-text-muted font-bold py-4 max-w-[150px] truncate">
                     <a
                       href={`https://wa.me/${customer.whatsapp.replace(
                         /\D/g,
@@ -361,7 +361,7 @@ export function SearchableCustomersTable({
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-green-600 dark:text-green-400 hover:text-green-800 dark:hover:text-green-300 underline"
+                      className="text-[#731b31] hover:text-[#d64560] underline"
                     >
                       {customer.whatsapp}
                     </a>
@@ -379,16 +379,16 @@ export function SearchableCustomersTable({
                           customer.paidStatus === "PAID"
                         }
                       >
-                        <SelectTrigger className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white w-[140px]">
+                        <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
                           {updatingCustomerId === customer.id ? (
-                            <span className="text-gray-400">Updating...</span>
+                            <span className="clay-text-muted font-bold">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
                           {Object.values(Status).map((status) => (
-                            <SelectItem key={status} value={status}>
+                            <SelectItem key={status} value={status} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">
                               {formatStatus(status)}
                             </SelectItem>
                           ))}
@@ -430,7 +430,7 @@ export function SearchableCustomersTable({
                           updatingCustomerId === customer.id ||
                           customer.paidStatus === "PAID"
                         }
-                        className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white w-[140px]"
+                        className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 w-[140px] h-10"
                       />
                     </TableCell>
                   )}
@@ -447,23 +447,23 @@ export function SearchableCustomersTable({
                           customer.paidStatus === "PAID"
                         }
                       >
-                        <SelectTrigger className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white w-[140px]">
+                        <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
                           {updatingCustomerId === customer.id ? (
-                            <span className="text-gray-400">Updating...</span>
+                            <span className="clay-text-muted font-bold">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="PENDING">Pending</SelectItem>
-                          <SelectItem value="PAID">Paid</SelectItem>
+                        <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                          <SelectItem value="PENDING" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Pending</SelectItem>
+                          <SelectItem value="PAID" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Paid</SelectItem>
                         </SelectContent>
                       </Select>
                     </TableCell>
                   )}
 
                   {userRole === "ADMIN" && (
-                    <TableCell className="text-gray-300 py-4 max-w-[150px] truncate">
+                    <TableCell className="clay-text-muted font-bold py-4 max-w-[150px] truncate">
                       {customer.user?.email || "N/A"}
                     </TableCell>
                   )}

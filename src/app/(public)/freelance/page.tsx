@@ -15,66 +15,66 @@ import Link from "next/link";
 
 export default function FreelancePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-purple-950 to-gray-950">
+    <div className="min-h-screen clay-bg">
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-block mb-6">
-            <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+            <span className="clay-card-yellow text-[#63490b] px-4 py-2 rounded-full text-sm font-semibold">
               🔥 Program Affiliate Terbaru
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-7xl font-extrabold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-7xl font-extrabold clay-text-title mb-6 leading-tight">
             Dapatkan{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+            <span className="text-[#d64560] drop-shadow-sm">
               Fee Jutaan Rupiah
             </span>
             <br />
             Tanpa Harus Jualan!
           </h1>
 
-          <p className="text-xl md:text-2xl text-purple-200 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl clay-text-muted font-bold mb-12 max-w-3xl mx-auto leading-relaxed">
             Hanya dengan Merekomendasikan Teman, Keluarga, atau Siapa Saja yang
             Ingin Beli Rumah!
           </p>
 
-          <div className="bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-xl rounded-3xl p-1 mb-12 border border-purple-500/30 shadow-[0_0_60px_rgba(139,92,246,0.25)] max-w-5xl mx-auto">
+          <div className="clay-panel p-1 mb-12 max-w-5xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8 p-8">
-              <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-gray-900/40 hover:bg-purple-900/20 transition-all duration-500 border border-purple-500/20 hover:border-purple-400/40 group">
-                <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Zap className="h-8 w-8 text-white" />
+              <div className="flex flex-col items-center text-center p-6 rounded-2xl clay-card bg-white/40 border-white hover:bg-white/60 transition-all duration-500 group">
+                <div className="clay-card-pink p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Zap className="h-8 w-8 clay-text-title font-bold" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-2xl font-bold clay-text-title mb-3">
                   Tanpa Jualan
                 </h3>
-                <p className="text-purple-300">
+                <p className="clay-text-muted font-bold">
                   Kamu tidak perlu jadi agen properti atau door to door ke calon
                   pembeli!
                 </p>
               </div>
 
-              <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-gray-900/40 hover:bg-purple-900/20 transition-all duration-500 border border-purple-500/20 hover:border-purple-400/40 group">
-                <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="h-8 w-8 text-white" />
+              <div className="flex flex-col items-center text-center p-6 rounded-2xl clay-card bg-white/40 border-white hover:bg-white/60 transition-all duration-500 group">
+                <div className="clay-card-pink p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Users className="h-8 w-8 clay-text-title font-bold" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-2xl font-bold clay-text-title mb-3">
                   Agen AI Kami yang Follow-Up
                 </h3>
-                <p className="text-purple-300">
+                <p className="clay-text-muted font-bold">
                   Setelah kamu rekomendasikan target konsumen, tim kami yang
                   akan menghubungi, presentasi, antar ceklokasi hingga closing.
                 </p>
               </div>
 
-              <div className="flex flex-col items-center text-center p-6 rounded-2xl bg-gray-900/40 hover:bg-purple-900/20 transition-all duration-500 border border-purple-500/20 hover:border-purple-400/40 group">
-                <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Wallet className="h-8 w-8 text-white" />
+              <div className="flex flex-col items-center text-center p-6 rounded-2xl clay-card bg-white/40 border-white hover:bg-white/60 transition-all duration-500 group">
+                <div className="clay-card-pink p-4 rounded-full mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Wallet className="h-8 w-8 clay-text-title font-bold" />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-3">
+                <h3 className="text-2xl font-bold clay-text-title mb-3">
                   Fee Langsung Setelah Akad Kredit
                 </h3>
-                <p className="text-purple-300">
+                <p className="clay-text-muted font-bold">
                   Begitu terjadi akad kredit, kamu langsung dapat fee hingga
                   jutaan rupiah per unit!
                 </p>
@@ -86,43 +86,43 @@ export default function FreelancePage() {
             <Link href="/auth/signup">
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-xl px-10 py-7 rounded-full shadow-[0_0_30px_#8b5cf6] hover:shadow-[0_0_40px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
+                className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-xl px-10 py-7 rounded-full shadow-[0_0_30px_#8b5cf6] hover:shadow-[0_0_40px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
               >
                 GABUNG SEKARANG <ArrowRight className="ml-3 h-6 w-6" />
               </Button>
             </Link>
           </div>
-          <p className="text-purple-400 mt-6 text-lg">Gratis & Tanpa Syarat</p>
+          <p className="clay-text-title font-extrabold mt-6 text-lg">Gratis & Tanpa Syarat</p>
         </div>
       </div>
 
       {/* Stats Section */}
-      <div className="py-16 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+      <div className="py-16 bg-[#aae4ee]/30">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">
+              <div className="text-4xl md:text-5xl font-bold clay-text-title font-extrabold mb-2">
                 1JT+
               </div>
-              <div className="text-purple-300">Fee per Unit</div>
+              <div className="clay-text-muted font-bold">Fee per Unit</div>
             </div>
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">
+              <div className="text-4xl md:text-5xl font-bold clay-text-title font-extrabold mb-2">
                 ∞
               </div>
-              <div className="text-purple-300">Potensi Penghasilan</div>
+              <div className="clay-text-muted font-bold">Potensi Penghasilan</div>
             </div>
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">
+              <div className="text-4xl md:text-5xl font-bold clay-text-title font-extrabold mb-2">
                 0%
               </div>
-              <div className="text-purple-300">Modal Awal</div>
+              <div className="clay-text-muted font-bold">Modal Awal</div>
             </div>
             <div className="p-6">
-              <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">
+              <div className="text-4xl md:text-5xl font-bold clay-text-title font-extrabold mb-2">
                 24/7
               </div>
-              <div className="text-purple-300">Support</div>
+              <div className="clay-text-muted font-bold">Support</div>
             </div>
           </div>
         </div>
@@ -132,28 +132,28 @@ export default function FreelancePage() {
       <div className="py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold clay-text-title mb-6">
               💡 Bagaimana Cara Kerjanya?
             </h2>
-            <p className="text-xl text-purple-300 max-w-2xl mx-auto">
+            <p className="text-xl clay-text-muted font-bold max-w-2xl mx-auto">
               Proses yang mudah dan sederhana untuk memulai penghasilan tambahan
               Anda
             </p>
           </div>
 
           <div className="max-w-5xl mx-auto">
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_50px_rgba(139,92,246,0.2)]">
+            <Card className="clay-panel">
               <CardContent className="p-8">
                 <div className="space-y-12">
                   <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="flex-shrink-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold text-white">
+                    <div className="flex-shrink-0 clay-card-pink rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold clay-text-title font-bold">
                       1
                     </div>
                     <div className="text-center md:text-left flex-grow">
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className="text-2xl font-bold clay-text-title mb-3">
                         Daftar Sekarang di program affiliate kami (Gratis!)
                       </h3>
-                      <p className="text-purple-300 text-lg">
+                      <p className="clay-text-muted font-bold text-lg">
                         Buka menu target dan masukan nomor telepon teman,
                         keluarga atau prospek yang ingin membeli rumah
                       </p>
@@ -161,15 +161,15 @@ export default function FreelancePage() {
                   </div>
 
                   <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="flex-shrink-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold text-white">
+                    <div className="flex-shrink-0 clay-card-pink rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold clay-text-title font-bold">
                       2
                     </div>
                     <div className="text-center md:text-left flex-grow">
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className="text-2xl font-bold clay-text-title mb-3">
                         Kamu tinggal duduk manis dan Tim Kami yang Akan
                         Menghubungi Calon Pembeli
                       </h3>
-                      <p className="text-purple-300 text-lg">
+                      <p className="clay-text-muted font-bold text-lg">
                         Tim profesional kami akan melakukan follow-up,
                         presentasi, hingga closing
                       </p>
@@ -177,14 +177,14 @@ export default function FreelancePage() {
                   </div>
 
                   <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="flex-shrink-0 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold text-white">
+                    <div className="flex-shrink-0 clay-card-pink rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold clay-text-title font-bold">
                       3
                     </div>
                     <div className="text-center md:text-left flex-grow">
-                      <h3 className="text-2xl font-bold text-white mb-3">
+                      <h3 className="text-2xl font-bold clay-text-title mb-3">
                         Kamu Dapat Fee Jutaan Rupiah Setelah Akad!
                       </h3>
-                      <p className="text-purple-300 text-lg">
+                      <p className="clay-text-muted font-bold text-lg">
                         Setelah terjadi akad kredit, fee langsung masuk ke
                         rekening kamu
                       </p>
@@ -198,43 +198,43 @@ export default function FreelancePage() {
       </div>
 
       {/* Who Is This For */}
-      <div className="py-24 bg-gradient-to-r from-gray-900/50 to-purple-900/20">
+      <div className="py-24 bg-[#c4ebf2]/30">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold clay-text-title mb-6">
               🎯 Siapa yang Cocok Ikut Program Ini?
             </h2>
-            <p className="text-xl text-purple-300 max-w-2xl mx-auto">
+            <p className="text-xl clay-text-muted font-bold max-w-2xl mx-auto">
               Program ini terbuka untuk siapa saja yang memiliki jaringan sosial
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)] hover:shadow-[0_0_50px_rgba(139,92,246,0.25)] transition-all duration-300">
+            <Card className="clay-card transition-all duration-300">
               <CardContent className="p-8">
                 <ul className="space-y-4">
                   <li className="flex items-start">
-                    <CheckCircle className="h-6 w-6 text-purple-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-purple-200">
+                    <CheckCircle className="h-6 w-6 text-[#d64560] mr-4 mt-1 flex-shrink-0" />
+                    <span className="text-lg clay-text-muted font-bold">
                       Siswa, Mahasiswa atau karyawan yang ingin penghasilan
                       tambahan
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-6 w-6 text-purple-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-purple-200">
+                    <CheckCircle className="h-6 w-6 text-[#d64560] mr-4 mt-1 flex-shrink-0" />
+                    <span className="text-lg clay-text-muted font-bold">
                       Ibu rumah tangga
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-6 w-6 text-purple-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-purple-200">
+                    <CheckCircle className="h-6 w-6 text-[#d64560] mr-4 mt-1 flex-shrink-0" />
+                    <span className="text-lg clay-text-muted font-bold">
                       Influencer, content creator, blogger
                     </span>
                   </li>
                   <li className="flex items-start">
-                    <CheckCircle className="h-6 w-6 text-purple-500 mr-4 mt-1 flex-shrink-0" />
-                    <span className="text-lg text-purple-200">
+                    <CheckCircle className="h-6 w-6 text-[#d64560] mr-4 mt-1 flex-shrink-0" />
+                    <span className="text-lg clay-text-muted font-bold">
                       Siapa pun yang punya jaringan atau kenalan yang ingin beli
                       rumah
                     </span>
@@ -243,10 +243,10 @@ export default function FreelancePage() {
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)] hover:shadow-[0_0_50px_rgba(139,92,246,0.25)] transition-all duration-300">
+            <Card className="clay-card transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-2xl text-white flex items-center">
-                  <Home className="h-8 w-8 text-purple-500 mr-3" />
+                <CardTitle className="text-2xl clay-text-title font-bold flex items-center">
+                  <Home className="h-8 w-8 text-[#d64560] mr-3" />
                   Proyek yang Tersedia:
                 </CardTitle>
               </CardHeader>
@@ -254,10 +254,10 @@ export default function FreelancePage() {
                 <div className="flex items-start">
                   <Star className="h-6 w-6 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-bold text-white">
+                    <h3 className="text-xl font-bold clay-text-title font-bold">
                       Rumah subsidi
                     </h3>
-                    <p className="text-purple-300 mt-1">
+                    <p className="clay-text-muted font-bold mt-1">
                       Harga terjangkau, legalitas terjamin
                     </p>
                   </div>
@@ -265,16 +265,16 @@ export default function FreelancePage() {
                 <div className="flex items-start">
                   <Star className="h-6 w-6 text-yellow-400 mr-3 mt-1 flex-shrink-0" />
                   <div>
-                    <h3 className="text-xl font-bold text-white">
+                    <h3 className="text-xl font-bold clay-text-title font-bold">
                       Banyak pilihan promo
                     </h3>
-                    <p className="text-purple-300 mt-1">
+                    <p className="clay-text-muted font-bold mt-1">
                       Lokasi strategis, dp akad rendah
                     </p>
                   </div>
                 </div>
-                <div className="pt-4 border-t border-purple-500/20">
-                  <p className="text-purple-300 flex items-center">
+                <div className="pt-4 border-t border-white/40">
+                  <p className="clay-text-muted font-bold flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-400 mr-2" />
                     Legalitas pasti aman & terpercaya
                   </p>
@@ -289,16 +289,16 @@ export default function FreelancePage() {
       <div className="py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold clay-text-title mb-6">
               🌟 Sukses Mitra Kami
             </h2>
-            <p className="text-xl text-purple-300 max-w-2xl mx-auto">
+            <p className="text-xl clay-text-muted font-bold max-w-2xl mx-auto">
               Dengarkan pengalaman dari mitra yang sudah bergabung
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)]">
+            <Card className="clay-card">
               <CardContent className="p-6 text-center">
                 <div className="text-yellow-400 mb-4 flex justify-center">
                   <Star className="h-6 w-6 fill-current" />
@@ -307,17 +307,17 @@ export default function FreelancePage() {
                   <Star className="h-6 w-6 fill-current" />
                   <Star className="h-6 w-6 fill-current" />
                 </div>
-                <p className="text-purple-200 mb-4">
+                <p className="clay-text-muted font-bold mb-4">
                   "Saya dapat fee 2 juta hanya dengan merekomendasikan teman.
                   Sangat mudah dan tanpa repot!"
                 </p>
-                <p className="text-purple-400 font-bold">
+                <p className="clay-text-title font-extrabold font-bold">
                   - Siti, Ibu Rumah Tangga
                 </p>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)]">
+            <Card className="clay-card">
               <CardContent className="p-6 text-center">
                 <div className="text-yellow-400 mb-4 flex justify-center">
                   <Star className="h-6 w-6 fill-current" />
@@ -326,15 +326,15 @@ export default function FreelancePage() {
                   <Star className="h-6 w-6 fill-current" />
                   <Star className="h-6 w-6 fill-current" />
                 </div>
-                <p className="text-purple-200 mb-4">
+                <p className="clay-text-muted font-bold mb-4">
                   "Sebagai mahasiswa, ini adalah penghasilan tambahan yang luar
                   biasa. Tidak perlu modal sama sekali!"
                 </p>
-                <p className="text-purple-400 font-bold">- Budi, Mahasiswa</p>
+                <p className="clay-text-title font-extrabold font-bold">- Budi, Mahasiswa</p>
               </CardContent>
             </Card>
 
-            <Card className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.15)]">
+            <Card className="clay-card">
               <CardContent className="p-6 text-center">
                 <div className="text-yellow-400 mb-4 flex justify-center">
                   <Star className="h-6 w-6 fill-current" />
@@ -343,11 +343,11 @@ export default function FreelancePage() {
                   <Star className="h-6 w-6 fill-current" />
                   <Star className="h-6 w-6 fill-current" />
                 </div>
-                <p className="text-purple-200 mb-4">
+                <p className="clay-text-muted font-bold mb-4">
                   "Fee yang saya dapatkan sudah melebihi penghasilan sampingan
                   saya sebelumnya. Sangat direkomendasikan!"
                 </p>
-                <p className="text-purple-400 font-bold">
+                <p className="clay-text-title font-extrabold font-bold">
                   - Andi, Content Creator
                 </p>
               </CardContent>
@@ -357,34 +357,34 @@ export default function FreelancePage() {
       </div>
 
       {/* Fee & Bonus */}
-      <div className="py-24 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+      <div className="py-24 bg-[#fed277]/20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold clay-text-title mb-6">
               💸 Fee Mulai dari 1 Juta
             </h2>
-            <p className="text-xl text-purple-200 max-w-2xl mx-auto mb-12">
+            <p className="text-xl clay-text-muted font-bold max-w-2xl mx-auto mb-12">
               Setiap penjualan dari referensi kamu bisa menghasilkan fee tanpa
               repot!
             </p>
 
-            <Card className="bg-gradient-to-br from-purple-900/70 to-pink-900/50 backdrop-blur-xl border-purple-500/40 shadow-[0_0_50px_rgba(139,92,246,0.3)] max-w-3xl mx-auto">
+            <Card className="clay-panel max-w-3xl mx-auto">
               <CardHeader>
-                <CardTitle className="text-3xl text-white flex items-center justify-center">
-                  <Gift className="h-10 w-10 mr-3 text-purple-300" />
+                <CardTitle className="text-3xl clay-text-title font-bold flex items-center justify-center">
+                  <Gift className="h-10 w-10 mr-3 clay-text-muted font-bold" />
                   Bonus Khusus untuk Pendaftar Hari Ini!
                 </CardTitle>
               </CardHeader>
               <CardContent className="pb-8">
-                <p className="text-purple-100 text-xl mb-8">
+                <p className="clay-text-muted font-bold text-xl mb-8">
                   Daftar hari ini dan dapatkan materi promosi + tips cara mudah
                   closing lebih cepat 🚀
                 </p>
-                <div className="bg-gradient-to-r from-purple-700/50 to-pink-700/50 p-6 rounded-2xl border border-purple-400/30">
-                  <h3 className="text-2xl font-bold text-white mb-3">
+                <div className="clay-panel p-6 rounded-2xl border border-white/40">
+                  <h3 className="text-2xl font-bold clay-text-title mb-3">
                     Apa yang Anda Dapatkan:
                   </h3>
-                  <ul className="text-left space-y-2 text-purple-200">
+                  <ul className="text-left space-y-2 clay-text-muted font-bold">
                     <li className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-2" />{" "}
                       Template promosi siap pakai
@@ -410,12 +410,12 @@ export default function FreelancePage() {
               <Link href="/auth/signin">
                 <Button
                   size="lg"
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
+                  className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
                 >
                   GABUNG SEKARANG <ArrowRight className="ml-3 h-8 w-8" />
                 </Button>
               </Link>
-              <p className="text-purple-300 mt-6 text-xl">
+              <p className="clay-text-muted font-bold mt-6 text-xl">
                 Gratis & Tanpa Komitmen
               </p>
             </div>
@@ -427,22 +427,22 @@ export default function FreelancePage() {
       <div className="py-24">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold clay-text-title mb-6">
               ❓ Pertanyaan Umum
             </h2>
-            <p className="text-xl text-purple-300 mb-16">
+            <p className="text-xl clay-text-muted font-bold mb-16">
               Masih punya pertanyaan? Kami siap membantu Anda
             </p>
 
-            <div className="bg-gradient-to-br from-gray-900/70 to-purple-900/30 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 shadow-[0_0_40px_rgba(139,92,246,0.2)]">
+            <div className="clay-panel p-8">
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <div className="text-center">
-                  <p className="text-2xl text-purple-300 mb-4">
+                  <p className="text-2xl clay-text-muted font-bold mb-4">
                     Hubungi Admin Kami:
                   </p>
                   <a
                     href="https://wa.me/6282264345250"
-                    className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold px-8 py-4 rounded-full text-xl transition-all duration-300 transform hover:scale-105"
+                    className="inline-flex items-center bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 clay-text-title font-bold font-bold px-8 py-4 rounded-full text-xl transition-all duration-300 transform hover:scale-105"
                   >
                     <svg
                       className="h-6 w-6 mr-2"
@@ -457,7 +457,7 @@ export default function FreelancePage() {
               </div>
             </div>
 
-            <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mt-16">
+            <p className="text-3xl font-bold text-[#d64560] drop-shadow-sm mt-16">
               Ubah Jaringanmu Jadi Uang Sekarang!
             </p>
           </div>
@@ -466,3 +466,5 @@ export default function FreelancePage() {
     </div>
   );
 }
+
+

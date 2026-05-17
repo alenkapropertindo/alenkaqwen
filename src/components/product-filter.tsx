@@ -109,26 +109,24 @@ export function ProductFilter({
   return (
     <div className="space-y-6">
       {/* Search and Filter Controls */}
-      <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-xl mb-8">
-        {/* Animated Conic Gradient Border */}
-        <div className="absolute top-1/2 left-1/2 h-[800%] w-[800%] sm:h-[500%] sm:w-[500%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+      <div className="relative overflow-hidden mb-8">
         
-        <div className="relative z-10 bg-white dark:bg-[#0d041a] rounded-[14px] p-6 w-full">
+        <div className="relative z-10 clay-panel p-6 w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search Input */}
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-              <Input
+            <div className="relative clay-card flex items-center px-3 py-1">
+              <Search className="text-[#5394a0] h-5 w-5 mr-2" />
+              <input
                 placeholder="Cari properti..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                className="w-full bg-transparent border-none focus:outline-none text-[#2b707d] placeholder-[#5394a0] font-medium py-2"
               />
             </div>
 
             {/* Lokasi Filter */}
             <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
-              <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
+              <SelectTrigger className="clay-card border-none text-[#2b707d] font-bold h-12">
                 <SelectValue placeholder="Semua Lokasi" />
               </SelectTrigger>
               <SelectContent>
@@ -143,7 +141,7 @@ export function ProductFilter({
 
             {/* Kategori Filter */}
             <Select value={selectedKategori} onValueChange={setSelectedKategori}>
-              <SelectTrigger className="bg-gray-50 dark:bg-gray-800 border-purple-500/30 text-gray-900 dark:text-white">
+              <SelectTrigger className="clay-card border-none text-[#2b707d] font-bold h-12">
                 <SelectValue placeholder="Semua Kategori" />
               </SelectTrigger>
               <SelectContent>
@@ -167,8 +165,8 @@ export function ProductFilter({
           ))}
         </div>
       ) : (
-        <div className="text-center py-12">
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+        <div className="text-center py-12 clay-panel">
+          <p className="clay-text-title font-bold text-lg">
             Tidak ada properti yang sesuai dengan kriteria pencarian.
           </p>
         </div>

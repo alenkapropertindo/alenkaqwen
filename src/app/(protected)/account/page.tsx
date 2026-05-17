@@ -115,14 +115,14 @@ export default function AccountPage() {
     return (
       <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
         <div className="animate-pulse">
-          <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-8"></div>
+          <div className="h-8 bg-white/40 rounded w-1/4 mb-8"></div>
           <div className="space-y-6">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="flex items-center space-x-4">
-                <div className="h-12 w-12 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+                <div className="h-12 w-12 bg-white/40 rounded-full"></div>
                 <div className="flex-1 space-y-2">
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
-                  <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                  <div className="h-4 bg-white/40 rounded"></div>
+                  <div className="h-4 bg-white/40 rounded w-3/4"></div>
                 </div>
               </div>
             ))}
@@ -136,10 +136,10 @@ export default function AccountPage() {
     return (
       <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
         <div className="text-center py-12">
-          <h1 className="text-2xl font-bold text-purple-800 dark:text-purple-400">
+          <h1 className="text-2xl font-extrabold clay-text-title">
             Not authenticated
           </h1>
-          <p className="text-purple-200 mt-2">
+          <p className="clay-text-muted font-bold mt-2">
             Please log in to view your account
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function AccountPage() {
         <motion.h1
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600"
+          className="text-3xl font-extrabold clay-text-title"
         >
           Account Settings
         </motion.h1>
@@ -163,7 +163,7 @@ export default function AccountPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="bg-gray-900/60 border border-purple-200 dark:border-purple-900/50 rounded-xl p-6"
+        className="clay-panel p-6"
       >
         <div className="flex flex-col md:flex-row gap-8">
           {/* Avatar Section */}
@@ -175,24 +175,24 @@ export default function AccountPage() {
                   alt="Profile"
                   width={120}
                   height={120}
-                  className="rounded-full border-2 border-purple-500"
+                  className="rounded-full border-4 border-white shadow-sm"
                 />
               ) : (
-                <div className="w-32 h-32 rounded-full bg-purple-100 dark:bg-purple-900/50 border-2 border-purple-300 dark:border-purple-500 flex items-center justify-center">
-                  <User className="h-16 w-16 text-purple-400" />
+                <div className="w-32 h-32 rounded-full bg-[#aae4ee] border-4 border-white shadow-sm flex items-center justify-center">
+                  <User className="h-16 w-16 text-[#ffffff]/70" />
                 </div>
               )}
               <button
-                className="absolute bottom-2 right-2 bg-purple-600 hover:bg-purple-700 rounded-full p-2 transition-colors"
+                className="absolute bottom-2 right-2 clay-btn-primary p-2 rounded-full"
                 onClick={() => toast.info("Avatar upload coming soon")}
               >
-                <Settings className="h-4 w-4 text-white" />
+                <Settings className="h-4 w-4" />
               </button>
             </div>
-            <h2 className="text-xl font-semibold mt-4 text-purple-100">
+            <h2 className="text-xl font-extrabold mt-4 clay-text-title">
               {name}
             </h2>
-            <p className="text-purple-300">{email}</p>
+            <p className="clay-text-muted font-bold">{email}</p>
           </div>
 
           {/* Information Section */}
@@ -200,88 +200,88 @@ export default function AccountPage() {
             {isEditing ? (
               <div className="space-y-6">
                 <div>
-                  <Label htmlFor="name" className="text-gray-300 dark:text-purple-200">
+                  <Label htmlFor="name" className="clay-text-title font-bold">
                     Name
                   </Label>
                   <Input
                     id="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="mt-1 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                    className="mt-1 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                   />
                 </div>
 
                 <div>
-                  <Label htmlFor="email" className="text-gray-300 dark:text-purple-200">
+                  <Label htmlFor="email" className="clay-text-title font-bold">
                     Email
                   </Label>
                   <Input
                     id="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="mt-1 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                    className="mt-1 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12 opacity-70"
                     disabled
                   />
-                  <p className="text-xs text-purple-400 mt-1">
+                  <p className="text-xs clay-text-muted font-bold mt-1">
                     Email cannot be changed
                   </p>
                 </div>
 
                 <div>
-                  <Label htmlFor="whatsapp" className="text-gray-300 dark:text-purple-200">
+                  <Label htmlFor="whatsapp" className="clay-text-title font-bold">
                     WhatsApp
                   </Label>
                   <div className="relative mt-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Phone className="h-4 w-4 text-purple-400" />
+                      <Phone className="h-4 w-4 text-[#366873]" />
                     </div>
                     <Input
                       id="whatsapp"
                       value={whatsapp}
                       onChange={(e) => setWhatsapp(e.target.value)}
-                      className="pl-10 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      className="pl-10 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       placeholder="+62..."
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="rekening" className="text-gray-300 dark:text-purple-200">
+                  <Label htmlFor="rekening" className="clay-text-title font-bold">
                     Nomor Rekening
                   </Label>
                   <div className="relative mt-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <CreditCard className="h-4 w-4 text-purple-400" />
+                      <CreditCard className="h-4 w-4 text-[#366873]" />
                     </div>
                     <Input
                       id="rekening"
                       value={rekening}
                       onChange={(e) => setRekening(e.target.value)}
-                      className="pl-10 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      className="pl-10 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       placeholder="cth: 9702345069/BCA"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="kodeUnik" className="text-gray-300 dark:text-purple-200">
+                  <Label htmlFor="kodeUnik" className="clay-text-title font-bold">
                     Kode Unik
                   </Label>
                   <div className="relative mt-1">
                     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <span className="h-4 w-4 text-purple-400 font-bold flex items-center justify-center">#</span>
+                      <span className="h-4 w-4 text-[#366873] font-bold flex items-center justify-center">#</span>
                     </div>
                     <Input
                       id="kodeUnik"
                       value={kodeUnik}
                       onChange={(e) => setKodeUnik(e.target.value)}
-                      className="pl-10 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      className="pl-10 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       placeholder="cth: UNIK123"
                       disabled={!!session?.user?.kodeUnik}
                     />
                   </div>
                   {session?.user?.kodeUnik && (
-                    <p className="text-xs text-purple-400 mt-1">
+                    <p className="text-xs clay-text-muted font-bold mt-1">
                       Kode unik sudah diatur dan tidak dapat diubah lagi.
                     </p>
                   )}
@@ -290,14 +290,14 @@ export default function AccountPage() {
                 <div className="flex space-x-3 pt-4">
                   <Button
                     onClick={handleSave}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="clay-btn-primary"
                   >
                     Save Changes
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => setIsEditing(false)}
-                    className="border-purple-300 dark:border-purple-700 text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-800/50"
+                    className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                   >
                     Cancel
                   </Button>
@@ -305,18 +305,18 @@ export default function AccountPage() {
               </div>
             ) : (
               <div className="space-y-6">
-                <div className="flex items-center justify-between pb-4 border-b border-purple-200 dark:border-purple-900/50">
+                <div className="flex items-center justify-between pb-4 border-b border-white/40">
                   <div>
-                    <h3 className="font-medium text-gray-300 dark:text-purple-200">
+                    <h3 className="font-extrabold clay-text-title">
                       Personal Information
                     </h3>
-                    <p className="text-sm text-purple-400">
+                    <p className="text-sm clay-text-muted font-bold">
                       Basic information about you
                     </p>
                   </div>
                   <Button
                     onClick={() => setIsEditing(true)}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="clay-btn-primary"
                   >
                     Edit Profile
                   </Button>
@@ -324,44 +324,44 @@ export default function AccountPage() {
 
                 <div className="space-y-4">
                   <div className="flex items-center">
-                    <User className="h-5 w-5 text-purple-400 mr-3" />
+                    <User className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">Name</p>
-                      <p className="text-purple-100">{name || "Not set"}</p>
+                      <p className="text-sm clay-text-muted font-bold">Name</p>
+                      <p className="clay-text-title font-bold">{name || "Not set"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <div className="h-5 w-5 text-purple-400 mr-3 flex items-center">
-                      <span className="text-xs">@</span>
+                    <div className="h-5 w-5 text-[#366873] mr-3 flex items-center">
+                      <span className="text-xs font-bold">@</span>
                     </div>
                     <div>
-                      <p className="text-sm text-purple-400">Email</p>
-                      <p className="text-purple-100">{email}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center">
-                    <Phone className="h-5 w-5 text-purple-400 mr-3" />
-                    <div>
-                      <p className="text-sm text-purple-400">WhatsApp</p>
-                      <p className="text-purple-100">{whatsapp || "Not set"}</p>
+                      <p className="text-sm clay-text-muted font-bold">Email</p>
+                      <p className="clay-text-title font-bold">{email}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <CreditCard className="h-5 w-5 text-purple-400 mr-3" />
+                    <Phone className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">Rekening Number</p>
-                      <p className="text-purple-100">{rekening || "Not set"}</p>
+                      <p className="text-sm clay-text-muted font-bold">WhatsApp</p>
+                      <p className="clay-text-title font-bold">{whatsapp || "Not set"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
-                    <div className="h-5 w-5 text-purple-400 mr-3 flex items-center justify-center font-bold">#</div>
+                    <CreditCard className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
-                      <p className="text-sm text-purple-400">Kode Unik</p>
-                      <p className="text-purple-100">{kodeUnik || "belum diatur"}</p>
+                      <p className="text-sm clay-text-muted font-bold">Rekening Number</p>
+                      <p className="clay-text-title font-bold">{rekening || "Not set"}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center">
+                    <div className="h-5 w-5 text-[#366873] mr-3 flex items-center justify-center font-bold">#</div>
+                    <div>
+                      <p className="text-sm clay-text-muted font-bold">Kode Unik</p>
+                      <p className="clay-text-title font-bold">{kodeUnik || "belum diatur"}</p>
                     </div>
                   </div>
                 </div>

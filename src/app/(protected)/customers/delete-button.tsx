@@ -43,28 +43,28 @@ export function DeleteButton({ customerId }: { customerId: string }) {
       <Button
         variant="outline"
         size="sm"
-        className="border-red-500 text-red-400 hover:bg-red-500/10 hover:text-red-300"
+        className="clay-btn bg-[#d64560]/20 hover:bg-[#d64560] text-[#d64560] hover:text-white border-none"
         onClick={() => setIsOpen(true)}
       >
         <Trash2 className="h-4 w-4" />
       </Button>
 
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-        <AlertDialogContent className="bg-gray-900 border-purple-500/30">
+        <AlertDialogContent className="border-none clay-panel">
           <AlertDialogHeader>
-            <AlertDialogTitle className="text-purple-400">
+            <AlertDialogTitle className="clay-text-title font-extrabold text-xl">
               Peringatan
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-gray-300">
+            <AlertDialogDescription className="clay-text-muted font-bold">
               Pastikan anda menghapus customer yang kurang potensial.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-gray-800 text-gray-300 border-gray-700 hover:bg-gray-700">
+            <AlertDialogCancel className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none">
               Batal
             </AlertDialogCancel>
             <AlertDialogAction
-              className="bg-red-600 hover:bg-red-700 text-white"
+              className="clay-btn bg-[#d64560] hover:bg-[#b0304a] text-white border-none"
               onClick={handleDelete}
             >
               Hapus

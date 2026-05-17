@@ -17,13 +17,13 @@ const badgeVariants = cva(
         outline: "text-foreground",
         // Custom variants for product categories
         strategis:
-          "border-transparent bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 shadow-[0_0_12px_#8b5cf6] animate-bounce",
+          "border-transparent bg-[#d64560] text-white shadow-sm",
         promo:
-          "border-transparent bg-gradient-to-r from-orange-500 to-amber-500 text-white hover:from-orange-600 hover:to-amber-600 shadow-[0_0_15px_#f97316] animate-bounce font-extrabold",
+          "border-transparent bg-[#fed277] text-[#7c5806] shadow-sm font-extrabold",
         dp_rendah:
-          "border-transparent bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:from-emerald-500 hover:to-teal-600 shadow-[0_0_12px_#10b981] animate-bounce",
+          "border-transparent bg-[#aae4ee] text-[#1f4f59] shadow-sm",
         dp_akad_gratis:
-          "border-transparent bg-gradient-to-r from-pink-500 to-fuchsia-500 text-white hover:from-pink-600 hover:to-fuchsia-600 shadow-[0_0_12px_#ec4899] animate-bounce",
+          "border-transparent bg-[#731b31] text-white shadow-sm font-extrabold",
       },
     },
     defaultVariants: {

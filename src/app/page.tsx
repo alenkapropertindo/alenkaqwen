@@ -54,17 +54,15 @@ export default async function Home() {
   const heroVisual = (
     <>
       {/* Background glowing orb */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-gray-200 dark:bg-purple-600 rounded-full blur-[120px] opacity-70 dark:opacity-20 animate-pulse"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] bg-white rounded-full blur-[120px] opacity-70 animate-pulse"></div>
 
-      <div className="relative w-full max-w-md mx-auto">
+      <div className="relative w-full max-w-md mx-auto clay-panel p-4">
         {/* Main Image/Card */}
-        <div className="relative overflow-hidden rounded-3xl p-[2px] z-0 shadow-2xl cursor-pointer">
-          {/* Animated Conic Gradient Border */}
-          <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
+        <div className="relative overflow-hidden rounded-[28px] z-0 cursor-pointer clay-card">
 
-          <div className="relative z-10 w-full bg-white dark:bg-gray-900 rounded-[22px] overflow-hidden">
-            <div className="h-72 bg-gray-100 dark:bg-gray-800 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent z-10"></div>
+          <div className="relative z-10 w-full rounded-[28px] overflow-hidden">
+            <div className="h-72 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"></div>
 
               <img src="/GIB.png" alt="Main Card Image" className="w-full h-full object-cover" />
 
@@ -78,48 +76,48 @@ export default async function Home() {
                   </span>
                 </div>
                 <div className="text-white text-sm flex items-center gap-1.5 mt-1 font-medium opacity-100">
-                  <MapPin className="w-4 h-4 text-purple-400 animate-bounce" /> Kendari City
+                  <MapPin className="w-4 h-4 text-white animate-bounce" /> Kendari City
                 </div>
               </div>
             </div>
 
-            <div className="p-6 flex justify-between items-center bg-white dark:bg-gray-900 relative overflow-hidden">
+            <div className="p-5 flex justify-between items-center relative overflow-hidden">
               <div className="relative z-10">
-                <div className="text-xs text-gray-400 dark:text-gray-500 uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
-                <div className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
+                <div className="text-xs clay-text-muted uppercase font-bold tracking-wider mb-1">Cicilan Mulai</div>
+                <div className="text-2xl font-extrabold clay-text-title">
                   Rp 1 Juta-an
                 </div>
               </div>
 
-              <Button className="rounded-full w-12 h-12 p-0 bg-gray-900 text-white dark:bg-purple-600 shadow-md relative z-10">
-                <ArrowRight className="w-5 h-5" />
-              </Button>
+              <button className="clay-btn-primary w-12 h-12 flex items-center justify-center relative z-10">
+                <ArrowRight className="w-5 h-5 text-[#1f4d36]" />
+              </button>
             </div>
           </div>
         </div>
 
         {/* Floating Stat Card 1 */}
-        <div className="absolute -left-2 sm:-left-12 top-16 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white dark:border-gray-700 animate-bounce" style={{ animationDuration: '4s' }}>
+        <div className="absolute -left-2 sm:-left-12 top-16 clay-card-pink p-4 animate-bounce" style={{ animationDuration: '4s' }}>
           <div className="flex items-center gap-4">
-            <div className="bg-green-100 dark:bg-green-900/40 p-2.5 rounded-full">
-              <TrendingUp className="w-6 h-6 text-green-600 dark:text-green-400" />
+            <div className="bg-white/40 p-2.5 rounded-full">
+              <TrendingUp className="w-6 h-6 text-[#6a2835]" />
             </div>
             <div>
-              <div className="text-lg font-black text-gray-900 dark:text-white">ROI Tinggi</div>
-              <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Investasi Aman</div>
+              <div className="text-lg font-black text-[#6a2835]">ROI Tinggi</div>
+              <div className="text-xs font-bold text-[#6a2835]/80">Investasi Aman</div>
             </div>
           </div>
         </div>
 
         {/* Floating Stat Card 2 */}
-        <div className="absolute -right-2 sm:-right-8 bottom-20 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white dark:border-gray-700 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
+        <div className="absolute -right-2 sm:-right-8 bottom-20 clay-card-yellow p-4 animate-bounce" style={{ animationDuration: '5s', animationDelay: '1s' }}>
           <div className="flex items-center gap-4">
-            <div className="bg-blue-100 dark:bg-blue-900/40 p-2.5 rounded-full">
-              <Users className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            <div className="bg-white/40 p-2.5 rounded-full">
+              <Users className="w-6 h-6 text-[#63490b]" />
             </div>
             <div>
-              <div className="text-lg font-black text-gray-900 dark:text-white">Affiliate</div>
-              <div className="text-xs font-medium text-gray-500 dark:text-gray-400">Komisi Jutaan</div>
+              <div className="text-lg font-black text-[#63490b]">Affiliate</div>
+              <div className="text-xs font-bold text-[#63490b]/80">Komisi Jutaan</div>
             </div>
           </div>
         </div>
@@ -128,26 +126,26 @@ export default async function Home() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen clay-bg transition-colors duration-300">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-purple-500/20 transition-colors duration-300">
+      <header className="sticky top-0 z-40 bg-[#c4ebf2]/80 backdrop-blur-md transition-colors duration-300 border-b border-white/40 shadow-sm">
         <div className="container mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-2 text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-600 dark:bg-clip-text transition-colors">
-            <div className="bg-gray-900 dark:bg-purple-600 p-1.5 rounded-lg shadow-md">
-              <Building2 className="w-5 h-5 text-white" />
+          <div className="flex items-center gap-2 text-2xl font-extrabold clay-text-title transition-colors">
+            <div className="clay-card-yellow p-1.5 flex items-center justify-center">
+              <Building2 className="w-5 h-5 text-[#63490b]" />
             </div>
             Alenka
           </div>
           <nav className="hidden md:flex space-x-12">
             <Link
               href="/"
-              className="hover:text-gray-900 dark:hover:text-purple-400 font-semibold text-gray-500 dark:text-purple-500 transition-colors"
+              className="hover:text-[#d64560] font-bold clay-text-muted transition-colors"
             >
               Home
             </Link>
             <Link
               href="/#products"
-              className="hover:text-gray-900 dark:hover:text-purple-400 font-semibold text-gray-500 dark:text-purple-500 transition-colors"
+              className="hover:text-[#d64560] font-bold clay-text-muted transition-colors"
             >
               Lokasi Terbaru
             </Link>
@@ -155,16 +153,16 @@ export default async function Home() {
               href="https://wa.me/6285242049550"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gray-900 dark:hover:text-purple-400 font-semibold text-gray-500 dark:text-purple-500 transition-colors"
+              className="hover:text-[#d64560] font-bold clay-text-muted transition-colors"
             >
               Hubungi Admin
             </a>
           </nav>
           <div className="flex space-x-4">
             <Link href="/auth/signup">
-              <Button className="bg-gray-900 hover:bg-gray-800 text-white dark:bg-gradient-to-r dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 shadow-sm dark:shadow-[0_0_10px_#8b5cf6] transition-all duration-300 rounded-full px-6">
+              <button className="clay-btn-primary px-6 py-2.5">
                 Freelance
-              </Button>
+              </button>
             </Link>
           </div>
         </div>
@@ -174,17 +172,15 @@ export default async function Home() {
       <section className="container mx-auto px-6 md:px-12 pt-12 pb-4 md:py-24 relative overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center justify-between relative z-10">
           <div className="lg:w-1/2 mb-4 lg:mb-0">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-purple-500/10 border border-gray-200 dark:border-purple-500/20 text-sm font-medium text-gray-600 dark:text-purple-400 mb-6 shadow-sm">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full clay-card-yellow text-sm font-bold text-[#63490b] mb-6">
+              <span className="flex h-2 w-2 rounded-full bg-white animate-pulse"></span>
               Properti Terbaik di Kelasnya
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight text-gray-900 dark:text-white leading-[1.1]">
-              Temukan <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-purple-400 dark:to-pink-600">Rumah Impian</span><br />
-              di Kendari
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight clay-text-title leading-[1.1]">
+              Temukan <span className="text-[#d64560] drop-shadow-sm">Rumah Impianmu</span><br />
+              di Kota Kendari
             </h1>
-            <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-10 max-w-lg leading-relaxed">
-              Temukan rumah impianmu dikota kendari dengan harga paling terjangkau. atau gabung komunitas digital marketing kami dan mulai hasilkan cuan dari rumah tanpa harus jualan.
-            </p>
+
 
             {/* Mobile Hero Visual */}
             <div className="flex lg:hidden justify-center relative w-full mb-12 mt-4">
@@ -192,30 +188,29 @@ export default async function Home() {
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
               <Link href="/freelance">
-                <Button className="h-12 px-8 rounded-full bg-gray-900 hover:bg-gray-800 text-white dark:bg-gradient-to-r dark:from-purple-600 dark:to-pink-600 dark:hover:from-purple-700 dark:hover:to-pink-700 shadow-lg dark:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 text-base font-semibold w-full sm:w-auto">
+                <button className="clay-btn-primary h-14 px-8 text-base w-full sm:w-auto flex items-center justify-center">
                   Gabung Freelance
-                </Button>
+                </button>
               </Link>
               <Link href="/#products">
-                <Button
-                  variant="outline"
-                  className="h-12 px-8 rounded-full border-gray-300 text-gray-900 hover:bg-gray-100 hover:text-gray-900 dark:border-0 dark:bg-white/10 dark:text-white dark:hover:bg-white/20 shadow-sm transition-all duration-300 text-base font-semibold backdrop-blur-md w-full sm:w-auto"
+                <button
+                  className="clay-btn h-14 px-8 text-base w-full sm:w-auto flex items-center justify-center"
                 >
                   <HomeIcon className="mr-2 h-5 w-5" />
                   Lihat Properti
-                </Button>
+                </button>
               </Link>
             </div>
 
             <div className="mt-12 flex items-center gap-6">
               <div className="flex -space-x-3">
-                <img className="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-black object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User" />
-                <img className="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-black object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt="User" />
-                <img className="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-black object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="User" />
-                <div className="w-10 h-10 rounded-full border-2 border-gray-50 dark:border-black bg-white dark:bg-gray-800 flex items-center justify-center text-xs font-bold text-gray-600 dark:text-gray-300 shadow-sm">+2k</div>
+                <img className="w-12 h-12 rounded-full border-4 border-[#c4ebf2] object-cover" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="User" />
+                <img className="w-12 h-12 rounded-full border-4 border-[#c4ebf2] object-cover" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80" alt="User" />
+                <img className="w-12 h-12 rounded-full border-4 border-[#c4ebf2] object-cover" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="User" />
+                <div className="w-12 h-12 rounded-full border-4 border-[#c4ebf2] clay-card-pink flex items-center justify-center text-xs font-bold text-[#6a2835]">+2k</div>
               </div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">
-                Dipercaya oleh <span className="font-bold text-gray-900 dark:text-white">2,000+</span> pelanggan
+              <div className="text-sm font-medium clay-text-muted">
+                Dipercaya oleh <span className="font-bold clay-text-title">2,000+</span> pelanggan
               </div>
             </div>
           </div>
@@ -228,36 +223,36 @@ export default async function Home() {
       {/* Product Cards Section */}
       <section id="products" className="container mx-auto px-6 md:px-12 pt-8 pb-12 md:py-20 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-block px-4 py-1.5 rounded-full bg-white dark:bg-purple-500/10 border border-gray-200 dark:border-purple-500/20 text-sm font-semibold text-gray-600 dark:text-purple-400 mb-4 shadow-sm">
+          <div className="inline-block px-5 py-2 rounded-full clay-card-pink text-[#6a2835] text-sm font-bold mb-6">
             Eksplorasi Katalog
           </div>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
-            Properti <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-600 to-gray-900 dark:from-purple-400 dark:to-pink-600">Terbaru</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold clay-text-title">
+            Properti <span className="text-[#d64560]">Terbaru</span>
           </h2>
         </div>
         <ProductFilter initialProducts={products} />
       </section>
 
       {/* Footer */}
-      <footer className="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-purple-500/20 py-16">
+      <footer className="bg-[#aae4ee] py-16 mt-12 rounded-t-[40px] shadow-[inset_0_8px_16px_rgba(120,190,205,0.6)]">
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-2 text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-600 dark:bg-clip-text">
-              <div className="bg-gray-900 dark:bg-purple-600 p-1.5 rounded-lg">
-                <Building2 className="w-5 h-5 text-white" />
+            <div className="flex items-center gap-2 text-2xl font-extrabold clay-text-title">
+              <div className="clay-card-yellow p-1.5 flex items-center justify-center">
+                <Building2 className="w-5 h-5 text-[#63490b]" />
               </div>
               Alenka
             </div>
             <div className="flex flex-wrap justify-center gap-8">
               <Link
                 href="/"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-purple-400 font-medium transition-colors"
+                className="font-bold clay-text-title hover:text-[#d64560] transition-colors"
               >
                 Home
               </Link>
               <a
                 href="/#products"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-purple-400 font-medium transition-colors"
+                className="font-bold clay-text-title hover:text-[#d64560] transition-colors"
               >
                 Lokasi Terbaru
               </a>
@@ -265,12 +260,12 @@ export default async function Home() {
                 href="https://wa.me/6285242049550"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-purple-400 font-medium transition-colors"
+                className="font-bold clay-text-title hover:text-[#d64560] transition-colors"
               >
                 Hubungi Admin
               </a>
             </div>
-            <div className="text-gray-500 dark:text-gray-500 font-medium text-sm">
+            <div className="clay-text-title font-bold text-sm">
               © 2025 Alenka Properti – Hak Cipta Dilindungi
             </div>
           </div>

@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 // Dynamically import the AddCustomerModal to avoid SSR issues
 const AddCustomerModal = dynamic(() => import("./add/modal").then(mod => mod.AddCustomerModal), {
   ssr: false,
-  loading: () => <Button className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"><Plus className="mr-2 h-4 w-4" /> Add Customer</Button>
+  loading: () => <Button className="clay-btn-primary"><Plus className="mr-2 h-4 w-4" /> Add Customer</Button>
 });
 
 export function AddCustomerButton({ 
@@ -40,12 +40,12 @@ export function AddCustomerButton({
   return (
     <>
       <Button
-        className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+        className="clay-btn-primary"
         onClick={handleClick}
       >
         <Plus className="mr-2 h-4 w-4" /> Tambah Data
         {followupCount > 0 && followupCount <= 10 && (
-          <span className="ml-2 bg-purple-800 text-purple-200 text-xs font-bold px-2 py-1 rounded-full">
+          <span className="ml-2 bg-[#d64560]/20 text-[#731b31] text-xs font-bold px-2 py-1 rounded-full">
             {followupCount}/10
           </span>
         )}

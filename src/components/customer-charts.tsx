@@ -108,37 +108,20 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
 
   // Theme-based chart colors
   const getChartColors = () => {
-    if (theme === "dark") {
-      return {
-        grid: "#4c1d95",
-        xAxis: "#ffffff",
-        xAxisTick: "#ffffff",
-        xAxisLine: "#7c3aed",
-        yAxis: "#ffffff",
-        yAxisTick: "#ffffff",
-        yAxisLine: "#7c3aed",
-        tooltipBg: "rgba(19, 9, 34, 0.9)",
-        tooltipBorder: "#8b5cf6",
-        tooltipLabel: "#e9d5ff",
-        legend: "#ffffff",
-        bar: "#a855f7",
-      };
-    } else {
-      return {
-        grid: "#e0e7ff",
-        xAxis: "#6366f1",
-        xAxisTick: "#4f46e5",
-        xAxisLine: "#818cf8",
-        yAxis: "#6366f1",
-        yAxisTick: "#4f46e5",
-        yAxisLine: "#818cf8",
-        tooltipBg: "rgba(255, 255, 255, 0.9)",
-        tooltipBorder: "#c7d2fe",
-        tooltipLabel: "#4338ca",
-        legend: "#4f46e5",
-        bar: "#818cf8",
-      };
-    }
+    return {
+      grid: "rgba(255,255,255,0.4)",
+      xAxis: "#1f4f59",
+      xAxisTick: "#1f4f59",
+      xAxisLine: "#ffffff",
+      yAxis: "#1f4f59",
+      yAxisTick: "#1f4f59",
+      yAxisLine: "#ffffff",
+      tooltipBg: "rgba(196, 235, 242, 0.9)",
+      tooltipBorder: "#ffffff",
+      tooltipLabel: "#1f4f59",
+      legend: "#1f4f59",
+      bar: "#d64560",
+    };
   };
 
   const colors = getChartColors();
@@ -146,15 +129,15 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
 
   if (!isMounted) {
     return (
-      <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-2xl">
-        <div className="relative z-10 h-full w-full bg-[#0d041a] rounded-[14px] p-5">
+      <div className="clay-panel mt-10 p-5">
+        <div className="flex flex-col h-full w-full">
           <div className="flex flex-row items-center justify-between pb-2">
-            <h3 className="text-lg font-bold text-gray-200">
+            <h3 className="text-lg font-extrabold clay-text-title">
               Customer Registration Trend
             </h3>
           </div>
           <div className="h-80 flex items-center justify-center">
-            <p className="text-gray-500 font-medium">
+            <p className="clay-text-muted font-bold">
               Loading chart...
             </p>
           </div>
@@ -164,12 +147,10 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
   }
 
   return (
-    <div className="relative overflow-hidden rounded-2xl p-[2px] z-0 shadow-2xl mt-10">
-      <div className="absolute top-1/2 left-1/2 h-[200%] w-[200%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
-      
-      <div className="relative z-10 flex flex-col h-full w-full bg-[#0d041a] rounded-[14px] p-5">
-        <div className="flex flex-row items-center justify-between pb-4 border-b border-white/5">
-          <h3 className="text-lg font-bold text-gray-200">
+    <div className="clay-panel mt-10 p-5">
+      <div className="flex flex-col h-full w-full">
+        <div className="flex flex-row items-center justify-between pb-4 border-b border-white/50">
+          <h3 className="text-lg font-extrabold clay-text-title">
             Customer Registration Trend
           </h3>
         {availableYears.length > 0 && (
@@ -177,15 +158,15 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
             value={selectedYear.toString()}
             onValueChange={(value) => setSelectedYear(parseInt(value))}
           >
-            <SelectTrigger className="w-[120px] bg-purple-900/40 border-purple-500/50 text-purple-100 focus:ring-fuchsia-500 focus:border-fuchsia-500 rounded-xl backdrop-blur-md hover:bg-purple-800/50 transition-colors">
+            <SelectTrigger className="w-[120px] bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors">
               <SelectValue placeholder="Select year" />
             </SelectTrigger>
-            <SelectContent className="bg-[#1e0a3c] border-purple-500/50">
+            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
               {availableYears.map((year) => (
                 <SelectItem
                   key={year}
                   value={year.toString()}
-                  className="text-purple-200 focus:bg-fuchsia-600/40 focus:text-white"
+                  className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]"
                 >
                   {year}
                 </SelectItem>
@@ -196,8 +177,8 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
       </div>
       <div className="relative z-10 w-full">
         {customers.length > 0 ? (
-          <div className="h-80 mt-6 min-w-0">
-            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <div className="h-80 mt-6 min-w-0 w-full relative">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
               <BarChart
                 data={customerDataByMonth}
                 margin={{
@@ -223,11 +204,11 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
                   contentStyle={{
                     backgroundColor: colors.tooltipBg,
                     borderColor: colors.tooltipBorder,
-                    borderRadius: "0.5rem",
-                    boxShadow: "0 4px 20px rgba(139, 92, 246, 0.4)",
-                    color: theme === "dark" ? "#fff" : "#000",
+                    borderRadius: "20px",
+                    boxShadow: "4px 4px 10px rgba(120, 190, 205, 0.5)",
+                    color: "#1f4f59",
                   }}
-                  itemStyle={{ color: theme === "dark" ? "#000" : "#000" }}
+                  itemStyle={{ color: "#d64560", fontWeight: "bold" }}
                   labelStyle={{
                     color: colors.tooltipLabel,
                     fontWeight: "bold",
@@ -246,7 +227,7 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
           </div>
         ) : (
           <div className="h-80 flex items-center justify-center mt-6">
-            <p className="text-purple-300/70 font-medium">
+            <p className="clay-text-muted font-bold">
               No customer data available
             </p>
           </div>

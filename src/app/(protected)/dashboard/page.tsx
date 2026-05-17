@@ -167,17 +167,12 @@ export default async function DashboardPage() {
 
   return (
     <div className="relative min-h-screen px-4 py-8 sm:px-6 lg:px-8 container mx-auto max-w-screen-xl space-y-10 z-0">
-      {/* Grand Neon Background Glows for the whole page */}
-      <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[0%] left-[-10%] w-[40%] h-[40%] bg-purple-600/10 blur-[150px] rounded-full mix-blend-screen"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-fuchsia-600/10 blur-[150px] rounded-full mix-blend-screen"></div>
-      </div>
 
       <div className="space-y-2 relative z-10">
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
+        <h1 className="text-4xl sm:text-5xl font-extrabold clay-text-title tracking-tight">
           Dashboard
         </h1>
-        <p className="text-gray-400 text-lg">
+        <p className="clay-text-muted text-lg font-medium">
           Ringkasan performa dan data marketing Anda hari ini.
         </p>
       </div>
@@ -190,29 +185,23 @@ export default async function DashboardPage() {
           return (
             <div 
               key={idx} 
-              className="relative overflow-hidden rounded-xl sm:rounded-2xl p-[1.5px] sm:p-[2px] z-0 shadow-2xl"
+              className="clay-panel flex flex-col justify-between h-full w-full p-4 sm:p-6"
             >
-              {/* Animated Conic Gradient Border */}
-              <div className="absolute top-1/2 left-1/2 h-[250%] w-[250%] -translate-x-1/2 -translate-y-1/2 animate-[spin_10s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_60%,#fde047_75%,#ec4899_90%,#a855f7_100%)] opacity-90" />
-              
-              {/* Inner Card Content */}
-              <div className="relative z-10 flex flex-col justify-between h-full w-full bg-[#0d041a] rounded-[10px] sm:rounded-[14px] p-3 sm:p-5">
-                <div className="flex flex-row items-start sm:items-center justify-between pb-1 sm:pb-2 gap-2">
-                  <h3 className="text-[10px] sm:text-sm font-semibold text-gray-200 tracking-wide line-clamp-2">
-                    {stat.title}
-                  </h3>
-                  <div className="p-1.5 sm:p-2.5 rounded-lg sm:rounded-xl bg-purple-900/30 border border-purple-500/20 shadow-inner flex-shrink-0">
-                    <Icon className="h-3 w-3 sm:h-5 sm:w-5 text-pink-400" strokeWidth={2.5} />
-                  </div>
+              <div className="flex flex-row items-start sm:items-center justify-between pb-1 sm:pb-2 gap-2">
+                <h3 className="text-[10px] sm:text-sm font-bold clay-text-title tracking-wide line-clamp-2">
+                  {stat.title}
+                </h3>
+                <div className="p-1.5 sm:p-2.5 clay-card-yellow flex-shrink-0">
+                  <Icon className="h-3 w-3 sm:h-5 sm:w-5 text-[#63490b]" strokeWidth={2.5} />
                 </div>
-                <div className="pt-1 sm:pt-2">
-                  <div className="text-lg sm:text-3xl font-bold text-white truncate">
-                    {stat.value}
-                  </div>
-                  <p className="text-[9px] sm:text-xs text-gray-400 mt-1 sm:mt-2 font-medium line-clamp-2">
-                    {stat.description}
-                  </p>
+              </div>
+              <div className="pt-1 sm:pt-2">
+                <div className="text-lg sm:text-3xl font-extrabold text-[#d64560] truncate">
+                  {stat.value}
                 </div>
+                <p className="text-[9px] sm:text-xs clay-text-muted mt-1 sm:mt-2 font-bold line-clamp-2">
+                  {stat.description}
+                </p>
               </div>
             </div>
           );

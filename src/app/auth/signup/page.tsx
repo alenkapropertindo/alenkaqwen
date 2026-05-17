@@ -81,7 +81,10 @@ export default function SignupPage() {
           }
         }
         
-        router.push("/dashboard");
+        // Sign out right after signup because default role is PENDING
+        await authClient.signOut();
+        
+        router.push("/auth/signin?registered=true");
       }
     } catch (err) {
       setError("An unexpected error occurred");
@@ -91,20 +94,20 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black p-4">
-      <Card className="w-full max-w-md bg-white dark:bg-gray-900 border-purple-500 border-2 shadow-[0_0_15px_#8b5cf6] shadow-purple-500/20 dark:shadow-purple-500/50">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-600">
+    <div className="min-h-screen flex items-center justify-center clay-bg p-4 transition-colors duration-300">
+      <Card className="w-full max-w-md clay-card border-none p-2 sm:p-4">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-3xl font-extrabold clay-text-title text-center">
             Buat Akun
           </CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400">
+          <CardDescription className="clay-text-muted text-center font-bold">
             Buat akun baru
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="name" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="name" className="clay-text-title font-bold">
                 Nama
               </Label>
               <Input
@@ -113,11 +116,11 @@ export default function SignupPage() {
                 type="text"
                 placeholder="Masukan nama"
                 required
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="email" className="clay-text-title font-bold">
                 Email
               </Label>
               <Input
@@ -126,11 +129,11 @@ export default function SignupPage() {
                 type="email"
                 placeholder="Masukan Email"
                 required
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="whatsapp" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="whatsapp" className="clay-text-title font-bold">
                 Whatsupp
               </Label>
               <Input
@@ -139,11 +142,11 @@ export default function SignupPage() {
                 type="tel"
                 placeholder="Masukan Nomor Whatsup"
                 required
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="kodePromo" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="kodePromo" className="clay-text-title font-bold">
                 Kode Promo (Opsional)
               </Label>
               <Input
@@ -151,11 +154,11 @@ export default function SignupPage() {
                 name="kodePromo"
                 type="text"
                 placeholder="Masukan Kode Promo"
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500 uppercase"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50 uppercase"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="password" className="clay-text-title font-bold">
                 Password
               </Label>
               <Input
@@ -165,29 +168,29 @@ export default function SignupPage() {
                 placeholder="Min 8 Karakter"
                 required
                 minLength={6}
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
               />
             </div>
             {error && (
-              <div className="text-red-400 text-sm text-center py-2">
+              <div className="text-[#d64560] font-bold text-sm text-center py-2">
                 {error}
               </div>
             )}
-            <Button
+            <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300 disabled:opacity-50"
+              className="clay-btn-primary w-full h-12 mt-4 text-lg disabled:opacity-50 flex items-center justify-center"
             >
               {isSubmitting ? "Signing up..." : "Sign Up"}
-            </Button>
+            </button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col">
-          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+        <CardFooter className="flex flex-col pb-6">
+          <div className="mt-4 text-center text-sm clay-text-muted font-bold">
             Sudah punya akun?{" "}
             <a
               href="/auth/signin"
-              className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 hover:underline"
+              className="text-[#d64560] hover:underline"
             >
               Login Disini
             </a>

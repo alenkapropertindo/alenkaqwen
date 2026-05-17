@@ -119,8 +119,10 @@
   --text-primary: oklch(0.141 0.005 285.823);
   --text-secondary: oklch(0.552 0.016 285.938);
   --border-color: oklch(0.92 0.004 286.32);
-  --gradient-from: oklch(0.705 0.15 286.067); /* purple-400 equivalent */
-  --gradient-to: oklch(0.645 0.246 16.439); /* pink-600 equivalent */
+  --gradient-from: oklch(0.705 0.15 286.067);
+  /* purple-400 equivalent */
+  --gradient-to: oklch(0.645 0.246 16.439);
+  /* pink-600 equivalent */
   --filter-bg: oklch(1 0 0);
   --card-bg-light: oklch(1 0 0);
   --card-bg-dark: oklch(0.21 0.006 285.885);
@@ -133,8 +135,10 @@
   --text-primary: oklch(0.985 0 0);
   --text-secondary: oklch(0.705 0.015 286.067);
   --border-color: oklch(1 0 0 / 10%);
-  --gradient-from: oklch(0.705 0.15 286.067); /* purple-400 equivalent */
-  --gradient-to: oklch(0.645 0.246 16.439); /* pink-600 equivalent */
+  --gradient-from: oklch(0.705 0.15 286.067);
+  /* purple-400 equivalent */
+  --gradient-to: oklch(0.645 0.246 16.439);
+  /* pink-600 equivalent */
   --filter-bg: oklch(0.21 0.006 285.885);
   --card-bg-light: oklch(1 0 0);
   --card-bg-dark: oklch(0.21 0.006 285.885);
@@ -144,6 +148,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground transition-colors duration-300;
   }
@@ -231,4 +236,104 @@
 .text-purple-600 {
   color: oklch(0.45 0.15 286.067);
   transition: color 0.3s ease;
+}
+
+@layer utilities {
+  .clay-bg {
+    background-color: #c4ebf2 !important;
+  }
+  
+  .clay-card {
+    background-color: #9bdce6;
+    border-radius: 36px;
+    box-shadow: 
+      10px 10px 20px rgba(110, 185, 200, 0.5), 
+      -10px -10px 20px rgba(255, 255, 255, 0.8),
+      inset 4px 4px 8px rgba(255, 255, 255, 0.9),
+      inset -4px -4px 8px rgba(110, 185, 200, 0.5);
+    border: none;
+  }
+
+  .clay-card-pink {
+    background-color: #ffb1c0;
+    border-radius: 36px;
+    box-shadow: 
+      10px 10px 20px rgba(220, 140, 150, 0.4), 
+      -10px -10px 20px rgba(255, 255, 255, 0.9),
+      inset 4px 4px 8px rgba(255, 255, 255, 0.9),
+      inset -4px -4px 8px rgba(220, 140, 150, 0.4);
+    border: none;
+    color: #6a2835;
+  }
+
+  .clay-card-yellow {
+    background-color: #ffde7a;
+    border-radius: 36px;
+    box-shadow: 
+      10px 10px 20px rgba(210, 170, 70, 0.4), 
+      -10px -10px 20px rgba(255, 255, 255, 0.9),
+      inset 4px 4px 8px rgba(255, 255, 255, 0.9),
+      inset -4px -4px 8px rgba(210, 170, 70, 0.4);
+    border: none;
+    color: #63490b;
+  }
+
+  .clay-btn {
+    background-color: #ffaa6b;
+    border-radius: 24px;
+    box-shadow: 
+      6px 6px 12px rgba(210, 120, 60, 0.4), 
+      -6px -6px 12px rgba(255, 255, 255, 0.8),
+      inset 3px 3px 6px rgba(255, 255, 255, 0.8),
+      inset -3px -3px 6px rgba(210, 120, 60, 0.4);
+    border: none;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #7a350c;
+    font-weight: 800;
+  }
+  
+  .clay-btn:active {
+    box-shadow: 
+      inset 6px 6px 12px rgba(210, 120, 60, 0.5), 
+      inset -6px -6px 12px rgba(255, 255, 255, 0.8);
+    transform: scale(0.95);
+  }
+
+  .clay-btn-primary {
+    background-color: #ff8fa3;
+    border-radius: 24px;
+    box-shadow: 
+      6px 6px 12px rgba(210, 100, 120, 0.4), 
+      -6px -6px 12px rgba(255, 255, 255, 0.8),
+      inset 3px 3px 6px rgba(255, 255, 255, 0.8),
+      inset -3px -3px 6px rgba(210, 100, 120, 0.4);
+    border: none;
+    color: #731b31;
+    font-weight: 800;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .clay-btn-primary:active {
+    box-shadow: 
+      inset 6px 6px 12px rgba(210, 100, 120, 0.5), 
+      inset -6px -6px 12px rgba(255, 255, 255, 0.8);
+    transform: scale(0.95);
+  }
+
+  .clay-panel {
+    background-color: #aae4ee;
+    border-radius: 36px;
+    box-shadow: 
+      inset 8px 8px 16px rgba(120, 190, 205, 0.6),
+      inset -8px -8px 16px rgba(255, 255, 255, 0.9);
+    border: none;
+  }
+  
+  .clay-text-title {
+    color: #1f4f59;
+  }
+
+  .clay-text-muted {
+    color: #366873;
+  }
 }

@@ -1,5 +1,6 @@
 import { CollapsibleSidebar } from "@/components/collapsible-sidebar";
 import { getServerSession } from "@/lib/get-session";
+import { redirect } from "next/navigation";
 
 export default async function ProtectedLayout({
   children,
@@ -9,13 +10,17 @@ export default async function ProtectedLayout({
   const session = await getServerSession();
   const user = session?.user;
 
-  if (!user) return null;
+  if (!user) redirect("/auth/signin");
+  
+  if (user.role === "PENDING") {
+    redirect("/auth/signin?pending=true");
+  }
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row">
       <CollapsibleSidebar user={user} />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <header className="hidden md:block border-b border-purple-200 dark:border-purple-900 bg-white dark:bg-gray-900/50 sticky top-0 z-10">
+        <header className="hidden md:block border-b border-white/40 bg-[#c4ebf2]/80 backdrop-blur-md sticky top-0 z-10">
           <div className="flex items-center justify-between px-6 py-4">
             <div></div> {/* Spacer for alignment */}
             <div className="flex items-center space-x-4">
@@ -23,7 +28,7 @@ export default async function ProtectedLayout({
             </div>
           </div>
         </header>
-        <main className="flex-1 bg-gray-50 dark:bg-gray-950 min-w-0 overflow-x-hidden">
+        <main className="flex-1 clay-bg min-w-0 overflow-x-hidden">
           {children}
         </main>
       </div>

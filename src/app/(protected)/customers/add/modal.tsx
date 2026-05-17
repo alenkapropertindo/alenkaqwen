@@ -96,10 +96,10 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] border-purple-500/30 bg-gray-900">
+      <DialogContent className="sm:max-w-[425px] border-none clay-panel">
         <DialogHeader>
-          <DialogTitle className="text-purple-400">Add New Customer</DialogTitle>
-          <DialogDescription className="text-gray-400">
+          <DialogTitle className="clay-text-title font-extrabold text-xl">Add New Customer</DialogTitle>
+          <DialogDescription className="clay-text-muted font-bold">
             Enter the details of the new customer.
           </DialogDescription>
         </DialogHeader>
@@ -110,12 +110,12 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Name</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Customer name"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormMessage />
@@ -128,15 +128,15 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
               name="whatsapp"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">WhatsApp</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">WhatsApp</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="WhatsApp number"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
-                  <FormDescription className="text-gray-400">
+                  <FormDescription className="clay-text-muted font-bold text-xs mt-1">
                     Include country code (e.g., 6281234567890)
                   </FormDescription>
                   <FormMessage />
@@ -144,18 +144,18 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
               )}
             />
 
-            <DialogFooter className="gap-2 sm:gap-0">
+            <DialogFooter className="gap-2 sm:gap-0 mt-4">
               <Button
                 type="button"
                 variant="outline"
-                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+                className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                 onClick={() => onOpenChange(false)}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+                className="clay-btn-primary"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? "Creating..." : "Create Customer"}

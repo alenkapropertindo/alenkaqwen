@@ -234,12 +234,12 @@ export function ProductModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] border-purple-500/30 bg-gray-900 max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[500px] border-none clay-panel max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-purple-400">
+          <DialogTitle className="clay-text-title font-extrabold text-xl">
             {product ? "Edit Product" : "Tambah Produk"}
           </DialogTitle>
-          <DialogDescription className="text-gray-400">
+          <DialogDescription className="clay-text-muted font-bold">
             {product
               ? "Edit the details of the product."
               : "Enter the details of the new product."}
@@ -252,12 +252,12 @@ export function ProductModal({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Title</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Title</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Product title"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormMessage />
@@ -270,12 +270,12 @@ export function ProductModal({
               name="detail"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Detail</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Detail</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Product detail"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormMessage />
@@ -288,21 +288,21 @@ export function ProductModal({
               name="kategori"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Kategori</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Kategori</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="bg-gray-800 border-purple-500/30 text-white">
+                      <SelectTrigger className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Strategis">Strategis</SelectItem>
-                      <SelectItem value="Promo">Promo</SelectItem>
-                      <SelectItem value="Dp_Rendah">Dp_Rendah</SelectItem>
-                      <SelectItem value="DP_Akad_Gratis">DP Akad Gratis</SelectItem>
+                    <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                      <SelectItem value="Strategis" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Strategis</SelectItem>
+                      <SelectItem value="Promo" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Promo</SelectItem>
+                      <SelectItem value="Dp_Rendah" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Dp_Rendah</SelectItem>
+                      <SelectItem value="DP_Akad_Gratis" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">DP Akad Gratis</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -315,12 +315,12 @@ export function ProductModal({
               name="lokasi"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Lokasi</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Lokasi</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Product location"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormMessage />
@@ -333,12 +333,12 @@ export function ProductModal({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Description</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Description</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Product description"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50"
                       rows={4}
                     />
                   </FormControl>
@@ -353,7 +353,7 @@ export function ProductModal({
                 name="dpAkad"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-purple-300">
+                    <FormLabel className="clay-text-title font-bold">
                       DP+Akad (Rp)
                     </FormLabel>
                     <FormControl>
@@ -361,7 +361,7 @@ export function ProductModal({
                         type="number"
                         placeholder="DP+Akad amount"
                         {...field}
-                        className="bg-gray-800 border-purple-500/30 text-white"
+                        className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       />
                     </FormControl>
                     <FormMessage />
@@ -374,7 +374,7 @@ export function ProductModal({
                 name="fee"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-purple-300">
+                    <FormLabel className="clay-text-title font-bold">
                       Fee Penjualan (Rp)
                     </FormLabel>
                     <FormControl>
@@ -382,7 +382,7 @@ export function ProductModal({
                         type="number"
                         placeholder="Fee amount"
                         {...field}
-                        className="bg-gray-800 border-purple-500/30 text-white"
+                        className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       />
                     </FormControl>
                     <FormMessage />
@@ -396,12 +396,12 @@ export function ProductModal({
               name="videoLink"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Video Link</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Video Link</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="https://example.com/video"
                       {...field}
-                      className="bg-gray-800 border-purple-500/30 text-white"
+                      className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormMessage />
@@ -414,7 +414,7 @@ export function ProductModal({
               name="imageUrl"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-purple-300">Image</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Image</FormLabel>
                   <FormControl>
                     <div className="space-y-4">
                       <Input
@@ -422,11 +422,11 @@ export function ProductModal({
                         accept="image/*"
                         onChange={handleImageChange}
                         disabled={uploading}
-                        className="bg-gray-800 border-purple-500/30 text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-600 file:text-white hover:file:bg-purple-700"
+                        className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#d64560] file:text-white hover:file:bg-[#731b31] h-auto p-2"
                       />
                       <Input type="hidden" {...field} />
                       {uploading && (
-                        <p className="text-purple-300 text-sm">
+                        <p className="clay-text-muted font-bold text-sm">
                           Uploading image...
                         </p>
                       )}
@@ -435,7 +435,7 @@ export function ProductModal({
                           <img
                             src={imagePreview}
                             alt="Preview"
-                            className="w-full h-48 object-cover rounded-lg border border-purple-500/30"
+                            className="w-full h-48 object-cover rounded-[20px] border-4 border-white shadow-sm"
                           />
                         </div>
                       )}
@@ -446,18 +446,18 @@ export function ProductModal({
               )}
             />
 
-            <DialogFooter className="gap-2 sm:gap-0">
+            <DialogFooter className="gap-2 sm:gap-0 mt-4">
               <Button
                 type="button"
                 variant="outline"
-                className="border-purple-500 text-purple-400 hover:bg-purple-500/10 hover:text-purple-300"
+                className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                 onClick={() => onOpenChange(false)}
               >
                 Cancel
               </Button>
               <Button
                 type="submit"
-                className="bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+                className="clay-btn-primary"
                 disabled={isSubmitting || uploading}
               >
                 {isSubmitting || uploading

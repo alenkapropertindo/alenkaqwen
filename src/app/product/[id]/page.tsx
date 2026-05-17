@@ -67,23 +67,23 @@ export default async function ProductDetailPage(
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white pb-20">
+    <div className="min-h-screen clay-bg pb-20 transition-colors duration-300">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-gray-200 dark:border-purple-500/20">
+      <header className="sticky top-0 z-40 bg-[#c4ebf2]/80 backdrop-blur-md border-b border-white/40 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex items-center">
           <Link href="/#products">
-            <Button variant="ghost" size="icon" className="mr-4 hover:bg-gray-100 dark:hover:bg-purple-900/30">
-              <ArrowLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+            <Button variant="ghost" size="icon" className="mr-4 hover:bg-white/40">
+              <ArrowLeft className="w-5 h-5 clay-text-title" />
             </Button>
           </Link>
-          <h1 className="text-xl font-bold truncate flex-1">{product.title}</h1>
+          <h1 className="text-xl font-extrabold clay-text-title truncate flex-1">{product.title}</h1>
         </div>
       </header>
 
       <main className="container mx-auto max-w-4xl mt-6 px-4">
-        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-purple-500/30 rounded-2xl overflow-hidden shadow-xl">
+        <div className="clay-card overflow-hidden">
           {/* Banner Image */}
-          <div className="relative overflow-hidden bg-gray-100 dark:bg-gray-800 w-full flex justify-center items-center">
+          <div className="relative overflow-hidden bg-[#aae4ee] w-full flex justify-center items-center">
             {isImageUrlValid(product.imageUrl) ? (
               <img
                 src={product.imageUrl!}
@@ -91,27 +91,24 @@ export default async function ProductDetailPage(
                 className="w-full h-auto max-h-[70vh] object-contain"
               />
             ) : (
-              <div className="bg-gradient-to-br from-gray-100 dark:from-purple-900/50 to-gray-200 dark:to-pink-900/50 w-full h-64 sm:h-96 flex items-center justify-center">
-                <HomeIcon className="h-20 w-20 text-gray-400 dark:text-purple-400" />
+              <div className="bg-[#aae4ee] w-full h-64 sm:h-96 flex items-center justify-center">
+                <HomeIcon className="h-20 w-20 text-[#ffffff]/70" />
               </div>
             )}
             
             {/* Category Badge Floating on Image */}
             {product.kategori && (
               <div className="absolute top-4 right-4 z-10">
-                <Badge
-                  variant={getBadgeVariant(product.kategori)}
-                  className="text-sm py-1 px-3 whitespace-nowrap shadow-lg"
-                >
+                <span className="inline-flex items-center text-xs sm:text-sm font-bold bg-[#ffde7a] text-[#63490b] px-3 py-1 rounded-full shadow-sm">
                   {formatKategori(product.kategori)}
-                </Badge>
+                </span>
               </div>
             )}
             
             {/* Location Badge Floating on Image */}
             <div className="absolute bottom-4 left-4 z-10">
-              <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-800 dark:text-purple-100 bg-white/90 dark:bg-purple-900/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-gray-200 dark:border-purple-400/50 shadow-[0_0_10px_rgba(168,85,247,0.2)] dark:shadow-[0_0_15px_rgba(168,85,247,0.4)]">
-                <MapPin className="w-4 h-4 text-purple-600 dark:text-purple-400 animate-bounce" style={{ animationDuration: '2s' }} />
+              <span className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#d64560] bg-white/80 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-sm">
+                <MapPin className="w-4 h-4 text-[#d64560] animate-bounce" style={{ animationDuration: '2s' }} />
                 {product.lokasi || "Kendari"}
               </span>
             </div>
@@ -120,28 +117,27 @@ export default async function ProductDetailPage(
           <div className="p-6 sm:p-8 space-y-8">
             {/* Title & Location */}
             <div>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
+              <h2 className="text-2xl sm:text-4xl font-extrabold clay-text-title mb-2">
                 {product.title}
               </h2>
             </div>
 
             {/* DP/Akad */}
-            <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-purple-500/30 rounded-xl p-5 shadow-sm relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-green-400/10 to-transparent rounded-bl-full transition-transform group-hover:scale-110"></div>
-              <h3 className="text-xs sm:text-sm font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
+            <div className="clay-panel p-5 relative overflow-hidden group">
+              <h3 className="text-xs sm:text-sm font-bold clay-text-muted uppercase tracking-wider mb-2">
                 Biaya DP / Akad
               </h3>
-              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 dark:bg-clip-text">
+              <p className="text-3xl sm:text-4xl font-extrabold text-[#d64560] drop-shadow-sm">
                 {formatCurrency(product.dpAkad)}
               </p>
             </div>
 
             {/* Description */}
             <div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <h3 className="text-xl font-bold clay-text-title mb-4 flex items-center gap-2">
                 Deskripsi
               </h3>
-              <div className="text-gray-700 dark:text-gray-300 leading-relaxed space-y-4 whitespace-pre-wrap">
+              <div className="clay-text-muted font-medium leading-relaxed space-y-4 whitespace-pre-wrap">
                 {product.description}
               </div>
             </div>
@@ -149,28 +145,28 @@ export default async function ProductDetailPage(
             {/* Detail section if exists */}
             {product.detail && product.detail !== product.description && (
               <div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-xl font-bold clay-text-title mb-4">
                   Detail Tambahan
                 </h3>
-                <div className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
+                <div className="clay-text-muted font-medium leading-relaxed whitespace-pre-wrap">
                   {product.detail}
                 </div>
               </div>
             )}
 
             {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 dark:border-gray-800">
+            <div className="flex flex-col sm:flex-row gap-4 pt-6 mt-6 border-t border-white/30">
               <a
                 href="https://wa.me/6285242049550"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"
               >
-                <Button
-                  className="w-full py-6 text-lg bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_15px_rgba(168,85,247,0.5)] transition-all duration-300 hover:scale-[1.02]"
+                <button
+                  className="clay-btn h-14 w-full text-lg flex items-center justify-center"
                 >
                   Tanya Admin Sekarang
-                </Button>
+                </button>
               </a>
               {product.videoLink && (
                 <a
@@ -179,12 +175,11 @@ export default async function ProductDetailPage(
                   rel="noopener noreferrer"
                   className="flex-1"
                 >
-                  <Button
-                    variant="outline"
-                    className="w-full py-6 text-lg border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white dark:text-pink-400 dark:border-pink-500 dark:hover:bg-pink-500/20 transition-all duration-300 hover:scale-[1.02]"
+                  <button
+                    className="clay-btn-primary h-14 w-full text-lg flex items-center justify-center"
                   >
                     Lihat Video Properti
-                  </Button>
+                  </button>
                 </a>
               )}
             </div>

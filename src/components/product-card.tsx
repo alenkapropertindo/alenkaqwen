@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { HomeIcon, MapPin } from "lucide-react";
+import { HomeIcon, MapPin, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 type Product = {
   id: string;
@@ -21,6 +22,7 @@ type Product = {
 };
 
 export function ProductCard({ product }: { product: Product }) {
+  const [isLoading, setIsLoading] = useState(false);
 
   // Format currency
   const formatCurrency = (value: number) => {
@@ -72,9 +74,19 @@ export function ProductCard({ product }: { product: Product }) {
   };
 
   return (
-    <Link href={`/product/${product.id}`} className="block h-full">
-      <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-purple-500/30 bg-white dark:bg-gray-900 shadow-md dark:shadow-xl h-full flex flex-col cursor-pointer transition-colors">
-        <div className="relative bg-gray-100 dark:bg-gray-800 border-b mb-1 lg:mb-4 border-gray-200 dark:border-purple-500/20">
+    <Link 
+      href={`/product/${product.id}`} 
+      className="block h-full transition-transform hover:scale-[1.02]"
+      onClick={() => setIsLoading(true)}
+    >
+      <div className="relative overflow-hidden clay-card h-full flex flex-col cursor-pointer">
+        {isLoading && (
+          <div className="absolute inset-0 z-50 bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-[30px]">
+            <Loader2 className="w-10 h-10 text-[#ff8fa3] animate-spin mb-2" />
+            <span className="text-sm font-bold text-[#ff8fa3] animate-pulse">Memuat...</span>
+          </div>
+        )}
+        <div className="relative bg-[#aae4ee] mb-1 lg:mb-4">
             {isImageUrlValid(product.imageUrl) ? (
               <img
                 src={product.imageUrl!}
@@ -82,8 +94,8 @@ export function ProductCard({ product }: { product: Product }) {
                 className="w-full h-40 lg:h-48 object-cover object-top"
               />
             ) : (
-              <div className="bg-linear-to-br from-gray-100 dark:from-purple-900/50 to-gray-200 dark:to-pink-900/50 w-full h-40 md:h-48 flex items-center justify-center">
-                <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-gray-400 dark:text-purple-400" />
+              <div className="bg-[#aae4ee] w-full h-40 md:h-48 flex items-center justify-center">
+                <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-[#ffffff]/70" />
               </div>
             )}
             {product.kategori && (
@@ -97,39 +109,37 @@ export function ProductCard({ product }: { product: Product }) {
               </div>
             )}
           </div>
-          <div className="flex flex-col flex-1 p-2 lg:p-5">
+          <div className="flex flex-col flex-1 p-3 lg:p-5">
             <div className="relative mb-2">
-              <h3 className="text-sm md:text-lg lg:text-xl font-bold text-gray-900 dark:text-white leading-tight">
+              <h3 className="text-sm md:text-lg lg:text-xl font-extrabold clay-text-title leading-tight pr-16">
                 {product.title}
               </h3>
               <div className="absolute top-0 right-0 z-10">
-                <span className="inline-flex items-center gap-1.5 text-[10px] md:text-xs font-bold text-gray-800 dark:text-purple-100 bg-white/90 dark:bg-purple-900/60 backdrop-blur-md px-2.5 py-1 rounded-md border border-gray-200 dark:border-purple-400/50 shadow-[0_0_10px_rgba(168,85,247,0.2)] dark:shadow-[0_0_15px_rgba(168,85,247,0.4)]">
-                  <MapPin className="w-3 h-3 text-purple-600 dark:text-purple-400 animate-bounce" style={{ animationDuration: '2s' }} />
+                <span className="inline-flex items-center gap-1 text-[10px] md:text-xs font-bold text-[#ff8fa3] bg-white/80 backdrop-blur-md px-2 py-1 rounded-xl shadow-sm">
+                  <MapPin className="w-3 h-3 text-[#ff8fa3] animate-bounce" style={{ animationDuration: '2s' }} />
                   {product.lokasi || "Kendari"}
                 </span>
               </div>
             </div>
 
             <div className="mb-2 lg:mb-4">
-              <div className="flex flex-col bg-gray-50 dark:bg-gray-800/50 border border-gray-200 dark:border-purple-500/30 rounded-lg p-2 shadow-sm w-full relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-16 h-12 bg-gradient-to-br from-green-400/10 to-transparent rounded-bl-full"></div>
-                <span className="text-[10px] md:text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-1">
+              <div className="flex flex-col clay-panel rounded-[20px] p-3 w-full relative overflow-hidden group">
+                <span className="text-[10px] md:text-xs font-bold clay-text-muted uppercase tracking-wider mb-1">
                   Biaya DP / Akad
                 </span>
                 <div className="flex items-center flex-wrap gap-0">
-                  <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-gray-900 dark:text-transparent dark:bg-gradient-to-r dark:from-purple-400 dark:to-pink-400 dark:bg-clip-text">
+                  <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#ff8fa3] drop-shadow-sm">
                     {formatCurrency(product.dpAkad)}
                   </span>
                 </div>
               </div>
             </div>
-            <p className="text-gray-700 dark:text-gray-300 mb-2 lg:mb-4 text-xs md:text-sm leading-relaxed line-clamp-3 flex-1">
+            <p className="clay-text-muted font-medium mb-3 lg:mb-5 text-xs md:text-sm leading-relaxed line-clamp-3 flex-1">
               {product.detail || product.description}
             </p>
             <div className="flex flex-col gap-3">
-              <Button
-                variant="outline"
-                className="w-full border-gray-300 text-gray-700 dark:text-purple-400 dark:border-purple-500 transition-all duration-300 text-sm md:text-base"
+              <button
+                className="clay-btn w-full py-2.5 text-sm md:text-base flex items-center justify-center"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
@@ -137,11 +147,10 @@ export function ProductCard({ product }: { product: Product }) {
                 }}
               >
                 Tanya Admin
-              </Button>
+              </button>
               {product.videoLink && (
-                <Button
-                  variant="outline"
-                  className="w-full border-gray-300 lg:mb-4 text-gray-700 dark:text-pink-400 dark:border-pink-500 transition-all duration-300 text-sm md:text-base"
+                <button
+                  className="clay-btn-primary w-full py-2.5 lg:mb-2 text-sm md:text-base flex items-center justify-center"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
@@ -149,7 +158,7 @@ export function ProductCard({ product }: { product: Product }) {
                   }}
                 >
                   Lihat Video
-                </Button>
+                </button>
               )}
             </div>
           </div>

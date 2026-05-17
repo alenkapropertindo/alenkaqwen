@@ -1,5 +1,10 @@
 "use client";
 
+import React, { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useForm } from "react-hook-form";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 import {
   Card,
   CardContent,
@@ -10,12 +15,6 @@ import {
 } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { useForm } from "react-hook-form";
-import { authClient } from "@/lib/auth-client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 interface LoginForm {
   email: string;
@@ -23,6 +22,14 @@ interface LoginForm {
 }
 
 export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center clay-bg"><div className="clay-text-title font-extrabold text-2xl">Loading...</div></div>}>
+      <LoginContent />
+    </Suspense>
+  );
+}
+
+function LoginContent() {
   const {
     register,
     handleSubmit,
@@ -30,6 +37,22 @@ export default function LoginPage() {
   } = useForm<LoginForm>();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("registered") === "true") {
+      toast.success("Registrasi berhasil! Silahkan login.", {
+        id: "registered-toast"
+      });
+    }
+    if (searchParams.get("pending") === "true") {
+      authClient.signOut().then(() => {
+        toast.error("Silahkan hubungi admin untuk meminta akses.", {
+          id: "pending-toast"
+        });
+      });
+    }
+  }, [searchParams]);
 
   const onSubmit = async (data: LoginForm) => {
     setIsSubmitting(true);
@@ -42,6 +65,12 @@ export default function LoginPage() {
       }
 
       if (session) {
+        if (session.user.role === "PENDING") {
+          await authClient.signOut();
+          toast.error("Silahkan hubungi admin untuk meminta akses.");
+          return;
+        }
+
         toast.success("Signed in successfully");
         router.push("/dashboard"); // Redirect to home page or dashboard
         router.refresh(); // Refresh the page to update the session
@@ -54,27 +83,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-black p-4">
-      <Card className="w-full max-w-md bg-white dark:bg-gray-900 border-purple-500 border-2 shadow-[0_0_15px_#8b5cf6] shadow-purple-500/20 dark:shadow-purple-500/50">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-600">
+    <div className="min-h-screen flex items-center justify-center clay-bg p-4 transition-colors duration-300">
+      <Card className="w-full max-w-md clay-card border-none p-2 sm:p-4">
+        <CardHeader className="text-center pb-2">
+          <CardTitle className="text-3xl font-extrabold clay-text-title text-center">
             Selamat Datang Kembali
           </CardTitle>
-          <CardDescription className="text-gray-600 dark:text-gray-400">
+          <CardDescription className="clay-text-muted text-center font-bold">
             Masuk akun anda
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="email" className="clay-text-title font-bold">
                 Email
               </Label>
               <Input
                 id="email"
                 type="email"
                 placeholder="Masukan Email"
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
@@ -84,18 +113,18 @@ export default function LoginPage() {
                 })}
               />
               {errors.email && (
-                <p className="text-red-500 text-sm">{errors.email.message}</p>
+                <p className="text-[#d64560] font-bold text-sm mt-1">{errors.email.message}</p>
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="password" className="text-gray-700 dark:text-gray-300">
+              <Label htmlFor="password" className="clay-text-title font-bold">
                 Password
               </Label>
               <Input
                 id="password"
                 type="password"
                 placeholder="Masukan Password"
-                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+                className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50"
                 {...register("password", {
                   required: "Password is required",
                   minLength: {
@@ -105,26 +134,26 @@ export default function LoginPage() {
                 })}
               />
               {errors.password && (
-                <p className="text-red-500 text-sm">
+                <p className="text-[#d64560] font-bold text-sm mt-1">
                   {errors.password.message}
                 </p>
               )}
             </div>
-            <Button
+            <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white shadow-[0_0_10px_#8b5cf6] hover:shadow-[0_0_15px_#8b5cf6] transition-all duration-300"
+              className="clay-btn-primary w-full h-12 mt-4 text-lg disabled:opacity-50 flex items-center justify-center"
             >
               {isSubmitting ? "Signing in..." : "Sign In"}
-            </Button>
+            </button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-col">
-          <div className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
+        <CardFooter className="flex flex-col pb-6">
+          <div className="mt-4 text-center text-sm clay-text-muted font-bold">
             Belum punya akun?{" "}
             <a
               href="/auth/signup"
-              className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 hover:underline"
+              className="text-[#d64560] hover:underline"
             >
               Daftar Disini
             </a>
