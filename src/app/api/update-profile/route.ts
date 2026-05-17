@@ -10,18 +10,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { name, whatsapp, rekeningNo } = await request.json();
+    const { name, whatsapp, rekeningNo, kodeUnik } = await request.json();
+
+    const updateData: any = {
+      name,
+      whatsapp,
+      rekeningNo,
+    };
+
+    // Only allow setting kodeUnik if it hasn't been set yet
+    if (kodeUnik && !session.user.kodeUnik) {
+      updateData.kodeUnik = kodeUnik;
+    }
 
     // Update user in database
     const updatedUser = await prisma.user.update({
       where: {
         id: session.user.id,
       },
-      data: {
-        name,
-        whatsapp,
-        rekeningNo,
-      },
+      data: updateData,
     });
 
     return NextResponse.json({ success: true, user: updatedUser });

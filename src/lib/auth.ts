@@ -22,6 +22,16 @@ export const auth = betterAuth({
         required: false,
         input: true,
       },
+      kodeUnik: {
+        type: "string",
+        required: false,
+        input: true,
+      },
+      affiliateId: {
+        type: "string",
+        required: false,
+        input: true,
+      },
       role: {
         type: "string",
         input: false,

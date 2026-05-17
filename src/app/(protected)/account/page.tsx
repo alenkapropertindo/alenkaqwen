@@ -16,6 +16,7 @@ interface User {
   image?: string | null;
   whatsapp?: string | null;
   rekeningNo?: string | null;
+  kodeUnik?: string | null;
 }
 
 interface Session {
@@ -30,6 +31,7 @@ export default function AccountPage() {
   const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [rekening, setRekening] = useState("");
+  const [kodeUnik, setKodeUnik] = useState("");
   const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
@@ -44,6 +46,7 @@ export default function AccountPage() {
           setEmail(result.session.user.email || "");
           setWhatsapp(result.session.user.whatsapp || "");
           setRekening(result.session.user.rekeningNo || "");
+          setKodeUnik(result.session.user.kodeUnik || "");
           setAvatar(result.session.user.image || "");
         } else {
           // Handle unauthorized case
@@ -72,6 +75,7 @@ export default function AccountPage() {
           name,
           whatsapp,
           rekeningNo: rekening,
+          kodeUnik: session?.user?.kodeUnik ? undefined : kodeUnik,
         }),
       });
 
@@ -91,6 +95,7 @@ export default function AccountPage() {
         setEmail(sessionResult.session.user.email || "");
         setWhatsapp(sessionResult.session.user.whatsapp || "");
         setRekening(sessionResult.session.user.rekeningNo || "");
+        setKodeUnik(sessionResult.session.user.kodeUnik || "");
         setAvatar(sessionResult.session.user.image || "");
       }
 
@@ -258,6 +263,30 @@ export default function AccountPage() {
                   </div>
                 </div>
 
+                <div>
+                  <Label htmlFor="kodeUnik" className="text-gray-300 dark:text-purple-200">
+                    Kode Unik
+                  </Label>
+                  <div className="relative mt-1">
+                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                      <span className="h-4 w-4 text-purple-400 font-bold flex items-center justify-center">#</span>
+                    </div>
+                    <Input
+                      id="kodeUnik"
+                      value={kodeUnik}
+                      onChange={(e) => setKodeUnik(e.target.value)}
+                      className="pl-10 bg-gray-800 border-purple-300 dark:border-purple-900/50 text-purple-100 focus:border-purple-500"
+                      placeholder="cth: UNIK123"
+                      disabled={!!session?.user?.kodeUnik}
+                    />
+                  </div>
+                  {session?.user?.kodeUnik && (
+                    <p className="text-xs text-purple-400 mt-1">
+                      Kode unik sudah diatur dan tidak dapat diubah lagi.
+                    </p>
+                  )}
+                </div>
+
                 <div className="flex space-x-3 pt-4">
                   <Button
                     onClick={handleSave}
@@ -325,6 +354,14 @@ export default function AccountPage() {
                     <div>
                       <p className="text-sm text-purple-400">Rekening Number</p>
                       <p className="text-purple-100">{rekening || "Not set"}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center">
+                    <div className="h-5 w-5 text-purple-400 mr-3 flex items-center justify-center font-bold">#</div>
+                    <div>
+                      <p className="text-sm text-purple-400">Kode Unik</p>
+                      <p className="text-purple-100">{kodeUnik || "belum diatur"}</p>
                     </div>
                   </div>
                 </div>

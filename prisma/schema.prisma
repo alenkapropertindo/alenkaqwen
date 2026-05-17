@@ -22,6 +22,7 @@ enum Status {
   FOLLOWUP
   PEMBERKASAN
   AKAD_KREDIT
+  AFFILIATE
 }
 
 
@@ -37,6 +38,8 @@ model User {
   rekeningNo    String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now()) @updatedAt
+  affiliateId   String?
+  kodeUnik      String?   @unique
   sessions      Session[]
   accounts      Account[]
   customers     Customer[]

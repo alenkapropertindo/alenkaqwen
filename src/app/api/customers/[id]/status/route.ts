@@ -22,7 +22,7 @@ export async function PUT(
     const { status } = json;
 
     // Validate status - using string values instead of enum
-    const validStatuses = ["FOLLOWUP", "PEMBERKASAN", "AKAD_KREDIT"];
+    const validStatuses = ["FOLLOWUP", "PEMBERKASAN", "AKAD_KREDIT", "AFFILIATE"];
     if (!validStatuses.includes(status)) {
       return new NextResponse("Invalid status", { status: 400 });
     }

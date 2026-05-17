@@ -30,19 +30,57 @@ export default function SignupPage() {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const whatsapp = formData.get("whatsapp") as string;
+    const kodePromo = formData.get("kodePromo") as string;
 
     try {
+      let affiliateId = undefined;
+
+      // Validate Promo Code if provided
+      if (kodePromo) {
+        const checkRes = await fetch("/api/check-promo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ kodePromo }),
+        });
+
+        const checkData = await checkRes.json();
+
+        if (!checkRes.ok) {
+          setError(checkData.error || "Kode promo tidak terdaftar, silahkan periksa kembali.");
+          setIsSubmitting(false);
+          return;
+        }
+
+        affiliateId = checkData.affiliateId;
+      }
       const res = await authClient.signUp.email({
         name,
         email,
         password,
         whatsapp,
-        callbackURL: "/dashboard",
+        affiliateId,
       });
 
       if (res.error) {
         setError(res.error.message || "Signup failed");
       } else {
+        // If affiliateId exists, register the customer
+        if (affiliateId) {
+          try {
+            const customerRes = await fetch("/api/register-affiliate-customer", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ affiliateId, name, whatsapp }),
+            });
+            if (!customerRes.ok) {
+              const customerError = await customerRes.json();
+              console.error("Failed to create customer:", customerError);
+            }
+          } catch (e) {
+            console.error("Error calling register customer API:", e);
+          }
+        }
+        
         router.push("/dashboard");
       }
     } catch (err) {
@@ -102,6 +140,18 @@ export default function SignupPage() {
                 placeholder="Masukan Nomor Whatsup"
                 required
                 className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="kodePromo" className="text-gray-700 dark:text-gray-300">
+                Kode Promo (Opsional)
+              </Label>
+              <Input
+                id="kodePromo"
+                name="kodePromo"
+                type="text"
+                placeholder="Masukan Kode Promo"
+                className="bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white focus-visible:ring-purple-500 focus-visible:ring-2 focus-visible:border-purple-500 uppercase"
               />
             </div>
             <div className="space-y-2">

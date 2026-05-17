@@ -374,7 +374,10 @@ export function SearchableCustomersTable({
                         onValueChange={(value) =>
                           handleStatusUpdate(customer.id, value as Status)
                         }
-                        disabled={updatingCustomerId === customer.id}
+                        disabled={
+                          updatingCustomerId === customer.id ||
+                          customer.paidStatus === "PAID"
+                        }
                       >
                         <SelectTrigger className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white w-[140px]">
                           {updatingCustomerId === customer.id ? (
@@ -441,14 +444,12 @@ export function SearchableCustomersTable({
                         }
                         disabled={
                           updatingCustomerId === customer.id ||
-                          customer.status !== "AKAD_KREDIT"
+                          customer.paidStatus === "PAID"
                         }
                       >
                         <SelectTrigger className="bg-gray-800 border-purple-300 dark:border-purple-500/50 text-white w-[140px]">
                           {updatingCustomerId === customer.id ? (
                             <span className="text-gray-400">Updating...</span>
-                          ) : customer.status !== "AKAD_KREDIT" ? (
-                            <span className="text-gray-400">Pending</span>
                           ) : (
                             <SelectValue />
                           )}
