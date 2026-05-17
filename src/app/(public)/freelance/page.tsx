@@ -59,7 +59,7 @@ export default function FreelancePage() {
                   <Users className="h-8 w-8 clay-text-title font-bold" />
                 </div>
                 <h3 className="text-2xl font-bold clay-text-title mb-3">
-                  Agen AI Kami yang Follow-Up
+                  Tim Kami yang Follow-Up
                 </h3>
                 <p className="clay-text-muted font-bold">
                   Setelah kamu rekomendasikan target konsumen, tim kami yang
@@ -377,7 +377,7 @@ export default function FreelancePage() {
               </CardHeader>
               <CardContent className="pb-8">
                 <p className="clay-text-muted font-bold text-xl mb-8">
-                  Daftar hari ini dan dapatkan materi promosi + tips cara mudah
+                  Daftar hari ini dan dapatkan bimbingan 1 on 1 + tips cara mudah
                   closing lebih cepat 🚀
                 </p>
                 <div className="clay-panel p-6 rounded-2xl border border-white/40">
@@ -387,15 +387,15 @@ export default function FreelancePage() {
                   <ul className="text-left space-y-2 clay-text-muted font-bold">
                     <li className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-2" />{" "}
-                      Template promosi siap pakai
+                      Materi promosi siap pakai
                     </li>
                     <li className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-2" />{" "}
-                      Video tutorial closing
+                      Bimbingan cara closing lebih cepat
                     </li>
                     <li className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-2" />{" "}
-                      Materi presentasi profesional
+                      Bimbingan langsung cara beriklan di media sosial
                     </li>
                     <li className="flex items-center">
                       <CheckCircle className="h-5 w-5 text-green-400 mr-2" />{" "}
@@ -406,7 +406,58 @@ export default function FreelancePage() {
               </CardContent>
             </Card>
 
-            <div className="mt-16">
+            <div className="mt-16 flex flex-col items-center">
+              {/* Premium Price Box */}
+              <div className="mb-10 relative inline-flex flex-col items-center w-full max-w-sm md:max-w-md">
+                {/* Glowing Aura */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#ff8fa3] via-[#ffb3c6] to-[#ff8fa3] rounded-[40px] blur-xl opacity-60 animate-pulse"></div>
+
+                {/* Main Premium Card */}
+                <div className="relative w-full clay-panel pt-8 pb-10 px-8 md:px-12 rounded-[40px] border border-white/50 bg-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(255,143,163,0.4)] flex flex-col items-center overflow-hidden">
+
+                  {/* Dynamic Shimmer Effect */}
+                  <div className="absolute top-0 left-[-150%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[shimmer_3s_infinite] rotate-12 pointer-events-none"></div>
+
+                  {/* VIP Badge */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-300 via-yellow-100 to-yellow-500 text-yellow-900 text-[10px] md:text-xs font-black px-6 py-1.5 rounded-b-2xl shadow-lg uppercase tracking-widest flex items-center gap-1 z-10 border-b border-x border-yellow-200">
+                    <span className="text-sm">💎</span> PENAWARAN EKSKLUSIF
+                  </div>
+
+                  <h3 className="text-sm md:text-base font-black text-white/90 mb-4 mt-2 uppercase tracking-[0.3em] text-center drop-shadow-md">
+                    Gabung Komunitas Sekarang
+                  </h3>
+
+                  <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 relative w-full">
+                    {/* Normal Price */}
+                    <div className="flex flex-col items-center md:items-end">
+                      <span className="text-[10px] md:text-xs font-bold text-white/60 uppercase tracking-widest mb-[-2px]">Harga Normal</span>
+                      <span className="text-3xl md:text-4xl font-black text-white/40 line-through decoration-red-500/80 decoration-[3px]">
+                        499K
+                      </span>
+                    </div>
+
+                    {/* Divider - Hidden on mobile, visible on desktop */}
+                    <div className="hidden md:block h-16 w-px bg-white/30 rounded-full"></div>
+
+                    {/* Current Price */}
+                    <div className="flex flex-col items-center md:items-start mt-2 md:mt-0">
+                      <span className="text-[10px] md:text-xs font-bold text-[#ffb3c6] uppercase tracking-widest mb-[-2px] animate-pulse">Hari Ini Saja</span>
+                      <span className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-[#ff8fa3] drop-shadow-[0_0_25px_rgba(255,143,163,0.8)]">
+                        149K
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Scarcity Indicator */}
+                  <div className="mt-6 flex items-center justify-center gap-2 bg-black/20 rounded-full px-4 py-2 border border-white/10">
+                    <span className="relative flex h-2.5 w-2.5">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                    <span className="text-xs md:text-sm font-bold text-white/80">Slot Promo Tersisa: <span className="text-[#ffb3c6] text-sm md:text-base font-black">12 Orang</span></span>
+                  </div>
+                </div>
+              </div>
               <Link href="/auth/signin">
                 <Button
                   size="lg"
@@ -416,7 +467,7 @@ export default function FreelancePage() {
                 </Button>
               </Link>
               <p className="clay-text-muted font-bold mt-6 text-xl">
-                Gratis & Tanpa Komitmen
+                Promo Spesial Terbatas
               </p>
             </div>
           </div>
