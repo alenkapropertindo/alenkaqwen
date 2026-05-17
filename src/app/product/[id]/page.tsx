@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HomeIcon, MapPin, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { DownloadButton } from "./download-button";
 
 // Format currency
 const formatCurrency = (value: number) => {
@@ -112,6 +113,13 @@ export default async function ProductDetailPage(
                 {product.lokasi || "Kendari"}
               </span>
             </div>
+
+            {/* Download Brosur Floating on Image */}
+            {product.imageUrl && isImageUrlValid(product.imageUrl) && (
+              <div className="absolute bottom-4 right-4 z-10">
+                <DownloadButton imageUrl={product.imageUrl} title={product.title} />
+              </div>
+            )}
           </div>
 
           <div className="p-6 sm:p-8 space-y-8">
