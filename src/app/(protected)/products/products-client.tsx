@@ -211,7 +211,7 @@ export default function ProductsClientPage() {
           </h1>
         </div>
         <div className="clay-panel p-6 sm:p-8">
-          <p className="clay-text-muted font-bold text-xl">Loading products...</p>
+          <p className="clay-text-muted font-bold text-xl">Memuat daftar produk...</p>
         </div>
       </div>
     );

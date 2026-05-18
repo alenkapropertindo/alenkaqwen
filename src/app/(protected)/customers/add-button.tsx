@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 // Dynamically import the AddCustomerModal to avoid SSR issues
 const AddCustomerModal = dynamic(() => import("./add/modal").then(mod => mod.AddCustomerModal), {
   ssr: false,
-  loading: () => <Button className="clay-btn-primary"><Plus className="mr-2 h-4 w-4" /> Add Customer</Button>
+  loading: () => <Button className="clay-btn-primary"><Plus className="mr-2 h-4 w-4" /> Tambah Data</Button>
 });
 
 export function AddCustomerButton({ 

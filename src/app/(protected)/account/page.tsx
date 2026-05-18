@@ -137,10 +137,10 @@ export default function AccountPage() {
       <div className="px-8 py-16 container mx-auto max-w-screen-lg space-y-8">
         <div className="text-center py-12">
           <h1 className="text-2xl font-extrabold clay-text-title">
-            Not authenticated
+            Belum masuk
           </h1>
           <p className="clay-text-muted font-bold mt-2">
-            Please log in to view your account
+            Silahkan masuk untuk melihat akun Anda
           </p>
         </div>
       </div>
@@ -155,7 +155,7 @@ export default function AccountPage() {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl font-extrabold clay-text-title"
         >
-          Account Settings
+          Pengaturan Akun
         </motion.h1>
       </div>
 
@@ -223,7 +223,7 @@ export default function AccountPage() {
                     disabled
                   />
                   <p className="text-xs clay-text-muted font-bold mt-1">
-                    Email cannot be changed
+                    Email tidak dapat diubah
                   </p>
                 </div>
 
@@ -292,14 +292,14 @@ export default function AccountPage() {
                     onClick={handleSave}
                     className="clay-btn-primary"
                   >
-                    Save Changes
+                    Simpan Perubahan
                   </Button>
                   <Button
                     variant="outline"
                     onClick={() => setIsEditing(false)}
                     className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                   >
-                    Cancel
+                    Batal
                   </Button>
                 </div>
               </div>
@@ -308,17 +308,17 @@ export default function AccountPage() {
                 <div className="flex items-center justify-between pb-4 border-b border-white/40">
                   <div>
                     <h3 className="font-extrabold clay-text-title">
-                      Personal Information
+                      Informasi Pribadi
                     </h3>
                     <p className="text-sm clay-text-muted font-bold">
-                      Basic information about you
+                      Informasi dasar tentang Anda
                     </p>
                   </div>
                   <Button
                     onClick={() => setIsEditing(true)}
                     className="clay-btn-primary"
                   >
-                    Edit Profile
+                    Edit Profil
                   </Button>
                 </div>
 
@@ -326,8 +326,8 @@ export default function AccountPage() {
                   <div className="flex items-center">
                     <User className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
-                      <p className="text-sm clay-text-muted font-bold">Name</p>
-                      <p className="clay-text-title font-bold">{name || "Not set"}</p>
+                      <p className="text-sm clay-text-muted font-bold">Nama</p>
+                      <p className="clay-text-title font-bold">{name || "Belum diatur"}</p>
                     </div>
                   </div>
 
@@ -345,15 +345,15 @@ export default function AccountPage() {
                     <Phone className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
                       <p className="text-sm clay-text-muted font-bold">WhatsApp</p>
-                      <p className="clay-text-title font-bold">{whatsapp || "Not set"}</p>
+                      <p className="clay-text-title font-bold">{whatsapp || "Belum diatur"}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center">
                     <CreditCard className="h-5 w-5 text-[#366873] mr-3" />
                     <div>
-                      <p className="text-sm clay-text-muted font-bold">Rekening Number</p>
-                      <p className="clay-text-title font-bold">{rekening || "Not set"}</p>
+                      <p className="text-sm clay-text-muted font-bold">Nomor Rekening</p>
+                      <p className="clay-text-title font-bold">{rekening || "Belum diatur"}</p>
                     </div>
                   </div>
 

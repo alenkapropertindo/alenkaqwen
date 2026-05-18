@@ -32,37 +32,40 @@ export default function SignupPage() {
     const whatsapp = formData.get("whatsapp") as string;
     const kodePromo = formData.get("kodePromo") as string;
 
+    if (!kodePromo || kodePromo.trim() === "") {
+      setError("pastikan anda memasukan kode promo");
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       let affiliateId = undefined;
 
-      // Validate Promo Code if provided
-      if (kodePromo) {
-        const checkRes = await fetch("/api/check-promo", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ kodePromo }),
-        });
+      const checkRes = await fetch("/api/check-promo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ kodePromo }),
+      });
 
-        const checkData = await checkRes.json();
+      const checkData = await checkRes.json();
 
-        if (!checkRes.ok) {
-          setError(checkData.error || "Kode promo tidak terdaftar, silahkan periksa kembali.");
-          setIsSubmitting(false);
-          return;
-        }
-
-        affiliateId = checkData.affiliateId;
+      if (!checkRes.ok) {
+        setError(checkData.error || "Kode promo tidak terdaftar, silahkan periksa kembali.");
+        setIsSubmitting(false);
+        return;
       }
+
+      affiliateId = checkData.affiliateId;
       const res = await authClient.signUp.email({
         name,
         email,
         password,
         whatsapp,
         affiliateId,
-      });
+      } as any);
 
       if (res.error) {
-        setError(res.error.message || "Signup failed");
+        setError(res.error.message || "Pendaftaran gagal");
       } else {
         // If affiliateId exists, register the customer
         if (affiliateId) {
@@ -87,7 +90,7 @@ export default function SignupPage() {
         router.push("/auth/signin?registered=true");
       }
     } catch (err) {
-      setError("An unexpected error occurred");
+      setError("Terjadi kesalahan tidak terduga");
     } finally {
       setIsSubmitting(false);
     }
@@ -147,13 +150,14 @@ export default function SignupPage() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="kodePromo" className="clay-text-title font-bold">
-                Kode Promo (Opsional)
+                Kode Promo
               </Label>
               <Input
                 id="kodePromo"
                 name="kodePromo"
                 type="text"
                 placeholder="Masukan Kode Promo"
+                required
                 className="clay-panel border-none text-[#1f4f59] placeholder-[#5394a0] font-medium h-12 focus-visible:ring-2 focus-visible:ring-white/50 uppercase"
               />
             </div>
@@ -181,7 +185,7 @@ export default function SignupPage() {
               disabled={isSubmitting}
               className="clay-btn-primary w-full h-12 mt-4 text-lg disabled:opacity-50 flex items-center justify-center"
             >
-              {isSubmitting ? "Signing up..." : "Sign Up"}
+              {isSubmitting ? "Sedang mendaftar..." : "Daftar"}
             </button>
           </form>
         </CardContent>

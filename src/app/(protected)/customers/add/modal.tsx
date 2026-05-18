@@ -98,9 +98,9 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[425px] border-none clay-panel">
         <DialogHeader>
-          <DialogTitle className="clay-text-title font-extrabold text-xl">Add New Customer</DialogTitle>
+          <DialogTitle className="clay-text-title font-extrabold text-xl">Tambah Customer Baru</DialogTitle>
           <DialogDescription className="clay-text-muted font-bold">
-            Enter the details of the new customer.
+            Masukkan detail customer baru.
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -110,10 +110,10 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="clay-text-title font-bold">Name</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Nama</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Customer name"
+                      placeholder="Nama customer"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
@@ -131,13 +131,13 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
                   <FormLabel className="clay-text-title font-bold">WhatsApp</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="WhatsApp number"
+                      placeholder="Nomor WhatsApp"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
                   </FormControl>
                   <FormDescription className="clay-text-muted font-bold text-xs mt-1">
-                    Include country code (e.g., 6281234567890)
+                    Sertakan kode negara (misal, 6281234567890)
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -151,14 +151,14 @@ export function AddCustomerModal({ open, onOpenChange, onCustomerCreated }: { op
                 className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                 onClick={() => onOpenChange(false)}
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 type="submit"
                 className="clay-btn-primary"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Creating..." : "Create Customer"}
+                {isSubmitting ? "Sedang menyimpan..." : "Simpan Customer"}
               </Button>
             </DialogFooter>
           </form>

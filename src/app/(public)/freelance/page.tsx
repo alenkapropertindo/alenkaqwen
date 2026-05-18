@@ -82,17 +82,71 @@ export default function FreelancePage() {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-center gap-6">
-            <Link href="/auth/signup">
+          <div className="mt-16 flex flex-col items-center">
+            {/* Premium Price Box */}
+            <div className="mb-10 relative inline-flex flex-col items-center w-full max-w-sm md:max-w-md">
+              {/* Glowing Aura */}
+              <div className="absolute -inset-1 bg-gradient-to-r from-[#ff8fa3] via-[#ffb3c6] to-[#ff8fa3] rounded-[40px] blur-xl opacity-60 animate-pulse"></div>
+
+              {/* Main Premium Card */}
+              <div className="relative w-full clay-panel pt-8 pb-10 px-8 md:px-12 rounded-[40px] border border-white/50 bg-white/10 backdrop-blur-2xl shadow-[0_20px_50px_rgba(255,143,163,0.4)] flex flex-col items-center overflow-hidden">
+
+                {/* Dynamic Shimmer Effect */}
+                <div className="absolute top-0 left-[-150%] w-[200%] h-full bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[shimmer_3s_infinite] rotate-12 pointer-events-none"></div>
+
+                {/* VIP Badge */}
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 bg-gradient-to-r from-yellow-300 via-yellow-100 to-yellow-500 text-yellow-900 text-[10px] md:text-xs font-black px-6 py-1.5 rounded-b-2xl shadow-lg uppercase tracking-widest flex items-center gap-1 z-10 border-b border-x border-yellow-200">
+                  <span className="text-sm">💎</span> PENAWARAN EKSKLUSIF
+                </div>
+
+                <h3 className="text-sm md:text-base font-black text-white/90 mb-4 mt-2 uppercase tracking-[0.3em] text-center drop-shadow-md">
+                  Gabung Komunitas Sekarang
+                </h3>
+
+                <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6 relative w-full">
+                  {/* Normal Price */}
+                  <div className="flex flex-col items-center md:items-end">
+                    <span className="text-sm md:text-base font-bold text-white/90 uppercase tracking-widest mb-[-2px]">Harga Normal</span>
+                    <span className="text-6xl md:text-7xl font-black text-white/90 line-through decoration-red-500 decoration-[6px] drop-shadow-md">
+                      499K
+                    </span>
+                  </div>
+
+                  {/* Divider - Hidden on mobile, visible on desktop */}
+                  <div className="hidden md:block h-16 w-px bg-white/30 rounded-full"></div>
+
+                  {/* Current Price */}
+                  <div className="flex flex-col items-center md:items-start mt-2 md:mt-0">
+                    <span className="text-xs md:text-sm font-bold text-[#ffb3c6] uppercase tracking-widest mb-[-2px] animate-pulse">Hari Ini Saja</span>
+                    <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-[#ff8fa3] drop-shadow-[0_0_25px_rgba(255,143,163,0.8)]">
+                      149K
+                    </span>
+                  </div>
+                </div>
+
+                {/* Scarcity Indicator */}
+                <div className="mt-6 flex items-center justify-center gap-2 bg-black/20 rounded-full px-4 py-2 border border-white/10">
+                  <span className="relative flex h-2.5 w-2.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                  </span>
+                  <span className="text-xs md:text-sm font-bold text-white/80">Slot Promo Tersisa: <span className="text-[#ffb3c6] text-sm md:text-base font-black">12 Orang</span></span>
+                </div>
+              </div>
+            </div>
+            <Link href="/auth/signin">
               <Button
                 size="lg"
-                className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-xl px-10 py-7 rounded-full shadow-[0_0_30px_#8b5cf6] hover:shadow-[0_0_40px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
+                className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
               >
-                GABUNG SEKARANG <ArrowRight className="ml-3 h-6 w-6" />
+                GABUNG SEKARANG <ArrowRight className="ml-3 h-8 w-8" />
               </Button>
             </Link>
+            <p className="clay-text-muted font-bold mt-6 text-xl">
+              Promo Spesial Terbatas
+            </p>
           </div>
-          <p className="clay-text-title font-extrabold mt-6 text-lg">Gratis & Tanpa Syarat</p>
+
         </div>
       </div>
 

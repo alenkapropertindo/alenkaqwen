@@ -150,7 +150,7 @@ export default function UsersClientPage() {
           </h1>
         </div>
         <div className="clay-panel p-8">
-          <p className="clay-text-muted font-bold text-xl">Loading users...</p>
+          <p className="clay-text-muted font-bold text-xl">Memuat daftar user...</p>
         </div>
       </div>
     );

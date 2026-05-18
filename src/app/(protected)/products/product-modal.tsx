@@ -237,12 +237,12 @@ export function ProductModal({
       <DialogContent className="sm:max-w-[500px] border-none clay-panel max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="clay-text-title font-extrabold text-xl">
-            {product ? "Edit Product" : "Tambah Produk"}
+            {product ? "Edit Produk" : "Tambah Produk"}
           </DialogTitle>
           <DialogDescription className="clay-text-muted font-bold">
             {product
-              ? "Edit the details of the product."
-              : "Enter the details of the new product."}
+              ? "Edit detail produk."
+              : "Masukkan detail produk baru."}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -252,10 +252,10 @@ export function ProductModal({
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="clay-text-title font-bold">Title</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Judul</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Product title"
+                      placeholder="Judul produk"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
@@ -273,7 +273,7 @@ export function ProductModal({
                   <FormLabel className="clay-text-title font-bold">Detail</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Product detail"
+                      placeholder="Detail produk"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
@@ -295,7 +295,7 @@ export function ProductModal({
                   >
                     <FormControl>
                       <SelectTrigger className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12">
-                        <SelectValue placeholder="Select a category" />
+                        <SelectValue placeholder="Pilih kategori" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
@@ -318,7 +318,7 @@ export function ProductModal({
                   <FormLabel className="clay-text-title font-bold">Lokasi</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Product location"
+                      placeholder="Lokasi produk"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                     />
@@ -333,10 +333,10 @@ export function ProductModal({
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="clay-text-title font-bold">Description</FormLabel>
+                  <FormLabel className="clay-text-title font-bold">Deskripsi</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Product description"
+                      placeholder="Deskripsi produk"
                       {...field}
                       className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50"
                       rows={4}
@@ -359,7 +359,7 @@ export function ProductModal({
                     <FormControl>
                       <Input
                         type="number"
-                        placeholder="DP+Akad amount"
+                        placeholder="Nominal DP+Akad"
                         {...field}
                         className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       />
@@ -380,7 +380,7 @@ export function ProductModal({
                     <FormControl>
                       <Input
                         type="number"
-                        placeholder="Fee amount"
+                        placeholder="Nominal fee"
                         {...field}
                         className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
                       />
@@ -427,7 +427,7 @@ export function ProductModal({
                       <Input type="hidden" {...field} />
                       {uploading && (
                         <p className="clay-text-muted font-bold text-sm">
-                          Uploading image...
+                          Sedang mengunggah gambar...
                         </p>
                       )}
                       {imagePreview && (
@@ -453,7 +453,7 @@ export function ProductModal({
                 className="clay-btn bg-white/40 hover:bg-white text-[#1f4f59] border-none"
                 onClick={() => onOpenChange(false)}
               >
-                Cancel
+                Batal
               </Button>
               <Button
                 type="submit"
@@ -462,10 +462,10 @@ export function ProductModal({
               >
                 {isSubmitting || uploading
                   ? uploading
-                    ? "Uploading..."
+                    ? "Sedang mengunggah..."
                     : product
-                    ? "Updating..."
-                    : "Creating..."
+                    ? "Sedang memperbarui..."
+                    : "Sedang membuat..."
                   : product
                   ? "Update Produk"
                   : "Tambah Produk"}
