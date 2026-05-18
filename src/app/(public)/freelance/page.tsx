@@ -205,10 +205,10 @@ export default function FreelancePage() {
                     </div>
                     <div className="text-center md:text-left flex-grow">
                       <h3 className="text-2xl font-bold clay-text-title mb-3">
-                        Daftar Sekarang di program affiliate kami (Gratis!)
+                        Daftar Sekarang di program affiliate kami
                       </h3>
                       <p className="clay-text-muted font-bold text-lg">
-                        Buka menu target dan masukan nomor telepon teman,
+                        Buka menu customers dan masukan nomor telepon teman,
                         keluarga atau prospek yang ingin membeli rumah
                       </p>
                     </div>
