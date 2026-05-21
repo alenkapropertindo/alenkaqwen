@@ -12,8 +12,20 @@ import {
   Wallet,
 } from "lucide-react";
 import Link from "next/link";
+import prisma from "@/lib/prisma";
+import { UserRole } from "@/generated/prisma";
+import CountdownTimer from "@/components/countdown-timer";
 
-export default function FreelancePage() {
+export const dynamic = "force-dynamic";
+
+export default async function FreelancePage() {
+  const userCount = await prisma.user.count({
+    where: {
+      role: UserRole.USER,
+    },
+  });
+
+  const currentPrice = 48 + Math.max(1, userCount);
   return (
     <div className="min-h-screen clay-bg">
       {/* Hero Section */}
@@ -119,7 +131,7 @@ export default function FreelancePage() {
                   <div className="flex flex-col items-center md:items-start mt-2 md:mt-0">
                     <span className="text-xs md:text-sm font-bold text-[#ffb3c6] uppercase tracking-widest mb-[-2px] animate-pulse">Hari Ini Saja</span>
                     <span className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-[#ff8fa3] drop-shadow-[0_0_25px_rgba(255,143,163,0.8)]">
-                      149K
+                      {currentPrice}K
                     </span>
                   </div>
                 </div>
@@ -134,6 +146,7 @@ export default function FreelancePage() {
                 </div>
               </div>
             </div>
+            <CountdownTimer />
             <Link href="/auth/signin">
               <Button
                 size="lg"
@@ -143,7 +156,7 @@ export default function FreelancePage() {
               </Button>
             </Link>
             <p className="clay-text-muted font-bold mt-6 text-xl">
-              Promo Spesial Terbatas
+              harga naik setiap kali member bergabung
             </p>
           </div>
 
@@ -497,7 +510,7 @@ export default function FreelancePage() {
                     <div className="flex flex-col items-center md:items-start mt-2 md:mt-0">
                       <span className="text-[10px] md:text-xs font-bold text-[#ffb3c6] uppercase tracking-widest mb-[-2px] animate-pulse">Hari Ini Saja</span>
                       <span className="text-6xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-[#ff8fa3] drop-shadow-[0_0_25px_rgba(255,143,163,0.8)]">
-                        149K
+                        {currentPrice}K
                       </span>
                     </div>
                   </div>
@@ -512,6 +525,7 @@ export default function FreelancePage() {
                   </div>
                 </div>
               </div>
+              <CountdownTimer />
               <Link href="/auth/signin">
                 <Button
                   size="lg"
@@ -521,7 +535,7 @@ export default function FreelancePage() {
                 </Button>
               </Link>
               <p className="clay-text-muted font-bold mt-6 text-xl">
-                Promo Spesial Terbatas
+                harga naik setiap kali member bergabung
               </p>
             </div>
           </div>
