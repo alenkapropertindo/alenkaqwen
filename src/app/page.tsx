@@ -169,7 +169,7 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-6 md:px-12 pt-12 pb-4 md:py-24 relative overflow-hidden">
+      {/* <section className="container mx-auto px-6 md:px-12 pt-12 pb-4 md:py-24 relative overflow-hidden">
         <div className="flex flex-col lg:flex-row items-center justify-between relative z-10">
           <div className="lg:w-1/2 mb-4 lg:mb-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full clay-card-yellow text-sm font-bold text-[#63490b] mb-6">
@@ -179,11 +179,11 @@ export default async function Home() {
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 tracking-tight clay-text-title leading-[1.1]">
               Temukan <span className="text-[#d64560] drop-shadow-sm">Rumah Impianmu</span><br />
               di Kota Kendari
-            </h1>
+            </h1> */}
 
 
-            {/* Mobile Hero Visual */}
-            <div className="flex lg:hidden justify-center relative w-full mb-12 mt-4">
+      {/* Mobile Hero Visual */}
+      {/* <div className="flex lg:hidden justify-center relative w-full mb-12 mt-4">
               {heroVisual}
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -218,18 +218,18 @@ export default async function Home() {
             {heroVisual}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Product Cards Section */}
       <section id="products" className="container mx-auto px-6 md:px-12 pt-8 pb-12 md:py-20 relative z-10">
-        <div className="text-center mb-16">
+        {/* <div className="text-center mb-16">
           <div className="inline-block px-5 py-2 rounded-full clay-card-pink text-[#6a2835] text-sm font-bold mb-6">
             Eksplorasi Katalog
           </div>
           <h2 className="text-3xl md:text-5xl font-extrabold clay-text-title">
             Properti <span className="text-[#d64560]">Terbaru</span>
           </h2>
-        </div>
+        </div> */}
         <ProductFilter initialProducts={products} />
       </section>
 
