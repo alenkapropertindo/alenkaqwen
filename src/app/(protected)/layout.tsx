@@ -10,10 +10,10 @@ export default async function ProtectedLayout({
   const session = await getServerSession();
   const user = session?.user;
 
-  if (!user) redirect("/auth/signin");
+  if (!user) redirect("/auth/login");
   
   if (user.role === "PENDING") {
-    redirect("/auth/signin?pending=true");
+    redirect("/auth/login?pending=true");
   }
 
   return (

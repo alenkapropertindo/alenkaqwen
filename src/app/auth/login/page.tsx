@@ -170,7 +170,7 @@ function LoginContent() {
           <div className="mt-4 text-center text-sm clay-text-muted font-bold">
             Belum punya akun?{" "}
             <a
-              href="/auth/signup"
+              href="/auth/register"
               className="text-[#d64560] hover:underline"
             >
               Daftar Disini

@@ -159,7 +159,7 @@ export default async function Home() {
             </a>
           </nav>
           <div className="flex space-x-4">
-            <Link href="/auth/signup">
+            <Link href="/freelance">
               <button className="clay-btn-primary px-6 py-2.5">
                 Freelance
               </button>

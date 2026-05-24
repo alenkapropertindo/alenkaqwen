@@ -147,7 +147,7 @@ export default async function FreelancePage() {
               </div>
             </div>
             <CountdownTimer />
-            <Link href="/auth/signin">
+            <Link href="/auth/register/alenka">
               <Button
                 size="lg"
                 className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
@@ -526,7 +526,7 @@ export default async function FreelancePage() {
                 </div>
               </div>
               <CountdownTimer />
-              <Link href="/auth/signin">
+              <Link href="/auth/register/alenka">
                 <Button
                   size="lg"
                   className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"

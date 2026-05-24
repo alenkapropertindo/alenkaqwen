@@ -29,7 +29,7 @@ export async function deleteUserAction({ userId }: { userId: string }) {
 
     if (session.user.id === userId) {
       await auth.api.signOut({ headers: headersList });
-      redirect("/auth/sign-in");
+      redirect("/auth/login");
     }
 
     revalidatePath("/dashboard/admin");
