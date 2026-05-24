@@ -110,7 +110,7 @@ export function ProductFilter({
     <div className="space-y-6">
       {/* Search and Filter Controls */}
       <div className="relative overflow-hidden mb-8">
-        
+
         <div className="relative z-10 clay-panel p-6 w-full">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {/* Search Input */}

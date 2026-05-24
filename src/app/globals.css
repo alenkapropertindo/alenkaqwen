@@ -245,18 +245,21 @@
   
   .clay-card {
     background-color: #9bdce6;
-    border-radius: 36px;
+    border-radius: 16px;
     box-shadow: 
       10px 10px 20px rgba(110, 185, 200, 0.5), 
       -10px -10px 20px rgba(255, 255, 255, 0.8),
       inset 4px 4px 8px rgba(255, 255, 255, 0.9),
       inset -4px -4px 8px rgba(110, 185, 200, 0.5);
     border: none;
+    @media (min-width: 640px) {
+      border-radius: 36px;
+    }
   }
 
   .clay-card-pink {
     background-color: #ffb1c0;
-    border-radius: 36px;
+    border-radius: 16px;
     box-shadow: 
       10px 10px 20px rgba(220, 140, 150, 0.4), 
       -10px -10px 20px rgba(255, 255, 255, 0.9),
@@ -264,11 +267,14 @@
       inset -4px -4px 8px rgba(220, 140, 150, 0.4);
     border: none;
     color: #6a2835;
+    @media (min-width: 640px) {
+      border-radius: 36px;
+    }
   }
 
   .clay-card-yellow {
     background-color: #ffde7a;
-    border-radius: 36px;
+    border-radius: 16px;
     box-shadow: 
       10px 10px 20px rgba(210, 170, 70, 0.4), 
       -10px -10px 20px rgba(255, 255, 255, 0.9),
@@ -276,6 +282,9 @@
       inset -4px -4px 8px rgba(210, 170, 70, 0.4);
     border: none;
     color: #63490b;
+    @media (min-width: 640px) {
+      border-radius: 36px;
+    }
   }
 
   .clay-btn {
@@ -322,11 +331,14 @@
 
   .clay-panel {
     background-color: #aae4ee;
-    border-radius: 36px;
+    border-radius: 16px;
     box-shadow: 
       inset 8px 8px 16px rgba(120, 190, 205, 0.6),
       inset -8px -8px 16px rgba(255, 255, 255, 0.9);
     border: none;
+    @media (min-width: 640px) {
+      border-radius: 36px;
+    }
   }
   
   .clay-text-title {
