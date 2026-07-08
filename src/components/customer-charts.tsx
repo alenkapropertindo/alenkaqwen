@@ -108,19 +108,21 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
 
   // Theme-based chart colors
   const getChartColors = () => {
+    const isDark = theme === "dark";
     return {
-      grid: "rgba(255,255,255,0.4)",
-      xAxis: "#1f4f59",
-      xAxisTick: "#1f4f59",
-      xAxisLine: "#ffffff",
-      yAxis: "#1f4f59",
-      yAxisTick: "#1f4f59",
-      yAxisLine: "#ffffff",
-      tooltipBg: "rgba(196, 235, 242, 0.9)",
-      tooltipBorder: "#ffffff",
-      tooltipLabel: "#1f4f59",
-      legend: "#1f4f59",
-      bar: "#d64560",
+      grid: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+      xAxis: isDark ? "#a1a3a9" : "#72747d",
+      xAxisTick: isDark ? "#a1a3a9" : "#72747d",
+      xAxisLine: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+      yAxis: isDark ? "#a1a3a9" : "#72747d",
+      yAxisTick: isDark ? "#a1a3a9" : "#72747d",
+      yAxisLine: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+      tooltipBg: isDark ? "rgba(30, 34, 43, 0.95)" : "rgba(255, 255, 255, 0.95)",
+      tooltipBorder: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.1)",
+      tooltipLabel: isDark ? "#e6e8ec" : "#2b2d35",
+      tooltipShadow: isDark ? "4px 4px 10px rgba(0, 0, 0, 0.5)" : "4px 4px 10px rgba(0, 0, 0, 0.08)",
+      legend: isDark ? "#e6e8ec" : "#2b2d35",
+      bar: isDark ? "#e6e8ec" : "#1e222b",
     };
   };
 
@@ -158,10 +160,10 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
             value={selectedYear.toString()}
             onValueChange={(value) => setSelectedYear(parseInt(value))}
           >
-            <SelectTrigger className="w-[120px] bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors">
+            <SelectTrigger className="w-[120px] bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors">
               <SelectValue placeholder="Select year" />
             </SelectTrigger>
-            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+            <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
               {availableYears.map((year) => (
                 <SelectItem
                   key={year}
@@ -205,10 +207,10 @@ export function CustomerCharts({ customers }: CustomerChartsProps) {
                     backgroundColor: colors.tooltipBg,
                     borderColor: colors.tooltipBorder,
                     borderRadius: "20px",
-                    boxShadow: "4px 4px 10px rgba(120, 190, 205, 0.5)",
-                    color: "#1f4f59",
+                    boxShadow: colors.tooltipShadow,
+                    color: colors.tooltipLabel,
                   }}
-                  itemStyle={{ color: "#d64560", fontWeight: "bold" }}
+                  itemStyle={{ color: colors.bar, fontWeight: "bold" }}
                   labelStyle={{
                     color: colors.tooltipLabel,
                     fontWeight: "bold",

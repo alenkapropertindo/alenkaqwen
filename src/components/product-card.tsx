@@ -81,12 +81,12 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="relative overflow-hidden clay-card h-full flex flex-col cursor-pointer">
         {isLoading && (
-          <div className="absolute inset-0 z-50 bg-white/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-[inherit]">
-            <Loader2 className="w-10 h-10 text-[#ff8fa3] animate-spin mb-2" />
-            <span className="text-sm font-bold text-[#ff8fa3] animate-pulse">Memuat...</span>
+          <div className="absolute inset-0 z-50 bg-background/60 backdrop-blur-sm flex flex-col items-center justify-center rounded-[inherit]">
+            <Loader2 className="w-10 h-10 text-[#d64560] dark:text-[#ff8fa3] animate-spin mb-2" />
+            <span className="text-sm font-bold text-[#d64560] dark:text-[#ff8fa3] animate-pulse">Memuat...</span>
           </div>
         )}
-        <div className="relative bg-[#aae4ee] mb-1 lg:mb-4">
+        <div className="relative bg-muted/20 mb-1 lg:mb-4 overflow-hidden rounded-[20px] mx-3 mt-3 shadow-[inset_3px_3px_6px_rgba(0,0,0,0.06)]">
           {isImageUrlValid(product.imageUrl) ? (
             <img
               src={product.imageUrl!}
@@ -94,15 +94,15 @@ export function ProductCard({ product }: { product: Product }) {
               className="w-full h-40 lg:h-48 object-cover object-top"
             />
           ) : (
-            <div className="bg-[#aae4ee] w-full h-40 md:h-48 flex items-center justify-center">
-              <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-[#ffffff]/70" />
+            <div className="w-full h-40 md:h-48 flex items-center justify-center bg-muted/10">
+              <HomeIcon className="h-10 w-10 md:h-12 md:w-12 text-muted-foreground/30" />
             </div>
           )}
           {product.kategori && (
             <div className="absolute top-2 right-2">
               <Badge
                 variant={getBadgeVariant(product.kategori)}
-                className="text-[0.65rem] md:text-xs py-0.5 px-1.5 md:py-1 md:px-2 whitespace-nowrap font-bold shadow-lg"
+                className="text-[0.65rem] md:text-xs py-0.5 px-1.5 md:py-1 md:px-2 whitespace-nowrap font-bold shadow-md"
               >
                 {formatKategori(product.kategori)}
               </Badge>
@@ -115,20 +115,20 @@ export function ProductCard({ product }: { product: Product }) {
               {product.title}
             </h3>
             <div className="absolute top-0 right-0 z-10">
-              <span className="inline-flex items-center gap-1 text-[10px] md:text-xs font-bold text-[#ff8fa3] bg-white/80 backdrop-blur-md px-2 py-1 rounded-sm shadow-sm">
-                <MapPin className="w-3 h-3 text-[#ff8fa3] animate-bounce" style={{ animationDuration: '2s' }} />
+              <span className="inline-flex items-center gap-1 text-[10px] md:text-xs font-bold text-foreground bg-background/80 backdrop-blur-md px-2 py-1 rounded-[8px] shadow-sm border border-white/10">
+                <MapPin className="w-3 h-3 text-[#d64560] dark:text-[#ff8fa3] animate-bounce" style={{ animationDuration: '2s' }} />
                 {product.lokasi || "Kendari"}
               </span>
             </div>
           </div>
-
+ 
           <div className="mb-1 lg:mb-4">
-            <div className="flex flex-col clay-panel rounded-[12px] sm:rounded-[20px] p-1 w-full relative overflow-hidden group">
-              <span className="text-[10px] md:text-xs font-bold clay-text-muted uppercase tracking-wider mb-0">
+            <div className="flex flex-col clay-panel rounded-[16px] sm:rounded-[20px] px-3.5 py-2 w-full relative overflow-hidden group">
+              <span className="text-[10px] md:text-xs font-bold clay-text-muted uppercase tracking-wider mb-0.5">
                 Biaya DP / Akad
               </span>
               <div className="flex items-center flex-wrap gap-0">
-                <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#ff8fa3] drop-shadow-sm">
+                <span className="text-lg md:text-xl lg:text-2xl font-extrabold text-[#d64560] dark:text-[#ff8fa3] drop-shadow-sm">
                   {formatCurrency(product.dpAkad)}
                 </span>
               </div>
@@ -150,7 +150,7 @@ export function ProductCard({ product }: { product: Product }) {
             </button>
             {product.videoLink && (
               <button
-                className="clay-btn-primary w-full py-1.5 lg:mb-2 text-sm md:text-base flex items-center justify-center"
+                className="clay-btn-dark w-full py-1.5 lg:mb-2 text-sm md:text-base flex items-center justify-center"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();

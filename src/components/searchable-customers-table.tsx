@@ -277,15 +277,15 @@ export function SearchableCustomersTable({
             placeholder="Cari customer berdasarkan nama, WhatsApp, atau email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
+            className="clay-panel border-none text-[#2b2d35] dark:text-[#e6e8ec] focus:ring-2 focus:ring-white/50 h-12"
           />
         </div>
         <div className="w-full md:w-48">
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12">
+            <SelectTrigger className="clay-panel border-none text-[#2b2d35] dark:text-[#e6e8ec] focus:ring-2 focus:ring-white/50 h-12">
               <SelectValue placeholder="Filter status" />
             </SelectTrigger>
-            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+            <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
               <SelectItem value="ALL" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Semua Status</SelectItem>
               {statuses.map((status) => (
                 <SelectItem key={status} value={status} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">
@@ -379,14 +379,14 @@ export function SearchableCustomersTable({
                           customer.paidStatus === "PAID"
                         }
                       >
-                        <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
+                        <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
                           {updatingCustomerId === customer.id ? (
                             <span className="clay-text-muted font-bold">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
                         </SelectTrigger>
-                        <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                        <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
                           {Object.values(Status).map((status) => (
                             <SelectItem key={status} value={status} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">
                               {formatStatus(status)}
@@ -430,7 +430,7 @@ export function SearchableCustomersTable({
                           updatingCustomerId === customer.id ||
                           customer.paidStatus === "PAID"
                         }
-                        className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 w-[140px] h-10"
+                        className="clay-panel border-none text-[#2b2d35] dark:text-[#e6e8ec] focus:ring-2 focus:ring-white/50 w-[140px] h-10"
                       />
                     </TableCell>
                   )}
@@ -447,14 +447,14 @@ export function SearchableCustomersTable({
                           customer.paidStatus === "PAID"
                         }
                       >
-                        <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
+                        <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[140px] h-10">
                           {updatingCustomerId === customer.id ? (
                             <span className="clay-text-muted font-bold">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
                         </SelectTrigger>
-                        <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                        <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
                           <SelectItem value="PENDING" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Pending</SelectItem>
                           <SelectItem value="PAID" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Paid</SelectItem>
                         </SelectContent>

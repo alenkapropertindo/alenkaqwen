@@ -249,16 +249,16 @@ export default function ProductsClientPage() {
               placeholder="Cari produk..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12"
+              className="pl-10 clay-panel border-none text-[#2b2d35] dark:text-[#e6e8ec] focus:ring-2 focus:ring-white/50 h-12"
             />
           </div>
           
           {/* Lokasi Filter */}
           <Select value={selectedLokasi} onValueChange={setSelectedLokasi}>
-            <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
+            <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
               <SelectValue placeholder="Semua Lokasi" />
             </SelectTrigger>
-            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+            <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
               <SelectItem value="__all__" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Semua Lokasi</SelectItem>
               {uniqueLokasi.map((lokasi) => (
                 <SelectItem key={lokasi} value={lokasi} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">
@@ -270,10 +270,10 @@ export default function ProductsClientPage() {
           
           {/* Kategori Filter */}
           <Select value={selectedKategori} onValueChange={setSelectedKategori}>
-            <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
+            <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
               <SelectValue placeholder="Semua Kategori" />
             </SelectTrigger>
-            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+            <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
               <SelectItem value="__all__" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Semua Kategori</SelectItem>
               <SelectItem value="Strategis" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Strategis</SelectItem>
               <SelectItem value="Promo" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Promo</SelectItem>
@@ -289,10 +289,10 @@ export default function ProductsClientPage() {
               setSortOrder("desc"); // Default to descending for fee
             }
           }}>
-            <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
+            <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors h-12">
               <SelectValue placeholder="Urutkan Berdasarkan" />
             </SelectTrigger>
-            <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+            <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
               <SelectItem value="createdAt" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Tanggal Terbaru</SelectItem>
               <SelectItem value="fee" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Fee Penjualan Tertinggi</SelectItem>
               <SelectItem value="title" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Nama Produk (A-Z)</SelectItem>

@@ -196,7 +196,7 @@ export default async function DashboardPage() {
                 </div>
               </div>
               <div className="pt-1 sm:pt-2">
-                <div className="text-lg sm:text-3xl font-extrabold text-[#d64560] truncate">
+                <div className="text-lg sm:text-3xl font-extrabold text-[#1e222b] dark:text-[#e6e8ec] truncate">
                   {stat.value}
                 </div>
                 <p className="text-[9px] sm:text-xs clay-text-muted mt-1 sm:mt-2 font-bold line-clamp-2">

@@ -224,14 +224,14 @@ export default function UsersClientPage() {
                         onValueChange={(value) => handleRoleChange(user.id, value as UserRole)}
                         disabled={updatingUserId === user.id}
                       >
-                        <SelectTrigger className="bg-white/40 border-white text-[#1f4f59] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[120px] h-10">
+                        <SelectTrigger className="bg-white/40 border-white text-[#2b2d35] dark:text-[#e6e8ec] font-bold focus:ring-[#d64560] rounded-[20px] backdrop-blur-md transition-colors w-[120px] h-10">
                           {updatingUserId === user.id ? (
                             <span className="clay-text-muted font-bold">Updating...</span>
                           ) : (
                             <SelectValue />
                           )}
                         </SelectTrigger>
-                        <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                        <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
                           <SelectItem value={UserRole.PENDING} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Pending</SelectItem>
                           <SelectItem value={UserRole.USER} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">User</SelectItem>
                           <SelectItem value={UserRole.ADMIN} className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Admin</SelectItem>

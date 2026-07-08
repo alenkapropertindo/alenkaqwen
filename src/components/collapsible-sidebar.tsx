@@ -115,11 +115,11 @@ export function CollapsibleSidebar({ user }: { user: User }) {
   return (
     <>
       {/* Mobile Navbar */}
-      <div className="md:hidden sticky top-0 z-50 w-full bg-[#c4ebf2]/80 backdrop-blur-md border-b border-white/40 shadow-sm">
+      <div className="md:hidden sticky top-0 z-50 w-full bg-[#e6e8ec]/80 dark:bg-[#1e222b]/80 backdrop-blur-md border-b border-white/40 dark:border-white/10 shadow-sm">
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-2">
             <div className="clay-card-yellow w-8 h-8 rounded-lg flex items-center justify-center">
-              <span className="text-[#63490b] font-extrabold">A</span>
+              <span className="text-[#63490b] dark:text-[#fceec5] font-extrabold">A</span>
             </div>
             <span className="text-xl font-extrabold clay-text-title">
               Alenka
@@ -141,7 +141,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              className="absolute top-full left-0 right-0 overflow-hidden bg-[#aae4ee] border-b border-white/40 shadow-lg"
+              className="absolute top-full left-0 right-0 overflow-hidden bg-[#e6e8ec]/95 dark:bg-[#1e222b]/95 border-b border-white/40 dark:border-white/10 shadow-lg backdrop-blur-md"
             >
               <nav className="p-4">
                 <ul className="space-y-2">
@@ -153,11 +153,11 @@ export function CollapsibleSidebar({ user }: { user: User }) {
                           <div
                             className={`flex items-center rounded-[20px] px-3 py-3 transition-all duration-200 ${
                               isActive
-                                ? "clay-btn-primary"
-                                : "clay-text-title hover:bg-white/40"
+                                ? "clay-btn-dark text-white dark:text-[#1e222b]"
+                                : "clay-text-title hover:bg-white/60 dark:hover:bg-neutral-800"
                             }`}
                           >
-                            <span className={isActive ? "text-[#731b31]" : "clay-text-muted"}>
+                            <span className={isActive ? "text-white dark:text-[#1e222b]" : "clay-text-muted"}>
                               {item.icon}
                             </span>
                             <span className="ml-3 font-medium">{item.title}</span>
@@ -166,10 +166,10 @@ export function CollapsibleSidebar({ user }: { user: User }) {
                       </li>
                     );
                   })}
-                  <li className="pt-2 mt-2 border-t border-white/40">
+                  <li className="pt-2 mt-2 border-t border-white/40 dark:border-white/10">
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center w-full rounded-[20px] px-3 py-3 transition-all duration-200 clay-text-title hover:bg-white/40"
+                      className="flex items-center w-full rounded-[20px] px-3 py-3 transition-all duration-200 clay-text-title hover:bg-white/60 dark:hover:bg-neutral-800"
                     >
                       <LogOut className="h-5 w-5 clay-text-muted" />
                       <span className="ml-3 font-medium">Sign-Out</span>
@@ -182,14 +182,13 @@ export function CollapsibleSidebar({ user }: { user: User }) {
         </AnimatePresence>
       </div>
 
-      {/* Desktop Sidebar */}
       <motion.aside
         initial={false}
         animate={{ width: isCollapsed ? 80 : 260 }}
-        className={`hidden md:flex h-screen sticky top-0 flex-col bg-[#aae4ee] border-r border-white/40 shadow-[4px_0_12px_rgba(120,190,205,0.3)] z-50`}
+        className="hidden md:flex h-screen sticky top-0 flex-col bg-[#e6e8ec] dark:bg-[#1e222b] border-r border-white/40 dark:border-white/10 shadow-[4px_0_12px_rgba(0,0,0,0.08)] dark:shadow-[4px_0_12px_rgba(0,0,0,0.3)] z-50"
       >
         {/* Sidebar header */}
-        <div className="flex items-center justify-between p-4 border-b border-white/40">
+        <div className="flex items-center justify-between p-4 border-b border-white/40 dark:border-white/10">
           <AnimatePresence>
             {!isCollapsed && (
               <motion.div
@@ -199,7 +198,7 @@ export function CollapsibleSidebar({ user }: { user: User }) {
                 className="flex items-center space-x-2"
               >
                 <div className="clay-card-yellow w-8 h-8 rounded-lg flex items-center justify-center">
-                  <span className="text-[#63490b] font-extrabold">A</span>
+                  <span className="text-[#63490b] dark:text-[#fceec5] font-extrabold">A</span>
                 </div>
                 <span className="text-xl font-extrabold clay-text-title">
                   Alenka
@@ -235,11 +234,11 @@ export function CollapsibleSidebar({ user }: { user: User }) {
                     <div
                       className={`flex items-center rounded-[20px] px-3 py-2 transition-all duration-200 ${
                         isActive
-                          ? "clay-btn-primary"
-                          : "clay-text-title hover:bg-white/40"
+                          ? "clay-btn-dark text-white dark:text-[#1e222b]"
+                          : "clay-text-title hover:bg-white/60 dark:hover:bg-neutral-800"
                       }`}
                     >
-                      <span className={`${isActive ? "text-[#731b31]" : "clay-text-muted"}`}>
+                      <span className={`${isActive ? "text-white dark:text-[#1e222b]" : "clay-text-muted"}`}>
                         {item.icon}
                       </span>
                       
@@ -264,14 +263,14 @@ export function CollapsibleSidebar({ user }: { user: User }) {
         </nav>
 
         {/* Sidebar footer - Logout button */}
-        <div className="p-4 border-t border-white/40">
+        <div className="p-4 border-t border-white/40 dark:border-white/10">
           <button
             onClick={handleSignOut}
-            className={`flex items-center w-full rounded-[20px] px-3 py-2 transition-all duration-200 clay-text-title hover:bg-white/40 ${
+            className={`flex items-center w-full rounded-[20px] px-3 py-2 transition-all duration-200 clay-text-title hover:bg-white/60 dark:hover:bg-neutral-800 ${
               isCollapsed ? "justify-center" : ""
             }`}
           >
-            <LogOut className="h-5 w-5" />
+            <LogOut className="h-5 w-5 clay-text-muted" />
             <AnimatePresence>
               {!isCollapsed && (
                 <motion.span

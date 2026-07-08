@@ -9,10 +9,10 @@ export function ThemeToggle({ className }: { className?: string }) {
   const { theme, setTheme } = useTheme()
 
   // Default styling for fixed position (used on public pages)
-  const defaultClassName = "fixed top-4 right-4 z-50 clay-btn bg-white/40 border-none hover:bg-white transition-all duration-300"
+  const defaultClassName = "fixed top-4 right-4 z-50 clay-btn w-12 h-12 flex items-center justify-center border-none transition-all duration-300"
   
   // Sidebar styling (used in sidebar)
-  const sidebarClassName = "clay-btn bg-white/40 border-none hover:bg-white transition-all duration-300"
+  const sidebarClassName = "clay-btn w-12 h-12 flex items-center justify-center border-none transition-all duration-300"
 
   const combinedClassName = className 
     ? className 

@@ -150,7 +150,7 @@ export default async function FreelancePage() {
             <Link href="/auth/register/alenka">
               <Button
                 size="lg"
-                className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
+                className="clay-btn-dark text-white dark:text-[#1e222b] font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_rgba(0,0,0,0.35)] dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-all duration-300 transform hover:scale-105"
               >
                 GABUNG SEKARANG <ArrowRight className="ml-3 h-8 w-8" />
               </Button>
@@ -529,7 +529,7 @@ export default async function FreelancePage() {
               <Link href="/auth/register/alenka">
                 <Button
                   size="lg"
-                  className="clay-card-pink hover:from-purple-700 hover:to-pink-700 clay-text-title font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_#8b5cf6] hover:shadow-[0_0_50px_#8b5cf6] transition-all duration-300 transform hover:scale-105 font-bold"
+                  className="clay-btn-dark text-white dark:text-[#1e222b] font-bold text-2xl px-12 py-8 rounded-full shadow-[0_0_40px_rgba(0,0,0,0.35)] dark:shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-all duration-300 transform hover:scale-105"
                 >
                   GABUNG SEKARANG <ArrowRight className="ml-3 h-8 w-8" />
                 </Button>

@@ -128,11 +128,11 @@ export default async function Home() {
   return (
     <div className="min-h-screen clay-bg transition-colors duration-300">
       {/* Header */}
-      <header className="sticky top-0 z-40 bg-[#c4ebf2]/80 backdrop-blur-md transition-colors duration-300 border-b border-white/40 shadow-sm">
+      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-md transition-colors duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.03)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.15)] border-b border-transparent">
         <div className="container mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2 text-2xl font-extrabold clay-text-title transition-colors">
             <div className="clay-card-yellow p-1.5 flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-[#63490b]" />
+              <Building2 className="w-5 h-5 text-[#7a5f15] dark:text-[#fceec5]" />
             </div>
             Alenka
           </div>
@@ -160,7 +160,7 @@ export default async function Home() {
           </nav>
           <div className="flex space-x-4">
             <Link href="/freelance">
-              <button className="clay-btn-primary px-6 py-2.5">
+              <button className="clay-btn-dark px-6 py-2.5">
                 Freelance
               </button>
             </Link>
@@ -234,12 +234,12 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-[#aae4ee] py-16 mt-12 rounded-t-[40px] shadow-[inset_0_8px_16px_rgba(120,190,205,0.6)]">
+      <footer className="clay-panel py-16 mt-12 rounded-t-[40px] rounded-b-none border-none">
         <div className="container mx-auto px-6 md:px-12">
           <div className="flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-2 text-2xl font-extrabold clay-text-title">
               <div className="clay-card-yellow p-1.5 flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-[#63490b]" />
+                <Building2 className="w-5 h-5 text-[#7a5f15] dark:text-[#fceec5]" />
               </div>
               Alenka
             </div>

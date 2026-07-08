@@ -184,7 +184,7 @@ export default async function ProductDetailPage(
                   className="flex-1"
                 >
                   <button
-                    className="clay-btn-primary h-14 w-full text-lg flex items-center justify-center"
+                    className="clay-btn-dark h-14 w-full text-lg flex items-center justify-center"
                   >
                     Lihat Video Properti
                   </button>

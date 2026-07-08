@@ -294,11 +294,11 @@ export function ProductModal({
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="clay-panel border-none text-[#1f4f59] focus:ring-2 focus:ring-white/50 h-12">
+                      <SelectTrigger className="clay-panel border-none text-[#2b2d35] dark:text-[#e6e8ec] focus:ring-2 focus:ring-white/50 h-12">
                         <SelectValue placeholder="Pilih kategori" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-[#aae4ee] border-white/40 rounded-[20px]">
+                    <SelectContent className="bg-[#e6e8ec] dark:bg-[#1e222b] border-white/40 dark:border-white/10 rounded-[20px]">
                       <SelectItem value="Strategis" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Strategis</SelectItem>
                       <SelectItem value="Promo" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Promo</SelectItem>
                       <SelectItem value="Dp_Rendah" className="clay-text-title font-bold focus:bg-white/40 focus:text-[#731b31]">Dp_Rendah</SelectItem>
